@@ -4,16 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="682e531b-ae23-4f9a-a8a9-a135d3eb976e" name="Changes" comment="commit1" />
+    <list default="true" id="682e531b-ae23-4f9a-a8a9-a135d3eb976e" name="Changes" comment="commit2">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/DAOS/DBUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="MIXED" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "an-lime"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/an-lime/courseProject.git",
+    "accountId": "4ef60e65-b54f-4654-b9f2-7573a982d9df"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/org/example/courseproject/StartApplication.java" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -51,6 +73,9 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\andre\Documents\Курсовой проект\idea\courseProject\src\main\resources\org\example\courseproject\fxml" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.example.courseproject" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -102,7 +127,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730361338271</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="commit2">
+      <option name="closed" value="true" />
+      <created>1730361620605</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1730361620605</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -118,8 +151,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="firstCommit" />
-    <MESSAGE value="commit2" />
     <MESSAGE value="commit1" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit1" />
+    <MESSAGE value="commit2" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit2" />
   </component>
 </project>
