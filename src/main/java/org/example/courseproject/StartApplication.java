@@ -12,7 +12,7 @@ public class StartApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("fxml/hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("testGit!");
+        stage.setTitle("testGit2!");
         stage.setScene(scene);
         stage.show();
     }
