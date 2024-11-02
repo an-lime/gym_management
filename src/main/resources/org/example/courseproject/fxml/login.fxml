@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="235.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.courseproject.controllers.LoginController">
+  <children>
+    <Label layoutX="8.0" layoutY="33.0" text="Авторизуйтесь в системе">
+      <font>
+        <Font size="19.0" />
+      </font>
+    </Label>
+    <Label layoutX="43.0" layoutY="85.0" text="логин" />
+    <Label layoutX="43.0" layoutY="132.0" text="пароль" />
+    <TextField fx:id="loginTxt" layoutX="43.0" layoutY="103.0" />
+    <TextField fx:id="password" layoutX="43.0" layoutY="150.0" visible="false" />
+    <Button fx:id="loginBtn" layoutX="89.0" layoutY="204.0" mnemonicParsing="false" onMouseClicked="#enter" text="Войти" />
+    <Label fx:id="error" alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="229.0" prefHeight="17.0" prefWidth="149.0" textAlignment="CENTER" />
+    <PasswordField fx:id="passwordField" layoutX="43.0" layoutY="150.0" />
+    <CheckBox fx:id="checkShowPassword" layoutX="43.0" layoutY="179.0" mnemonicParsing="false" onMouseClicked="#toggleVisiblePassword" text="Показать пароль" />
+  </children>
+</Pane>
