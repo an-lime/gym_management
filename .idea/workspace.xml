@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="682e531b-ae23-4f9a-a8a9-a135d3eb976e" name="Changes" comment="clear code">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c5a9320e-9b09-41ce-9b08-edeff14eec06.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c5a9320e-9b09-41ce-9b08-edeff14eec06.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c5a9320e-9b09-41ce-9b08-edeff14eec06/storage_v2/_src_/database/courseProject.fr5JTw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c5a9320e-9b09-41ce-9b08-edeff14eec06/storage_v2/_src_/database/courseProject.fr5JTw/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/DAOS/DBUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/DAOS/DBUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/LoginController.java" afterDir="false" />
+    <list default="true" id="682e531b-ae23-4f9a-a8a9-a135d3eb976e" name="Changes" comment="вывод фио юзера">
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/MainPageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/courseproject/fxml/main-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/courseproject/fxml/main-page.fxml" afterDir="false" />
     </list>
@@ -191,7 +183,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730362710149</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="вывод фио юзера">
+      <option name="closed" value="true" />
+      <created>1730544996219</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1730544996219</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,6 +213,7 @@
     <MESSAGE value="commit1" />
     <MESSAGE value="commit2" />
     <MESSAGE value="simpleCommit" />
-    <option name="LAST_COMMIT_MESSAGE" value="simpleCommit" />
+    <MESSAGE value="вывод фио юзера" />
+    <option name="LAST_COMMIT_MESSAGE" value="вывод фио юзера" />
   </component>
 </project>
