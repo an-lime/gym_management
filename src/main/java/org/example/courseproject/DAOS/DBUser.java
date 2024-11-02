@@ -13,16 +13,16 @@ public class DBUser {
 
     public Users getUser(String log, String pass) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM users where login=? and password=?;";
-        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME+"?characterEncoding=UTF8";
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
 
-        try(Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)){
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
             PreparedStatement statement = dbConn.prepareStatement(sql);
             statement.setString(1, log);
             statement.setString(2, pass);
             ResultSet res = statement.executeQuery();
 
-            while(res.next()) {
+            while (res.next()) {
                 Users user = new Users();
                 user.setIdUser(res.getInt("id_user"));
                 user.setLogin(res.getString("login"));
@@ -32,7 +32,7 @@ public class DBUser {
                 user.setIdRole(res.getInt("id_role"));
                 return user;
             }
+            return null;
         }
-        return null;
     }
 }

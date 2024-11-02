@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="682e531b-ae23-4f9a-a8a9-a135d3eb976e" name="Changes" comment="simpleCommit">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/MainPageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/models/Users.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/courseproject/fxml/main-page.fxml" afterDir="false" />
+    <list default="true" id="682e531b-ae23-4f9a-a8a9-a135d3eb976e" name="Changes" comment="clear code">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c5a9320e-9b09-41ce-9b08-edeff14eec06.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c5a9320e-9b09-41ce-9b08-edeff14eec06.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c5a9320e-9b09-41ce-9b08-edeff14eec06/storage_v2/_src_/database/courseProject.fr5JTw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c5a9320e-9b09-41ce-9b08-edeff14eec06/storage_v2/_src_/database/courseProject.fr5JTw/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/DAOS/DBUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/DAOS/DBUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/StartApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/StartApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/courseproject/fxml/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/courseproject/fxml/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/MainPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/courseproject/fxml/main-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/courseproject/fxml/main-page.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +31,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RESET_MODE" value="MIXED" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -75,7 +74,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/andre/Documents/Курсовой проект/idea/courseProject",
+    "last_opened_file_path": "C:/Users/andre/Documents/idea/kr3",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -104,7 +103,7 @@
   <component name="RunManager">
     <configuration name="Start" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.example.courseproject.StartApplication" />
-      <module name="courseProject" />
+      <module name="gymManagement" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

@@ -78,7 +78,7 @@ public class LoginController implements Initializable {
                     Scene scene = new Scene(fxmlLoader.load());
 
                     MainPageController mainPageController = fxmlLoader.getController();
-                    mainPageController.setIdCurrentUser(dbUser.getUser(loginTxt.getText(), enterPassword).getIdUser());
+                    mainPageController.setCurrentUser(user);
 
                     Stage stage = (Stage) loginBtn.getScene().getWindow();
                     stage.setTitle("Добро пожаловать");
