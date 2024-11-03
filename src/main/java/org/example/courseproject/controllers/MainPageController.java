@@ -24,17 +24,13 @@ public class MainPageController implements Initializable {
     @FXML
     private Button btnExit;
 
-    public Users getCurrentUser() {
-        return currentUser;
-    }
-
-    public void setCurrentUser(Users currentUser) {
-        this.currentUser = currentUser;
-        lblWelcome.setText(lblWelcome.getText() + currentUser.getFio() + '!');
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
+
+    public void startPage(Users currentUser) {
+        this.currentUser = currentUser;
+        lblWelcome.setText(lblWelcome.getText() + currentUser.getFio() + '!');
     }
 
     @FXML
