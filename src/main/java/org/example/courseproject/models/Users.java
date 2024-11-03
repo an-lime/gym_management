@@ -9,51 +9,36 @@ public class Users {
     private String telephone;
     private int idRole;
 
-    public int getIdUser() {
-        return idUser;
+    public Users(int idUser, String login, String password, String fio, String telephone, int idRole) {
+        this.idUser = idUser;
+        this.login = login;
+        this.password = password;
+        this.fio = fio;
+        this.telephone = telephone;
+        this.idRole = idRole;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public int getIdUser() {
+        return idUser;
     }
 
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFio() {
         return fio;
     }
 
-    public void setFio(String fio) {
-        this.fio = fio;
-    }
-
     public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
     public int getIdRole() {
         return idRole;
-    }
-
-    public void setIdRole(int idRole) {
-        this.idRole = idRole;
     }
 }

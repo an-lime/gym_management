@@ -2,12 +2,20 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="390.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.courseproject.controllers.MainPageController">
+<AnchorPane prefHeight="416.0" prefWidth="636.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.courseproject.controllers.MainPageController">
    <children>
-      <Label fx:id="lblWelcome" layoutX="60.0" layoutY="52.0" text="Добро пожаловать, " />
-      <Button fx:id="btnExit" layoutX="304.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#doExit" text="Выход" />
+      <Label fx:id="lblWelcome" layoutX="206.0" layoutY="40.0" text="Добро пожаловать, " />
+      <Button fx:id="btnExit" layoutX="570.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#doExit" text="Выход" />
+      <TableView fx:id="tblWorkout" layoutX="121.0" layoutY="108.0" prefHeight="200.0" prefWidth="393.0">
+         <columns>
+            <TableColumn fx:id="coach" prefWidth="140.0000057220459" text="Тренер" />
+            <TableColumn fx:id="trainingDate" prefWidth="123.20001220703125" text="Дата тренировки" />
+            <TableColumn fx:id="trainingType" prefWidth="127.9999938964844" text="Вид тренировки" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
