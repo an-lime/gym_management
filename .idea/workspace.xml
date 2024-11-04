@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="682e531b-ae23-4f9a-a8a9-a135d3eb976e" name="Changes" comment="буду добавлять конструктор моделей">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/DAOS/DBWorkout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+    <list default="true" id="682e531b-ae23-4f9a-a8a9-a135d3eb976e" name="Changes" comment="Добавил общее заполнение таблицы тренировок">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/DAOS/DBUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/DAOS/DBUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/DAOS/DBWorkout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/DAOS/DBWorkout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/controllers/MainPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/models/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/models/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/models/Workouts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/models/Workouts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/models/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/models/ModelUsers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/courseproject/models/Workouts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/courseproject/models/ModelWorkouts.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/courseproject/fxml/main-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/courseproject/fxml/main-page.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +73,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/andre/Documents/idea/lab11",
+    "last_opened_file_path": "C:/Users/andre/Documents/idea/lab8",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -94,6 +94,9 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\andre\Documents\Курсовой проект\idea\courseProject\src\main\resources\org\example\courseproject\fxml" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="org.example.courseproject.DAOS" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org.example.courseproject" />
@@ -125,7 +128,9 @@
       <option name="presentableId" value="Default" />
       <updated>1730267326032</updated>
       <workItem from="1730539688806" duration="429000" />
-      <workItem from="1730622101227" duration="10027000" />
+      <workItem from="1730622101227" duration="10443000" />
+      <workItem from="1730664645817" duration="393000" />
+      <workItem from="1730712887976" duration="5017000" />
     </task>
     <task id="LOCAL-00001" summary="firstCommit">
       <option name="closed" value="true" />
@@ -215,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730622882566</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Добавил общее заполнение таблицы тренировок">
+      <option name="closed" value="true" />
+      <created>1730632780124</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1730632780124</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,6 +253,7 @@
     <MESSAGE value="вывод фио юзера" />
     <MESSAGE value="кнопка выхода + переписал метод onClick для onAction" />
     <MESSAGE value="буду добавлять конструктор моделей" />
-    <option name="LAST_COMMIT_MESSAGE" value="буду добавлять конструктор моделей" />
+    <MESSAGE value="Добавил общее заполнение таблицы тренировок" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил общее заполнение таблицы тренировок" />
   </component>
 </project>

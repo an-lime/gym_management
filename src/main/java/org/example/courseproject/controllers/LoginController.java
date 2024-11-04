@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.example.courseproject.DAOS.DBUser;
 import org.example.courseproject.StartApplication;
-import org.example.courseproject.models.Users;
+import org.example.courseproject.models.ModelUsers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -56,7 +56,7 @@ public class LoginController implements Initializable {
 
             if (!loginTxt.getText().isEmpty() & !enterPassword.isEmpty()) {
 
-                Users user = dbUser.getUser(loginTxt.getText(), enterPassword);
+                ModelUsers user = dbUser.getUser(loginTxt.getText(), enterPassword);
                 if (user == null) {
                     error.setVisible(true);
                     error.setText("Ошибка входа");

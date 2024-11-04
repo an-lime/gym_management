@@ -1,6 +1,6 @@
 package org.example.courseproject.models;
 
-public class Users {
+public class ModelUsers {
 
     private int idUser;
     private String login;
@@ -9,7 +9,7 @@ public class Users {
     private String telephone;
     private int idRole;
 
-    public Users(int idUser, String login, String password, String fio, String telephone, int idRole) {
+    public ModelUsers(int idUser, String login, String password, String fio, String telephone, int idRole) {
         this.idUser = idUser;
         this.login = login;
         this.password = password;

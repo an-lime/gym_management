@@ -15,8 +15,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.example.courseproject.DAOS.DBWorkout;
 import org.example.courseproject.StartApplication;
-import org.example.courseproject.models.Users;
-import org.example.courseproject.models.Workouts;
+import org.example.courseproject.models.ModelUsers;
+import org.example.courseproject.models.ModelWorkouts;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -31,18 +31,9 @@ public class MainPageController implements Initializable {
     private Button btnExit;
 
     @FXML
-    private TableView<Workouts> tblWorkout;
+    private TableView<ModelWorkouts> tblWorkout;
 
-    @FXML
-    private TableColumn<Workouts, String> coach;
-
-    @FXML
-    private TableColumn<Workouts, String> trainingDate;
-
-    @FXML
-    private TableColumn<Workouts, String> trainingType;
-
-    private Users currentUser;
+    private ModelUsers currentUser;
 
     DBWorkout dbWorkout;
 
@@ -51,19 +42,42 @@ public class MainPageController implements Initializable {
         dbWorkout = new DBWorkout();
     }
 
-    public void startPage(Users currentUser) throws SQLException, ClassNotFoundException {
+    public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
         this.currentUser = currentUser;
         lblWelcome.setText(lblWelcome.getText() + currentUser.getFio() + '!');
         initializeTable();
     }
 
     public void initializeTable() throws SQLException, ClassNotFoundException {
-        ObservableList<Workouts> list = FXCollections.observableArrayList(dbWorkout.getWorkout(currentUser.getIdRole()));
+        ObservableList<ModelWorkouts> list = FXCollections.observableArrayList(dbWorkout.getWorkout(currentUser));
         tblWorkout.setItems(list);
 
-        coach.setCellValueFactory(new PropertyValueFactory<>("coach"));
-        trainingDate.setCellValueFactory(new PropertyValueFactory<>("trainingDate"));
-        trainingType.setCellValueFactory(new PropertyValueFactory<>("trainingType"));
+        tblWorkout.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+
+        if (currentUser.getIdRole() == 1) {
+            TableColumn<ModelWorkouts, String> coach = new TableColumn<>("Тренер");
+            coach.setCellValueFactory(new PropertyValueFactory<>("coach"));
+
+            TableColumn<ModelWorkouts, String> trainingDate = new TableColumn<>("Дата тренировки");
+            trainingDate.setCellValueFactory(new PropertyValueFactory<>("trainingDate"));
+
+            TableColumn<ModelWorkouts, String> trainingType = new TableColumn<>("Вид тренировки");
+            trainingType.setCellValueFactory(new PropertyValueFactory<>("trainingType"));
+
+            tblWorkout.getColumns().addAll(coach, trainingDate, trainingType);
+
+        } else {
+
+            TableColumn<ModelWorkouts, String> trainingDate = new TableColumn<>("Дата тренировки");
+            trainingDate.setCellValueFactory(new PropertyValueFactory<>("trainingDate"));
+
+            TableColumn<ModelWorkouts, String> trainingStructure = new TableColumn<>("Состав тренировки");
+            trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClientStr"));
+
+            tblWorkout.getColumns().addAll(trainingDate, trainingStructure);
+        }
+
+
     }
 
     @FXML

@@ -1,6 +1,6 @@
 package org.example.courseproject.DAOS;
 
-import org.example.courseproject.models.Users;
+import org.example.courseproject.models.ModelUsers;
 
 import java.sql.*;
 
@@ -11,7 +11,7 @@ public class DBUser {
     private final String LOGIN = "postgres";
     private final String PASS = "root";
 
-    public Users getUser(String log, String pass) throws SQLException, ClassNotFoundException {
+    public ModelUsers getUser(String log, String pass) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM users where login=? and password=?;";
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -23,7 +23,7 @@ public class DBUser {
             ResultSet res = statement.executeQuery();
 
             while (res.next()) {
-                Users user = new Users(
+                ModelUsers user = new ModelUsers(
                         res.getInt("id_user"),
                         res.getString("login"),
                         res.getString("password"),

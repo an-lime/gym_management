@@ -1,19 +1,18 @@
 package org.example.courseproject.models;
 
-import java.sql.Array;
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Collection;
 
-public class Workouts {
+public class ModelWorkouts {
     private int id_workout;
     private String coach;
     private String trainingDate;
     private ArrayList<Integer> id_client;
+    private ArrayList<String> nameClientArr = new ArrayList<>();
+    private String nameClientStr;
     private String trainingType;
     private ArrayList<Integer> exercises;
 
-    public Workouts(int id_workout, String coach, String trainingDate, ArrayList<Integer> id_client, String trainingType, ArrayList<Integer> exercises) {
+    public ModelWorkouts(int id_workout, String coach, String trainingDate, ArrayList<Integer> id_client, String trainingType, ArrayList<Integer> exercises) {
         this.id_workout = id_workout;
         this.coach = coach;
         this.trainingDate = trainingDate;
@@ -36,6 +35,22 @@ public class Workouts {
 
     public ArrayList<Integer> getId_client() {
         return id_client;
+    }
+
+    public ArrayList<String> getNameClientArr() {
+        return nameClientArr;
+    }
+
+    public void setNameClientArr(ArrayList<String> nameClientArr) {
+        this.nameClientArr = nameClientArr;
+    }
+
+    public void setNameClientStr(String nameClientStr) {
+        this.nameClientStr = nameClientStr;
+    }
+
+    public String getNameClientStr() {
+        return nameClientStr;
     }
 
     public String getTrainingType() {
