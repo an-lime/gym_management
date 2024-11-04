@@ -7,57 +7,63 @@ public class ModelWorkouts {
     private String coach;
     private String trainingDate;
     private ArrayList<Integer> id_client;
-    private ArrayList<String> nameClientArr = new ArrayList<>();
-    private String nameClientStr;
+    private String nameClient;
     private String trainingType;
     private ArrayList<Integer> exercises;
 
-    public ModelWorkouts(int id_workout, String coach, String trainingDate, ArrayList<Integer> id_client, String trainingType, ArrayList<Integer> exercises) {
-        this.id_workout = id_workout;
-        this.coach = coach;
-        this.trainingDate = trainingDate;
-        this.id_client = id_client;
-        this.trainingType = trainingType;
-        this.exercises = exercises;
-    }
-
     public int getId_workout() {
         return id_workout;
+    }
+
+    public void setId_workout(int id_workout) {
+        this.id_workout = id_workout;
     }
 
     public String getCoach() {
         return coach;
     }
 
+    public void setCoach(String coach) {
+        this.coach = coach;
+    }
+
     public String getTrainingDate() {
         return trainingDate;
+    }
+
+    public void setTrainingDate(String trainingDate) {
+        this.trainingDate = trainingDate;
     }
 
     public ArrayList<Integer> getId_client() {
         return id_client;
     }
 
-    public ArrayList<String> getNameClientArr() {
-        return nameClientArr;
+    public void setId_client(ArrayList<Integer> id_client) {
+        this.id_client = id_client;
     }
 
-    public void setNameClientArr(ArrayList<String> nameClientArr) {
-        this.nameClientArr = nameClientArr;
+    public String getNameClient() {
+        return nameClient;
     }
 
-    public void setNameClientStr(String nameClientStr) {
-        this.nameClientStr = nameClientStr;
-    }
-
-    public String getNameClientStr() {
-        return nameClientStr;
+    public void setNameClient(String nameClient) {
+        this.nameClient = nameClient;
     }
 
     public String getTrainingType() {
         return trainingType;
     }
 
+    public void setTrainingType(String trainingType) {
+        this.trainingType = trainingType;
+    }
+
     public ArrayList<Integer> getExercises() {
         return exercises;
+    }
+
+    public void setExercises(ArrayList<Integer> exercises) {
+        this.exercises = exercises;
     }
 }

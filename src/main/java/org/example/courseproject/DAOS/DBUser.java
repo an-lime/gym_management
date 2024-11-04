@@ -3,11 +3,12 @@ package org.example.courseproject.DAOS;
 import org.example.courseproject.models.ModelUsers;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBUser {
     private final String HOST = "localhost";
     private final String PORT = "5432";
-    private final String DB_NAME = "courseProject";
+    private final String DB_NAME = "gymManagement";
     private final String LOGIN = "postgres";
     private final String PASS = "root";
 
@@ -53,5 +54,39 @@ public class DBUser {
 
 
         }
+    }
+
+    public String getUserFioOnWorkout(Array idUsers) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+
+        String sql = "SELECT fio FROM users WHERE id_user = any (?);";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setArray(1, idUsers);
+            ResultSet res = statement.executeQuery();
+
+            ArrayList<String> fioArr = new ArrayList<>();
+            String fioStr;
+
+            while (res.next()) {
+                fioArr.add(res.getString("fio"));
+            }
+
+            fioStr = (toString(fioArr));
+
+            return fioStr;
+
+
+        }
+    }
+
+    public String toString(ArrayList<String> arrayList) {
+        StringBuilder str = new StringBuilder();
+        for (String str1 : arrayList) {
+            str.append(str1).append("\n");
+        }
+        return str.toString();
     }
 }

@@ -49,12 +49,13 @@ public class MainPageController implements Initializable {
     }
 
     public void initializeTable() throws SQLException, ClassNotFoundException {
-        ObservableList<ModelWorkouts> list = FXCollections.observableArrayList(dbWorkout.getWorkout(currentUser));
-        tblWorkout.setItems(list);
-
-        tblWorkout.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 
         if (currentUser.getIdRole() == 1) {
+
+            ObservableList<ModelWorkouts> list = FXCollections.observableArrayList(dbWorkout.getWorkoutForClient(currentUser));
+            tblWorkout.setItems(list);
+
+            tblWorkout.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
             TableColumn<ModelWorkouts, String> coach = new TableColumn<>("Тренер");
             coach.setCellValueFactory(new PropertyValueFactory<>("coach"));
 
@@ -68,13 +69,20 @@ public class MainPageController implements Initializable {
 
         } else {
 
+            ObservableList<ModelWorkouts> list = FXCollections.observableArrayList(dbWorkout.getWorkoutForCoachOnly(currentUser));
+            tblWorkout.setItems(list);
+
+            tblWorkout.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+
             TableColumn<ModelWorkouts, String> trainingDate = new TableColumn<>("Дата тренировки");
             trainingDate.setCellValueFactory(new PropertyValueFactory<>("trainingDate"));
 
             TableColumn<ModelWorkouts, String> trainingStructure = new TableColumn<>("Состав тренировки");
-            trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClientStr"));
+            trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
 
             tblWorkout.getColumns().addAll(trainingDate, trainingStructure);
+
+
         }
 
 
@@ -90,8 +98,7 @@ public class MainPageController implements Initializable {
             stage.setScene(scene);
             stage.show();
 
-        } catch (
-                Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
