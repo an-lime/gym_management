@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/courseproject/DAOS/DBUser.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/courseproject/DAOS/DBWorkout.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBUser.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBWorkout.java" dialect="GenericSQL" />
   </component>
 </project>

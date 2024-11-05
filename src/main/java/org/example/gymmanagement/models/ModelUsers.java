@@ -1,4 +1,4 @@
-package org.example.courseproject.models;
+package org.example.gymmanagement.models;
 
 public class ModelUsers {
 
@@ -16,6 +16,18 @@ public class ModelUsers {
         this.fio = fio;
         this.telephone = telephone;
         this.idRole = idRole;
+    }
+
+    @Override
+    public String toString() {
+        return this.getFio();
+    }
+
+    public ModelUsers(int idUser, String login, String password, String fio) {
+        this.idUser = idUser;
+        this.login = login;
+        this.password = password;
+        this.fio = fio;
     }
 
     public int getIdUser() {
@@ -41,4 +53,6 @@ public class ModelUsers {
     public int getIdRole() {
         return idRole;
     }
+
+
 }

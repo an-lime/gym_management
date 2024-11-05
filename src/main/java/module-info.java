@@ -5,9 +5,9 @@ module org.example.courseproject {
     requires org.postgresql.jdbc;
 
 
-    opens org.example.courseproject to javafx.fxml;
-    exports org.example.courseproject;
-    exports org.example.courseproject.controllers;
-    exports org.example.courseproject.models;
-    opens org.example.courseproject.controllers to javafx.fxml;
+    opens org.example.gymmanagement to javafx.fxml;
+    exports org.example.gymmanagement;
+    exports org.example.gymmanagement.controllers;
+    exports org.example.gymmanagement.models;
+    opens org.example.gymmanagement.controllers to javafx.fxml;
 }

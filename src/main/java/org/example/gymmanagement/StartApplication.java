@@ -1,4 +1,4 @@
-package org.example.courseproject;
+package org.example.gymmanagement;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

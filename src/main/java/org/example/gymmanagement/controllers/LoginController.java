@@ -1,4 +1,4 @@
-package org.example.courseproject.controllers;
+package org.example.gymmanagement.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,9 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.example.courseproject.DAOS.DBUser;
-import org.example.courseproject.StartApplication;
-import org.example.courseproject.models.ModelUsers;
+import org.example.gymmanagement.DAOS.DBUser;
+import org.example.gymmanagement.StartApplication;
+import org.example.gymmanagement.models.ModelUsers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -56,7 +56,7 @@ public class LoginController implements Initializable {
 
             if (!loginTxt.getText().isEmpty() & !enterPassword.isEmpty()) {
 
-                ModelUsers user = dbUser.getUser(loginTxt.getText(), enterPassword);
+                ModelUsers user = dbUser.getCurrentUser(loginTxt.getText(), enterPassword);
                 if (user == null) {
                     error.setVisible(true);
                     error.setText("Ошибка входа");

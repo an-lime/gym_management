@@ -1,7 +1,7 @@
-package org.example.courseproject.DAOS;
+package org.example.gymmanagement.DAOS;
 
-import org.example.courseproject.models.ModelUsers;
-import org.example.courseproject.models.ModelWorkouts;
+import org.example.gymmanagement.models.ModelUsers;
+import org.example.gymmanagement.models.ModelWorkouts;
 
 import java.sql.*;
 import java.util.*;
@@ -60,6 +60,35 @@ public class DBWorkout {
                 ModelWorkouts workout = new ModelWorkouts();
 
                 workout.setId_workout(res.getInt("id_workout"));
+                workout.setTrainingDate(res.getString("training_date"));
+                workout.setId_client(getList(res, "id_clients"));
+                workout.setNameClient(dbUser.getUserFioOnWorkout(res.getArray("id_clients")));
+                workout.setExercises(getList(res, "exercises"));
+
+                modelWorkoutsList.add(workout);
+
+            }
+            return modelWorkoutsList;
+        }
+    }
+
+    public List<ModelWorkouts> getWorkoutForCoachAll() throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+
+        List<ModelWorkouts> modelWorkoutsList = new ArrayList<ModelWorkouts>();
+        DBUser dbUser = new DBUser();
+        String sql = "select * from workouts;";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            ResultSet res = statement.executeQuery();
+
+            while (res.next()) {
+                ModelWorkouts workout = new ModelWorkouts();
+
+                workout.setId_workout(res.getInt("id_workout"));
+                workout.setCoach(dbUser.getUserFio(res.getInt("id_user_coach")));
                 workout.setTrainingDate(res.getString("training_date"));
                 workout.setId_client(getList(res, "id_clients"));
                 workout.setNameClient(dbUser.getUserFioOnWorkout(res.getArray("id_clients")));

@@ -1,4 +1,4 @@
-package org.example.courseproject.models;
+package org.example.gymmanagement.models;
 
 import java.util.ArrayList;
 
