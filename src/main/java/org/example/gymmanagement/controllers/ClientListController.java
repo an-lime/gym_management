@@ -6,9 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.example.gymmanagement.DAOS.DBUser;
 import org.example.gymmanagement.StartApplication;
+import org.example.gymmanagement.interfaces.Controller;
 import org.example.gymmanagement.models.ModelUsers;
 
 import java.net.URL;
@@ -17,7 +20,7 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ClientListController implements Initializable {
+public class ClientListController implements Initializable, Controller {
 
     @FXML
     private Button btnBack;
@@ -40,12 +43,30 @@ public class ClientListController implements Initializable {
     @FXML
     private Button btnSave;
 
+    @FXML
+    private Pane paneConfirm;
+
+    @FXML
+    private Label lblConfirmAction;
+
+    @FXML
+    private TextField textPassword;
+
     private ModelUsers currentUser;
+
+    private int step = 0;
 
     DBUser dbUser;
 
     public void initialize(URL url, ResourceBundle rb) {
         dbUser = new DBUser();
+        paneConfirm.setManaged(false);
+    }
+
+    @Override
+    public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
+        this.currentUser = currentUser;
+        initializeComboBox();
     }
 
     @FXML
@@ -59,18 +80,13 @@ public class ClientListController implements Initializable {
             mainPageController.startPage(currentUser);
 
             Stage stage = (Stage) btnBack.getScene().getWindow();
-            stage.setTitle("Добро пожаловать");
+            stage.setTitle("Спортзал \"Штангелина\"");
             stage.setScene(scene);
             stage.show();
 
         } catch (Exception e) {
             System.out.println(e);
         }
-    }
-
-    public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
-        this.currentUser = currentUser;
-        initializeComboBox();
     }
 
     public void initializeComboBox() throws ClassNotFoundException, SQLException {
@@ -85,6 +101,11 @@ public class ClientListController implements Initializable {
 
     @FXML
     void showClientInfo() {
+        paneConfirm.setManaged(false);
+        textPassword.setText("");
+        step = 0;
+        lblConfirmAction.setVisible(true);
+        paneConfirm.setVisible(false);
         lblFio.setText(comboClient.getSelectionModel().getSelectedItem().getFio());
         lblLogin.setText(comboClient.getSelectionModel().getSelectedItem().getLogin());
         lblPassword.setText(comboClient.getSelectionModel().getSelectedItem().getPassword());
@@ -92,19 +113,58 @@ public class ClientListController implements Initializable {
 
     @FXML
     void doSave() throws SQLException, ClassNotFoundException {
-        dbUser.updateUsers(comboClient.getSelectionModel().getSelectedItem().getIdUser(),
-                lblFio.getText(), lblLogin.getText(), lblPassword.getText());
 
-        lblSaveGood.setVisible(true);
+        if (step == 0) {
+            paneConfirm.setManaged(true);
+            paneConfirm.setVisible(true);
 
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            public void run() {
-                lblSaveGood.setVisible(false);
+            step = 1;
+        } else if (step == 1) {
+
+            if (textPassword.getText().equals(currentUser.getPassword())) {
+
+                dbUser.updateUsers(comboClient.getSelectionModel().getSelectedItem().getIdUser(),
+                        lblFio.getText(), lblLogin.getText(), lblPassword.getText());
+
+                lblSaveGood.setText("Изменения прошли успешно!");
+                lblSaveGood.setVisible(true);
+
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    public void run() {
+                        lblSaveGood.setVisible(false);
+                    }
+                };
+
+                timer.schedule(task, 2000);
+
+                textPassword.setText("");
+                lblConfirmAction.setVisible(true);
+                paneConfirm.setManaged(false);
+                paneConfirm.setVisible(false);
+                step = 0;
+            } else {
+                lblSaveGood.setVisible(true);
+                lblSaveGood.setText("Проверьте правильность пароля!");
+
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    public void run() {
+                        lblSaveGood.setVisible(false);
+                    }
+                };
+
+                timer.schedule(task, 2000);
             }
-        };
+        }
 
-        timer.schedule(task, 2000);
+
+    }
+
+    @FXML
+    void hideConfirmLbl(MouseEvent event) {
+        lblConfirmAction.setVisible(false);
+        textPassword.requestFocus();
     }
 
 }

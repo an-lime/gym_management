@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="328.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.TrainingPlanController">
+   <children>
+      <Button fx:id="btnBack" layoutX="388.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="Назад" />
+   </children>
+</AnchorPane>

@@ -81,7 +81,7 @@ public class LoginController implements Initializable {
                     mainPageController.startPage(user);
 
                     Stage stage = (Stage) loginBtn.getScene().getWindow();
-                    stage.setTitle("Добро пожаловать");
+                    stage.setTitle("Спортзал \"Штангелина\"");
                     stage.setScene(scene);
                     stage.show();
 

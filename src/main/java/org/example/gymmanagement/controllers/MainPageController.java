@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.example.gymmanagement.DAOS.DBWorkout;
 import org.example.gymmanagement.StartApplication;
+import org.example.gymmanagement.interfaces.Controller;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
 
@@ -18,7 +19,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class MainPageController implements Initializable {
+public class MainPageController implements Initializable, Controller {
 
     @FXML
     private Label lblWelcome;
@@ -47,6 +48,7 @@ public class MainPageController implements Initializable {
         dbWorkout = new DBWorkout();
     }
 
+    @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
         this.currentUser = currentUser;
         lblWelcome.setText(lblWelcome.getText() + currentUser.getFio() + '!');
@@ -55,6 +57,7 @@ public class MainPageController implements Initializable {
         if (currentUser.getIdRole() == 1) {
             btnAllCouch.setVisible(false);
             btnClientList.setVisible(false);
+            btnTrainingPlan.setVisible(false);
         }
     }
 
@@ -147,6 +150,27 @@ public class MainPageController implements Initializable {
             System.out.println(e);
         }
 
+    }
+
+    @FXML
+    void goTrainingPlan() {
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("fxml/training-plan.fxml"));
+
+            Scene scene = new Scene(fxmlLoader.load());
+
+            TrainingPlanController trainingPlanController = fxmlLoader.getController();
+            trainingPlanController.startPage(currentUser);
+
+            Stage stage = (Stage) btnTrainingPlan.getScene().getWindow();
+            stage.setTitle("Планы тренировок");
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
     }
 
