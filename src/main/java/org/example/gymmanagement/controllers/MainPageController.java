@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.example.gymmanagement.DAOS.DBWorkout;
 import org.example.gymmanagement.StartApplication;
@@ -15,6 +17,7 @@ import org.example.gymmanagement.interfaces.Controller;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
 
+import javafx.util.Callback;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -43,9 +46,16 @@ public class MainPageController implements Initializable, Controller {
 
     DBWorkout dbWorkout;
 
+    changeTblColumn change;
+
+    public Button getBtnClientList() {
+        return btnClientList;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dbWorkout = new DBWorkout();
+        change = new changeTblColumn();
     }
 
     @Override
@@ -69,14 +79,20 @@ public class MainPageController implements Initializable, Controller {
             tblWorkout.setItems(list);
 
             tblWorkout.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+
             TableColumn<ModelWorkouts, String> coach = new TableColumn<>("Тренер");
             coach.setCellValueFactory(new PropertyValueFactory<>("coach"));
+            change.changeColumn(coach);
 
             TableColumn<ModelWorkouts, String> trainingDate = new TableColumn<>("Дата тренировки");
             trainingDate.setCellValueFactory(new PropertyValueFactory<>("trainingDate"));
+            change.changeColumn(trainingDate);
+
 
             TableColumn<ModelWorkouts, String> trainingType = new TableColumn<>("Вид тренировки");
             trainingType.setCellValueFactory(new PropertyValueFactory<>("trainingType"));
+            change.changeColumn(trainingType);
+
 
             tblWorkout.getColumns().addAll(coach, trainingDate, trainingType);
 
@@ -89,9 +105,11 @@ public class MainPageController implements Initializable, Controller {
 
             TableColumn<ModelWorkouts, String> trainingDate = new TableColumn<>("Дата тренировки");
             trainingDate.setCellValueFactory(new PropertyValueFactory<>("trainingDate"));
+            change.changeColumn(trainingDate);
 
             TableColumn<ModelWorkouts, String> trainingStructure = new TableColumn<>("Состав тренировки");
             trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
+            change.changeColumn(trainingStructure);
 
             tblWorkout.getColumns().addAll(trainingDate, trainingStructure);
 
@@ -114,12 +132,15 @@ public class MainPageController implements Initializable, Controller {
 
             TableColumn<ModelWorkouts, String> coach = new TableColumn<>("Тренер");
             coach.setCellValueFactory(new PropertyValueFactory<>("coach"));
+            change.changeColumn(coach);
 
             TableColumn<ModelWorkouts, String> trainingDate = new TableColumn<>("Дата тренировки");
             trainingDate.setCellValueFactory(new PropertyValueFactory<>("trainingDate"));
+            change.changeColumn(trainingDate);
 
             TableColumn<ModelWorkouts, String> trainingStructure = new TableColumn<>("Состав тренировки");
             trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
+            change.changeColumn(trainingStructure);
 
             tblWorkout.getColumns().addAll(coach, trainingDate, trainingStructure);
 
@@ -143,7 +164,15 @@ public class MainPageController implements Initializable, Controller {
 
             Stage stage = (Stage) btnClientList.getScene().getWindow();
             stage.setTitle("Список клиентов");
+
+            stage.setResizable(false);
+
+            stage.setFullScreenExitHint("");
+            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+
             stage.setScene(scene);
+            stage.setFullScreen(true);
+
             stage.show();
 
         } catch (Exception e) {
@@ -181,11 +210,45 @@ public class MainPageController implements Initializable, Controller {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) btnExit.getScene().getWindow();
             stage.setTitle("Авторизуйтесь в системе");
+
+            stage.setResizable(false);
+
+            stage.setFullScreenExitHint("");
+            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+
             stage.setScene(scene);
+            stage.setFullScreen(true);
+
             stage.show();
 
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+}
+
+class changeTblColumn{
+
+    public void changeColumn(TableColumn<ModelWorkouts, String> column) {
+
+        column.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell call(TableColumn<ModelWorkouts, String> param) {
+                return new TableCell<ModelWorkouts, String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setText(null);
+                        } else {
+                            setFont(Font.font("Verdana", 15));
+                            setText(item);
+                        }
+                    }
+                };
+            }
+
+        });
+
     }
 }

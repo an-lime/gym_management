@@ -1,27 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="235.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.LoginController">
-  <children>
-    <Label layoutX="8.0" layoutY="33.0" text="Авторизуйтесь в системе">
-      <font>
-        <Font size="19.0" />
-      </font>
-    </Label>
-    <Label layoutX="43.0" layoutY="85.0" text="логин" />
-    <Label layoutX="43.0" layoutY="132.0" text="пароль" />
-    <TextField fx:id="loginTxt" layoutX="43.0" layoutY="103.0" />
-    <PasswordField fx:id="passwordField" layoutX="43.0" layoutY="150.0" />
-    <TextField fx:id="password" layoutX="43.0" layoutY="150.0" visible="false" />
-    <CheckBox fx:id="checkShowPassword" layoutX="43.0" layoutY="179.0" mnemonicParsing="false" onAction="#toggleVisiblePassword" text="Показать пароль" />
-    <Button fx:id="loginBtn" layoutX="89.0" layoutY="204.0" mnemonicParsing="false" onAction="#enter" text="Войти" />
-    <Label fx:id="error" alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="229.0" prefHeight="17.0" prefWidth="149.0" textAlignment="CENTER" />
-  </children>
-</Pane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.LoginController">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Авторизуйтесь в системе" textAlignment="CENTER">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <Label prefHeight="18.0" prefWidth="100.0" text="логин">
+               <VBox.margin>
+                  <Insets right="90.0" top="30.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="loginTxt" maxWidth="-Infinity" prefHeight="30.0" prefWidth="190.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <Label prefHeight="18.0" prefWidth="100.0" text="пароль">
+               <VBox.margin>
+                  <Insets right="90.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <AnchorPane maxWidth="-Infinity" prefHeight="26.0" prefWidth="539.0">
+               <children>
+                  <PasswordField fx:id="passwordField" layoutX="174.0" prefHeight="30.0" prefWidth="190.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </PasswordField>
+                  <TextField fx:id="password" layoutX="174.0" layoutY="1.0" prefHeight="30.0" prefWidth="190.0" visible="false">
+                     <font>
+                        <Font size="15.0" />
+                     </font></TextField>
+               </children>
+            </AnchorPane>
+            <CheckBox fx:id="checkShowPassword" mnemonicParsing="false" onAction="#toggleVisiblePassword" text="Показать пароль">
+               <VBox.margin>
+                  <Insets right="45.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </CheckBox>
+            <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#enter" text="Войти">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Label fx:id="error" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="149.0" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

@@ -61,6 +61,7 @@ public class ClientListController implements Initializable, Controller {
     public void initialize(URL url, ResourceBundle rb) {
         dbUser = new DBUser();
         paneConfirm.setManaged(false);
+        paneConfirm.setVisible(false);
     }
 
     @Override
@@ -96,6 +97,8 @@ public class ClientListController implements Initializable, Controller {
         lblFio.setText(comboClient.getSelectionModel().getSelectedItem().getFio());
         lblLogin.setText(comboClient.getSelectionModel().getSelectedItem().getLogin());
         lblPassword.setText(comboClient.getSelectionModel().getSelectedItem().getPassword());
+
+        comboClient.setStyle("-fx-font: 15px \"Verdana\";");
 
     }
 

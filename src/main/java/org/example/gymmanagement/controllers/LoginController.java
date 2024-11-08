@@ -3,13 +3,18 @@ package org.example.gymmanagement.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.example.gymmanagement.DAOS.DBUser;
 import org.example.gymmanagement.StartApplication;
 import org.example.gymmanagement.models.ModelUsers;
+import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,6 +46,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dbUser = new DBUser();
+
     }
 
     @FXML
@@ -82,7 +88,15 @@ public class LoginController implements Initializable {
 
                     Stage stage = (Stage) loginBtn.getScene().getWindow();
                     stage.setTitle("Спортзал \"Штангелина\"");
+
+                    stage.setResizable(false);
+
+                    stage.setFullScreenExitHint("");
+                    stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+
                     stage.setScene(scene);
+                    stage.setFullScreen(true);
+
                     stage.show();
 
                 }
