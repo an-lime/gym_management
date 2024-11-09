@@ -11,6 +11,11 @@ public class ModelWorkouts {
     private String trainingType;
     private ArrayList<Integer> exercises;
 
+    @Override
+    public String toString() {
+        return this.trainingDate;
+    }
+
     public int getId_workout() {
         return id_workout;
     }

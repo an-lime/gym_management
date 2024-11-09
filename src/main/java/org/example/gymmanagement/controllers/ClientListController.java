@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -82,7 +83,15 @@ public class ClientListController implements Initializable, Controller {
 
             Stage stage = (Stage) btnBack.getScene().getWindow();
             stage.setTitle("Спортзал \"Штангелина\"");
+
+            stage.setResizable(false);
+
+            stage.setFullScreenExitHint("");
+            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+
             stage.setScene(scene);
+            stage.setFullScreen(true);
+
             stage.show();
 
         } catch (Exception e) {

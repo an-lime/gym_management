@@ -4,17 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="682e531b-ae23-4f9a-a8a9-a135d3eb976e" name="Changes" comment="при изменении данных клиента запрашивается пароль">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
+    <list default="true" id="682e531b-ae23-4f9a-a8a9-a135d3eb976e" name="Changes" comment="Для готовых окон оформлен полноэкранный режим">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBExercises.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBTrainingPlan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/models/ModelExercises.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/css/fonts.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/StartApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/StartApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBWorkout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBWorkout.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/ClientListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/ClientListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/MainPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/client-list.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/client-list.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/main-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/main-page.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/TrainingPlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/TrainingPlanController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/models/ModelWorkouts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/models/ModelWorkouts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/training-plan.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/training-plan.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,9 +26,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
         <option value="FxmlFile" />
+        <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -79,7 +82,8 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/andre/Documents/idea/kr3&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/andre/Documents/idea/firstfx&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -99,6 +103,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\andre\Documents\Курсовой проект\idea\gymManagement\src\main\resources\org\example\gymmanagement\resources\fxml" />
       <recent name="C:\Users\andre\Documents\Курсовой проект\idea\gymManagement\src\main\resources" />
       <recent name="C:\Users\andre\Documents\Курсовой проект\idea\courseProject\src\main\resources\org\example\courseproject\fxml" />
     </key>
@@ -143,7 +148,9 @@
       <workItem from="1730783929741" duration="7434000" />
       <workItem from="1730791411595" duration="8545000" />
       <workItem from="1730889852174" duration="4489000" />
-      <workItem from="1731043990807" duration="10803000" />
+      <workItem from="1731043990807" duration="15388000" />
+      <workItem from="1731139777870" duration="8107000" />
+      <workItem from="1731150038117" duration="2426000" />
     </task>
     <task id="LOCAL-00001" summary="firstCommit">
       <option name="closed" value="true" />
@@ -273,7 +280,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730893287883</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Для готовых окон оформлен полноэкранный режим">
+      <option name="closed" value="true" />
+      <created>1731055514745</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1731055514745</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,6 +318,7 @@
     <MESSAGE value="Данные в таблице тренировок теперь зависят от пользователя" />
     <MESSAGE value="Появилась возможность изменять данные клиентов" />
     <MESSAGE value="при изменении данных клиента запрашивается пароль" />
-    <option name="LAST_COMMIT_MESSAGE" value="при изменении данных клиента запрашивается пароль" />
+    <MESSAGE value="Для готовых окон оформлен полноэкранный режим" />
+    <option name="LAST_COMMIT_MESSAGE" value="Для готовых окон оформлен полноэкранный режим" />
   </component>
 </project>

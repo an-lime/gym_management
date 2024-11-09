@@ -18,6 +18,7 @@ import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
 
 import javafx.util.Callback;
+
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -46,7 +47,7 @@ public class MainPageController implements Initializable, Controller {
 
     DBWorkout dbWorkout;
 
-    changeTblColumn change;
+    ChangeTblColumn change;
 
     public Button getBtnClientList() {
         return btnClientList;
@@ -55,7 +56,7 @@ public class MainPageController implements Initializable, Controller {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dbWorkout = new DBWorkout();
-        change = new changeTblColumn();
+        change = new ChangeTblColumn();
     }
 
     @Override
@@ -82,6 +83,7 @@ public class MainPageController implements Initializable, Controller {
 
             TableColumn<ModelWorkouts, String> coach = new TableColumn<>("Тренер");
             coach.setCellValueFactory(new PropertyValueFactory<>("coach"));
+            coach.getStyleClass().add("cell");
             change.changeColumn(coach);
 
             TableColumn<ModelWorkouts, String> trainingDate = new TableColumn<>("Дата тренировки");
@@ -176,7 +178,7 @@ public class MainPageController implements Initializable, Controller {
             stage.show();
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
     }
@@ -194,11 +196,19 @@ public class MainPageController implements Initializable, Controller {
 
             Stage stage = (Stage) btnTrainingPlan.getScene().getWindow();
             stage.setTitle("Планы тренировок");
+
+            stage.setResizable(false);
+
+            stage.setFullScreenExitHint("");
+            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+
             stage.setScene(scene);
+            stage.setFullScreen(true);
+
             stage.show();
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
     }
@@ -222,18 +232,18 @@ public class MainPageController implements Initializable, Controller {
             stage.show();
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 }
 
-class changeTblColumn{
+class ChangeTblColumn {
 
     public void changeColumn(TableColumn<ModelWorkouts, String> column) {
 
         column.setCellFactory(new Callback<>() {
             @Override
-            public TableCell call(TableColumn<ModelWorkouts, String> param) {
+            public TableCell<ModelWorkouts, String> call(TableColumn<ModelWorkouts, String> param) {
                 return new TableCell<ModelWorkouts, String>() {
                     @Override
                     protected void updateItem(String item, boolean empty) {
