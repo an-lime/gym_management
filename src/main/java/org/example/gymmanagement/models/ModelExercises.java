@@ -10,6 +10,8 @@ public class ModelExercises {
         this.exercise = exercise;
     }
 
+    public ModelExercises() {}
+
     public int getId() {
         return id;
     }

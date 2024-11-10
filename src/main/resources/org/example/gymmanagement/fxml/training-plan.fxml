@@ -44,7 +44,7 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="comboExercises" maxHeight="-Infinity" prefHeight="30.0" prefWidth="167.0" styleClass="cell" stylesheets="@../css/fonts.css">
+                              <ComboBox fx:id="comboExercises" maxHeight="-Infinity" prefHeight="31.0" prefWidth="230.0" styleClass="cell" stylesheets="@../css/fonts.css">
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin></ComboBox>

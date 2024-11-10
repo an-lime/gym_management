@@ -35,4 +35,28 @@ public class DBExercises {
 
     }
 
+    public void addNewExercise(String exercise) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
+        Class.forName("org.postgresql.Driver");
+        String sql = "insert into exercises VALUES (DEFAULT, ?);";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setString(1, exercise);
+            statement.executeUpdate();
+        }
+    }
+
+    public void deleteExercise(int id) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
+        Class.forName("org.postgresql.Driver");
+        String sql = "delete from exercises where exercises.id_exercise = ?";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        }
+    }
+
 }

@@ -4,11 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.gymmanagement.DAOS.DBExercises;
 import org.example.gymmanagement.DAOS.DBTrainingPlan;
@@ -19,6 +21,7 @@ import org.example.gymmanagement.models.ModelExercises;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Array;
 import java.sql.SQLException;
@@ -160,8 +163,51 @@ public class TrainingPlanController implements Initializable, Controller {
     }
 
     @FXML
-    void doAddNewExercise() {
-        //TODO возможность добавления новых упражнений
+    void doAddNewExercise() throws ClassNotFoundException, SQLException, IOException {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(StartApplication.class.getResource("fxml/exercises.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Список упражнений");
+        stage.setScene(new Scene(root));
+
+        ExercisesController exercisesController = loader.getController();
+        exercisesController.startPage(currentUser);
+
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(this.btnAddNewExercise.getScene().getWindow());
+
+        stage.showAndWait();
+
+        comboExercises.setItems(FXCollections.observableArrayList(dbExercises.getExercises()));
+
+
+
+//        try {
+//            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("fxml/exercises.fxml"));
+//
+//            Scene scene = new Scene(fxmlLoader.load());
+//
+//            ExercisesController exercisesController = fxmlLoader.getController();
+//            exercisesController.startPage(currentUser);
+//
+//            Stage stage = (Stage) btnAddNewExercise.getScene().getWindow();
+//            stage.setTitle("Список упражнений");
+//
+//            stage.setResizable(false);
+//
+//            stage.setFullScreenExitHint("");
+//            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+//
+//            stage.setScene(scene);
+//            stage.setFullScreen(true);
+//
+//            stage.show();
+//
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
 
     }
 }
