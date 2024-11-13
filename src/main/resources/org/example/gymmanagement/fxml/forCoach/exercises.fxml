@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.ExercisesController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.forCoachControllers.ExercisesController">
    <center>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="358.0" prefWidth="253.0">
                <children>
                   <Label text="Упражнения" />
-                  <ListView fx:id="listExercises" maxHeight="-Infinity" onMouseClicked="#deleteExercise" prefHeight="230.0" prefWidth="192.0" styleClass="cell" stylesheets="@../css/fonts.css" />
+                  <ListView fx:id="listExercises" maxHeight="-Infinity" onMouseClicked="#deleteExercise" prefHeight="230.0" prefWidth="192.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
                </children>
             </VBox>
             <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="231.0" prefWidth="248.0">

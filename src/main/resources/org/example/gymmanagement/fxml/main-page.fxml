@@ -10,56 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.MainPageController">
-   <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="lblWelcome" maxWidth="-Infinity" prefHeight="35.0" prefWidth="586.0" text="Добро пожаловать, ">
-               <VBox.margin>
-                  <Insets left="45.0" top="-50.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="24.0" />
-               </font></Label>
-            <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="34.0" prefWidth="541.0">
-               <children>
-                  <Button fx:id="btnClientList" mnemonicParsing="false" onAction="#goClientList" text="Список клиентов" textAlignment="CENTER">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="btnTrainingPlan" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goTrainingPlan" text="Составить план тренировки" textAlignment="CENTER">
-                     <HBox.margin>
-                        <Insets left="190.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </HBox>
-            <TableView fx:id="tblWorkout" maxWidth="-Infinity" prefHeight="278.0" prefWidth="542.0">
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin></TableView>
-            <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="34.0" prefWidth="541.0">
-               <children>
-                  <ToggleButton fx:id="btnAllCouch" mnemonicParsing="false" onAction="#showAllCouch" text="Отобразить всю информацию" textAlignment="CENTER">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets top="5.0" />
-                     </HBox.margin>
-                  </ToggleButton>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </center>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="936.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.MainPageController">
    <top>
       <HBox alignment="TOP_RIGHT" prefHeight="26.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -73,4 +24,81 @@
          </BorderPane.margin>
       </HBox>
    </top>
+   <center>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="611.0" prefWidth="691.0">
+               <children>
+                  <Label fx:id="lblWelcome" alignment="BOTTOM_LEFT" maxWidth="-Infinity" prefHeight="35.0" prefWidth="694.0" text="Добро пожаловать, " textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets left="45.0" top="-70.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="BOTTOM_LEFT" maxWidth="-Infinity" prefHeight="34.0" prefWidth="598.0">
+                     <children>
+                        <Button fx:id="btnRequestToCoach" mnemonicParsing="false" onAction="#goRequest" text="Запрос на тренировку">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnClientList" maxWidth="-Infinity" mnemonicParsing="false" onAction="#goClientList" prefHeight="31.0" prefWidth="175.2" text="Список клиентов" textAlignment="CENTER">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="-50.0" top="30.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="374.0" prefWidth="842.0" spacing="10.0">
+                     <children>
+                        <TableView fx:id="tblWorkout" maxWidth="-Infinity" prefHeight="374.0" prefWidth="649.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="36.0" prefWidth="648.0">
+                     <children>
+                        <ToggleButton fx:id="btnAllCouch" mnemonicParsing="false" onAction="#showAllCouch" prefHeight="31.0" prefWidth="234.0" text="Отобразить всю информацию" textAlignment="CENTER">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                        </ToggleButton>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="boxBtnForCoach" alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="222.0" prefWidth="289.0" spacing="10.0">
+               <children>
+                  <Button fx:id="btnTrainingPlan" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goTrainingPlan" text="Планы тренировок" textAlignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnAddNewWorkout" mnemonicParsing="false" onAction="#goAddNewWorkout" text="Добавить новую тренировку">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnStartWorkout" mnemonicParsing="false" text="Начать тренировку">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
 </BorderPane>

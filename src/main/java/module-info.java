@@ -10,4 +10,7 @@ module org.example.courseproject {
     exports org.example.gymmanagement.controllers;
     exports org.example.gymmanagement.models;
     opens org.example.gymmanagement.controllers to javafx.fxml;
+    exports org.example.gymmanagement.controllers.forCoachControllers;
+    opens org.example.gymmanagement.controllers.forCoachControllers to javafx.fxml;
+    opens org.example.gymmanagement.controllers.forClientControllers to javafx.fxml;
 }

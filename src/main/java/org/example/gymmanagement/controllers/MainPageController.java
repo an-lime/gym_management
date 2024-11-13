@@ -9,16 +9,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.text.Font;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.example.gymmanagement.DAOS.DBWorkout;
 import org.example.gymmanagement.StartApplication;
+import org.example.gymmanagement.controllers.forClientControllers.RequestController;
+import org.example.gymmanagement.controllers.forCoachControllers.ClientListController;
+import org.example.gymmanagement.controllers.forCoachControllers.TrainingPlanController;
 import org.example.gymmanagement.interfaces.Controller;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
 
-import javafx.util.Callback;
+import org.example.gymmanagement.utils.ChangeTblColumn;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -42,6 +47,21 @@ public class MainPageController implements Initializable, Controller {
 
     @FXML
     private Button btnTrainingPlan;
+
+    @FXML
+    private VBox boxBtnForCoach;
+
+    @FXML
+    private Button btnRequestFromClient;
+
+    @FXML
+    private Button btnRequestToCoach;
+
+    @FXML
+    private Button btnStartWorkout;
+
+    @FXML
+    private Button btnAddNewWorkout;
 
     private ModelUsers currentUser;
 
@@ -68,7 +88,12 @@ public class MainPageController implements Initializable, Controller {
         if (currentUser.getIdRole() == 1) {
             btnAllCouch.setVisible(false);
             btnClientList.setVisible(false);
-            btnTrainingPlan.setVisible(false);
+
+            boxBtnForCoach.setVisible(false);
+            boxBtnForCoach.setManaged(false);
+        } else {
+            btnRequestToCoach.setManaged(false);
+            btnRequestToCoach.setVisible(false);
         }
     }
 
@@ -157,7 +182,7 @@ public class MainPageController implements Initializable, Controller {
     void goClientList() {
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("fxml/client-list.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("fxml/forCoach/client-list.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
 
@@ -187,7 +212,7 @@ public class MainPageController implements Initializable, Controller {
     void goTrainingPlan() {
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("fxml/training-plan.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("fxml/forCoach/training-plan.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
 
@@ -210,6 +235,56 @@ public class MainPageController implements Initializable, Controller {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+    }
+
+    @FXML
+    void goRequest() throws ClassNotFoundException, SQLException, IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("fxml/forClient/do-request.fxml"));
+
+        Scene scene = new Scene(fxmlLoader.load());
+
+        RequestController requestController = fxmlLoader.getController();
+        requestController.startPage(currentUser);
+
+        Stage stage = (Stage) btnTrainingPlan.getScene().getWindow();
+        stage.setTitle("Планы тренировок");
+
+        stage.setResizable(false);
+
+        stage.setFullScreenExitHint("");
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+
+        stage.setScene(scene);
+        stage.setFullScreen(true);
+
+        stage.show();
+
+    }
+
+    @FXML
+    void goAddNewWorkout() throws ClassNotFoundException, SQLException, IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("fxml/forClient/do-request.fxml"));
+
+        Scene scene = new Scene(fxmlLoader.load());
+
+        RequestController requestController = fxmlLoader.getController();
+        requestController.startPage(currentUser);
+
+        Stage stage = (Stage) btnTrainingPlan.getScene().getWindow();
+        stage.setTitle("Планы тренировок");
+
+        stage.setResizable(false);
+
+        stage.setFullScreenExitHint("");
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+
+        stage.setScene(scene);
+        stage.setFullScreen(true);
+
+        stage.show();
 
     }
 
@@ -237,28 +312,3 @@ public class MainPageController implements Initializable, Controller {
     }
 }
 
-class ChangeTblColumn {
-
-    public void changeColumn(TableColumn<ModelWorkouts, String> column) {
-
-        column.setCellFactory(new Callback<>() {
-            @Override
-            public TableCell<ModelWorkouts, String> call(TableColumn<ModelWorkouts, String> param) {
-                return new TableCell<ModelWorkouts, String>() {
-                    @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setText(null);
-                        } else {
-                            setFont(Font.font("Verdana", 15));
-                            setText(item);
-                        }
-                    }
-                };
-            }
-
-        });
-
-    }
-}

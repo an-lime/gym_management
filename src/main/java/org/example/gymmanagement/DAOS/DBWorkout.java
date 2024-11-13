@@ -72,6 +72,35 @@ public class DBWorkout {
         }
     }
 
+    public List<ModelWorkouts> getCurrentWorkoutForCoachOnly(int id_workout) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+
+        List<ModelWorkouts> modelWorkoutsList = new ArrayList<ModelWorkouts>();
+        DBUser dbUser = new DBUser();
+        String sql = "select * from workouts where id_workout = ?;";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, id_workout);
+            ResultSet res = statement.executeQuery();
+
+            while (res.next()) {
+                ModelWorkouts workout = new ModelWorkouts();
+
+                workout.setId_workout(res.getInt("id_workout"));
+                workout.setTrainingDate(res.getString("training_date"));
+                workout.setId_client(getList(res, "id_clients"));
+                workout.setNameClient(dbUser.getUserFioOnWorkout(res.getArray("id_clients")));
+                workout.setExercises(getList(res, "exercises"));
+
+                modelWorkoutsList.add(workout);
+
+            }
+            return modelWorkoutsList;
+        }
+    }
+
     public List<ModelWorkouts> getWorkoutForCoachAll() throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -109,6 +138,36 @@ public class DBWorkout {
         DBUser dbUser = new DBUser();
         String sql = "select * from workouts where id_user_coach = ? and training_date > CURRENT_TIMESTAMP(0)\n" +
                 "and id_workout not in (select id_workout from training_plan);";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, user.getIdUser());
+            ResultSet res = statement.executeQuery();
+
+            while (res.next()) {
+                ModelWorkouts workout = new ModelWorkouts();
+
+                workout.setId_workout(res.getInt("id_workout"));
+                workout.setTrainingDate(res.getString("training_date"));
+                workout.setId_client(getList(res, "id_clients"));
+                workout.setNameClient(dbUser.getUserFioOnWorkout(res.getArray("id_clients")));
+                workout.setExercises(getList(res, "exercises"));
+
+                modelWorkoutsList.add(workout);
+
+            }
+            return modelWorkoutsList;
+        }
+    }
+
+    public List<ModelWorkouts> getWorkoutHavePlan(ModelUsers user) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+
+        List<ModelWorkouts> modelWorkoutsList = new ArrayList<ModelWorkouts>();
+        DBUser dbUser = new DBUser();
+        String sql = "select * from workouts where id_user_coach = ? \n" +
+                "and id_workout in (select id_workout from training_plan);";
 
         try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
             PreparedStatement statement = dbConn.prepareStatement(sql);

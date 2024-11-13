@@ -1,5 +1,7 @@
 package org.example.gymmanagement.models;
 
+import java.util.ArrayList;
+
 public class ModelExercises {
 
     private int id;

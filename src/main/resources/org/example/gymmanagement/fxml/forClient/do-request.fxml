@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="814.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.forClientControllers.RequestController">
+   <top>
+      <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" text="Назад">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox maxWidth="-Infinity" prefHeight="360.0" prefWidth="522.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="522.0">
+               <children>
+                  <Label text="Заявка на проведение тренировки">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <DatePicker fx:id="datePicker" promptText="Дата тренировки" styleClass="cell" stylesheets="@../../css/fonts.css">
+               <VBox.margin>
+                  <Insets top="100.0" />
+               </VBox.margin>
+            </DatePicker>
+            <Label text="Тренер">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <ComboBox fx:id="comboCoach" prefHeight="31.0" prefWidth="233.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
+            <Label text="Индивидуальная/групповая">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <ComboBox fx:id="comboTypeWorkout" onAction="#showExercises" prefHeight="31.0" prefWidth="233.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
+            <HBox fx:id="boxExercises" prefHeight="287.0" prefWidth="522.0" spacing="20.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="214.0" prefWidth="236.0" spacing="5.0">
+                     <children>
+                        <Label text="Упражненния">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="comboExercises" maxHeight="-Infinity" prefHeight="31.0" prefWidth="230.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
+                        <Button mnemonicParsing="false" onAction="#addExercises" text="Добавить">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="242.0" prefWidth="223.0">
+                     <children>
+                        <Label text="Упражнения">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="listExercises" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#showContext" prefHeight="220.0" prefWidth="222.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="522.0">
+               <children>
+                  <VBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="264.0">
+                     <children>
+                        <Label fx:id="lblError" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="250.0" text="Заполните все поля!" textFill="RED">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btnAddRequest" mnemonicParsing="false" onAction="#doAddRequest" text="Отправить заявку">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="45.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

@@ -1,4 +1,4 @@
-package org.example.gymmanagement.controllers;
+package org.example.gymmanagement.controllers.forCoachControllers;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.example.gymmanagement.DAOS.DBUser;
 import org.example.gymmanagement.StartApplication;
+import org.example.gymmanagement.controllers.MainPageController;
 import org.example.gymmanagement.interfaces.Controller;
 import org.example.gymmanagement.models.ModelUsers;
 

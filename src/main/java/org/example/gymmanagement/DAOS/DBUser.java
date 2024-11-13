@@ -106,6 +106,29 @@ public class DBUser {
         }
     }
 
+    public List<ModelUsers> getAllCoach() throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM users where id_role = 2;";
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+
+        List<ModelUsers> modelUsersList = new ArrayList<>();
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            ResultSet res = statement.executeQuery();
+
+            while (res.next()) {
+                ModelUsers user = new ModelUsers(
+                        res.getInt("id_user"),
+                        res.getString("login"),
+                        res.getString("password"),
+                        res.getString("fio"));
+                modelUsersList.add(user);
+            }
+            return modelUsersList;
+        }
+    }
+
     public void updateUsers(int id, String fio, String login, String password) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");

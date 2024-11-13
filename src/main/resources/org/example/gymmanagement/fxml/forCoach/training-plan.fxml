@@ -2,15 +2,17 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="663.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.TrainingPlanController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.forCoachControllers.TrainingPlanController">
    <top>
       <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="663.0" BorderPane.alignment="CENTER">
          <children>
@@ -26,15 +28,38 @@
       </HBox>
    </top>
    <center>
-      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="294.0" prefWidth="625.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="410.0" prefWidth="834.0" BorderPane.alignment="CENTER">
          <children>
+            <VBox fx:id="vBoxStructure" alignment="CENTER" prefHeight="410.0" prefWidth="516.0">
+               <children>
+                  <Label text="Состав тренировки">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tblWorkoutStructure" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="205.0" prefWidth="221.0">
+                     <VBox.margin>
+                        <Insets bottom="50.0" top="5.0" />
+                     </VBox.margin>
+                  </TableView>
+               </children>
+            </VBox>
             <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="264.0" prefWidth="706.0">
                <children>
                   <Label text="Дата тренировки">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
-                  <ComboBox fx:id="comboTrainingDate" onAction="#showExercises" prefHeight="27.0" prefWidth="242.0" styleClass="cell" stylesheets="@../css/fonts.css" />
+                  <HBox prefHeight="24.0" prefWidth="406.0">
+                     <children>
+                        <ComboBox fx:id="comboTrainingDate" onAction="#showExercises" prefHeight="27.0" prefWidth="242.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
+                        <CheckBox fx:id="checkAllPlan" mnemonicParsing="false" onMouseClicked="#showAllPlan" text="Составленные планы">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </CheckBox>
+                     </children>
+                  </HBox>
                   <HBox fx:id="hBoxExercises" alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="335.0">
                      <children>
                         <VBox prefHeight="89.0" prefWidth="248.0">
@@ -44,7 +69,7 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="comboExercises" maxHeight="-Infinity" prefHeight="31.0" prefWidth="230.0" styleClass="cell" stylesheets="@../css/fonts.css">
+                              <ComboBox fx:id="comboExercises" maxHeight="-Infinity" prefHeight="31.0" prefWidth="230.0" styleClass="cell" stylesheets="@../../css/fonts.css">
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin></ComboBox>
@@ -76,17 +101,17 @@
                   </HBox>
                </children>
                <HBox.margin>
-                  <Insets bottom="30.0" />
+                  <Insets bottom="30.0" left="20.0" />
                </HBox.margin>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="294.0" prefWidth="500.0">
+            <VBox alignment="CENTER" prefHeight="294.0" prefWidth="511.0">
                <children>
                   <Label text="Упражнения">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="listExercises" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="206.0" prefWidth="290.0" styleClass="cell" stylesheets="@../css/fonts.css">
+                  <ListView fx:id="listExercises" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#showContext" prefHeight="205.0" prefWidth="221.0" styleClass="cell" stylesheets="@../../css/fonts.css">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -106,7 +131,7 @@
                   </Button>
                </children>
                <HBox.margin>
-                  <Insets right="20.0" />
+                  <Insets />
                </HBox.margin>
             </VBox>
          </children>

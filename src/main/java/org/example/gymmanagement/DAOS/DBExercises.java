@@ -59,4 +59,28 @@ public class DBExercises {
         }
     }
 
+    public ArrayList<ModelExercises> getNameExercisesInPlan(Array idExercise) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+
+        String sql = "SELECT id_exercise, title FROM exercises WHERE id_exercise = any (?);";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setArray(1, idExercise);
+            ResultSet res = statement.executeQuery();
+
+            ArrayList<ModelExercises> exerciseArr = new ArrayList<>();
+
+            while (res.next()) {
+                ModelExercises modelExercises = new ModelExercises(res.getInt("id_exercise"),
+                        res.getString("title"));
+                exerciseArr.add(modelExercises);
+            }
+
+            return exerciseArr;
+
+        }
+    }
+
 }
