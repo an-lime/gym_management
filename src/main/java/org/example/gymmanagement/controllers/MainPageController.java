@@ -11,11 +11,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.example.gymmanagement.DAOS.DBWorkout;
 import org.example.gymmanagement.StartApplication;
 import org.example.gymmanagement.controllers.forClientControllers.RequestController;
 import org.example.gymmanagement.controllers.forCoachControllers.ClientListController;
+import org.example.gymmanagement.controllers.forCoachControllers.NewWorkoutController;
 import org.example.gymmanagement.controllers.forCoachControllers.TrainingPlanController;
 import org.example.gymmanagement.interfaces.Controller;
 import org.example.gymmanagement.models.ModelUsers;
@@ -109,16 +109,16 @@ public class MainPageController implements Initializable, Controller {
             TableColumn<ModelWorkouts, String> coach = new TableColumn<>("Тренер");
             coach.setCellValueFactory(new PropertyValueFactory<>("coach"));
             coach.getStyleClass().add("cell");
-            change.changeColumn(coach);
+            change.changeColumnWorkout(coach);
 
             TableColumn<ModelWorkouts, String> trainingDate = new TableColumn<>("Дата тренировки");
             trainingDate.setCellValueFactory(new PropertyValueFactory<>("trainingDate"));
-            change.changeColumn(trainingDate);
+            change.changeColumnWorkout(trainingDate);
 
 
             TableColumn<ModelWorkouts, String> trainingType = new TableColumn<>("Вид тренировки");
             trainingType.setCellValueFactory(new PropertyValueFactory<>("trainingType"));
-            change.changeColumn(trainingType);
+            change.changeColumnWorkout(trainingType);
 
 
             tblWorkout.getColumns().addAll(coach, trainingDate, trainingType);
@@ -132,11 +132,11 @@ public class MainPageController implements Initializable, Controller {
 
             TableColumn<ModelWorkouts, String> trainingDate = new TableColumn<>("Дата тренировки");
             trainingDate.setCellValueFactory(new PropertyValueFactory<>("trainingDate"));
-            change.changeColumn(trainingDate);
+            change.changeColumnWorkout(trainingDate);
 
             TableColumn<ModelWorkouts, String> trainingStructure = new TableColumn<>("Состав тренировки");
             trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
-            change.changeColumn(trainingStructure);
+            change.changeColumnWorkout(trainingStructure);
 
             tblWorkout.getColumns().addAll(trainingDate, trainingStructure);
 
@@ -159,15 +159,15 @@ public class MainPageController implements Initializable, Controller {
 
             TableColumn<ModelWorkouts, String> coach = new TableColumn<>("Тренер");
             coach.setCellValueFactory(new PropertyValueFactory<>("coach"));
-            change.changeColumn(coach);
+            change.changeColumnWorkout(coach);
 
             TableColumn<ModelWorkouts, String> trainingDate = new TableColumn<>("Дата тренировки");
             trainingDate.setCellValueFactory(new PropertyValueFactory<>("trainingDate"));
-            change.changeColumn(trainingDate);
+            change.changeColumnWorkout(trainingDate);
 
             TableColumn<ModelWorkouts, String> trainingStructure = new TableColumn<>("Состав тренировки");
             trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
-            change.changeColumn(trainingStructure);
+            change.changeColumnWorkout(trainingStructure);
 
             tblWorkout.getColumns().addAll(coach, trainingDate, trainingStructure);
 
@@ -266,15 +266,15 @@ public class MainPageController implements Initializable, Controller {
     @FXML
     void goAddNewWorkout() throws ClassNotFoundException, SQLException, IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("fxml/forClient/do-request.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("fxml/forCoach/new-workout.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
 
-        RequestController requestController = fxmlLoader.getController();
-        requestController.startPage(currentUser);
+        NewWorkoutController newWorkoutController = fxmlLoader.getController();
+        newWorkoutController.startPage(currentUser);
 
-        Stage stage = (Stage) btnTrainingPlan.getScene().getWindow();
-        stage.setTitle("Планы тренировок");
+        Stage stage = (Stage) btnAddNewWorkout.getScene().getWindow();
+        stage.setTitle("Новые тренировки");
 
         stage.setResizable(false);
 

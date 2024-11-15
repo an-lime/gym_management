@@ -4,30 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="682e531b-ae23-4f9a-a8a9-a135d3eb976e" name="Changes" comment="К окно плана тренировки добавлена возможносьт создавать новые упражнения">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBRequests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forClientControllers/RequestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forCoachControllers/NewWorkoutController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/utils/ChangeTblColumn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/forClient/do-request.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/forCoach/new-workout.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+    <list default="true" id="682e531b-ae23-4f9a-a8a9-a135d3eb976e" name="Changes" comment="Клиент теперь может отправлять заявки на тренировку">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBGroupCells.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forClientControllers/ShowSendRequestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/models/ModelRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/forClient/show-send-request.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBExercises.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBExercises.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBTrainingPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBTrainingPlan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBRequests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBRequests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBWorkout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBWorkout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/ClientListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forCoachControllers/ClientListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/ExercisesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forCoachControllers/ExercisesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/MainPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/TrainingPlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forCoachControllers/TrainingPlanController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/models/ModelExercises.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/models/ModelExercises.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/client-list.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/forCoach/client-list.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/exercises.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/forCoach/exercises.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forClientControllers/RequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forClientControllers/RequestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forCoachControllers/NewWorkoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forCoachControllers/NewWorkoutController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forCoachControllers/TrainingPlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forCoachControllers/TrainingPlanController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/utils/ChangeTblColumn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/utils/ChangeTblColumn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/forClient/do-request.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/forClient/do-request.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/forCoach/new-workout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/forCoach/new-workout.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/main-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/main-page.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/training-plan.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/forCoach/training-plan.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +33,8 @@
       <list>
         <option value="Interface" />
         <option value="CSS File" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -93,7 +87,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/andre/Documents/Курсовой проект/idea/gymManagement",
+    "last_opened_file_path": "C:/Users/andre/Documents/idea/lab11",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -167,7 +161,11 @@
       <workItem from="1731311973769" duration="11388000" />
       <workItem from="1731333926955" duration="704000" />
       <workItem from="1731492691250" duration="4083000" />
-      <workItem from="1731497820750" duration="10280000" />
+      <workItem from="1731497820750" duration="13196000" />
+      <workItem from="1731527648615" duration="937000" />
+      <workItem from="1731561862456" duration="4484000" />
+      <workItem from="1731566396580" duration="5934000" />
+      <workItem from="1731648680533" duration="2621000" />
     </task>
     <task id="LOCAL-00001" summary="firstCommit">
       <option name="closed" value="true" />
@@ -321,7 +319,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731235050753</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Клиент теперь может отправлять заявки на тренировку">
+      <option name="closed" value="true" />
+      <created>1731510448701</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1731510448701</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -354,6 +360,7 @@
     <MESSAGE value="Для готовых окон оформлен полноэкранный режим" />
     <MESSAGE value="Готово окно составления плана тренировки" />
     <MESSAGE value="К окно плана тренировки добавлена возможносьт создавать новые упражнения" />
-    <option name="LAST_COMMIT_MESSAGE" value="К окно плана тренировки добавлена возможносьт создавать новые упражнения" />
+    <MESSAGE value="Клиент теперь может отправлять заявки на тренировку" />
+    <option name="LAST_COMMIT_MESSAGE" value="Клиент теперь может отправлять заявки на тренировку" />
   </component>
 </project>

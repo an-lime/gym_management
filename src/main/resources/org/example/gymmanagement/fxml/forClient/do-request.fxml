@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="716.0" prefWidth="814.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.forClientControllers.RequestController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="771.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.forClientControllers.RequestController">
    <top>
       <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -27,7 +27,7 @@
       </HBox>
    </top>
    <center>
-      <VBox maxWidth="-Infinity" prefHeight="360.0" prefWidth="522.0" spacing="5.0" BorderPane.alignment="CENTER">
+      <VBox maxWidth="-Infinity" prefHeight="711.0" prefWidth="522.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" prefHeight="20.0" prefWidth="522.0">
                <children>
@@ -38,11 +38,42 @@
                   </Label>
                </children>
             </HBox>
-            <DatePicker fx:id="datePicker" promptText="Дата тренировки" styleClass="cell" stylesheets="@../../css/fonts.css">
+            <Button fx:id="btnGoSendRequests" mnemonicParsing="false" onAction="#goSendRequests" text="Отправленные заявки">
+               <font>
+                  <Font size="15.0" />
+               </font>
                <VBox.margin>
                   <Insets top="100.0" />
                </VBox.margin>
-            </DatePicker>
+            </Button>
+            <Label text="Индивидуальная/групповая">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </Label>
+            <ComboBox fx:id="comboTypeWorkout" onAction="#showExercises" prefHeight="31.0" prefWidth="233.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <DatePicker fx:id="datePicker" onAction="#setAvailableTime" promptText="Дата тренировки" styleClass="cell" stylesheets="@../../css/fonts.css" />
+                  <Label text="в">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="comboTime" prefHeight="31.0" prefWidth="100.0" promptText="Время" stylesheets="@../../css/fonts.css" />
+                  <Label text="часов">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
             <Label text="Тренер">
                <font>
                   <Font size="15.0" />
@@ -52,15 +83,6 @@
                </VBox.margin>
             </Label>
             <ComboBox fx:id="comboCoach" prefHeight="31.0" prefWidth="233.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
-            <Label text="Индивидуальная/групповая">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
-            <ComboBox fx:id="comboTypeWorkout" onAction="#showExercises" prefHeight="31.0" prefWidth="233.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
             <HBox fx:id="boxExercises" prefHeight="287.0" prefWidth="522.0" spacing="20.0">
                <children>
                   <VBox alignment="CENTER_LEFT" prefHeight="214.0" prefWidth="236.0" spacing="5.0">

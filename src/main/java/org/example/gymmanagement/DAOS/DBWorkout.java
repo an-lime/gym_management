@@ -4,6 +4,8 @@ import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
 
 import java.sql.*;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.*;
 
 public class DBWorkout {
@@ -188,6 +190,50 @@ public class DBWorkout {
             }
             return modelWorkoutsList;
         }
+    }
+
+    public ArrayList<Integer> getHoursWorkout(LocalDate date) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+        String sql = "SELECT EXTRACT(HOUR FROM training_date) AS hour FROM workouts where training_date::date = ?";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            Date sqlDate = Date.valueOf(date);
+
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setDate(1, sqlDate);
+            ResultSet res = statement.executeQuery();
+            ArrayList<Integer> hoursWorkout = new ArrayList<>();
+
+            while (res.next()) {
+                hoursWorkout.add(res.getInt("hour"));
+            }
+            return hoursWorkout;
+        }
+
+
+    }
+
+    public ArrayList<Integer> getHoursRequest(LocalDate date) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+        String sql = "SELECT EXTRACT(HOUR FROM training_date_request) AS hour FROM requests where training_date_request::date = ?";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            Date sqlDate = Date.valueOf(date);
+
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setDate(1, sqlDate);
+            ResultSet res = statement.executeQuery();
+            ArrayList<Integer> hoursWorkout = new ArrayList<>();
+
+            while (res.next()) {
+                hoursWorkout.add(res.getInt("hour"));
+            }
+            return hoursWorkout;
+        }
+
+
     }
 
     public ArrayList<Integer> getList(ResultSet rs, String column) throws SQLException {

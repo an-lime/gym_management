@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCombination;
@@ -12,23 +13,21 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.example.gymmanagement.DAOS.DBExercises;
-import org.example.gymmanagement.DAOS.DBRequests;
-import org.example.gymmanagement.DAOS.DBUser;
+import org.example.gymmanagement.DAOS.*;
 import org.example.gymmanagement.StartApplication;
 import org.example.gymmanagement.controllers.MainPageController;
+import org.example.gymmanagement.controllers.forCoachControllers.ExercisesController;
 import org.example.gymmanagement.interfaces.Controller;
 import org.example.gymmanagement.models.ModelExercises;
 import org.example.gymmanagement.models.ModelUsers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class RequestController implements Controller, Initializable {
 
@@ -59,14 +58,24 @@ public class RequestController implements Controller, Initializable {
     @FXML
     private ComboBox<ModelUsers> comboCoach;
 
+    @FXML
+    private Button btnGoSendRequests;
+
+    @FXML
+    private ComboBox<Integer> comboTime;
+
     private ModelUsers currentUser;
 
     private DBExercises dbExercises;
     private DBUser dbUser;
     private DBRequests dbRequests;
+    private DBWorkout dbWorkout;
+    private DBGroupCells dbGroupCells;
 
-    ContextMenu contextMenu = new ContextMenu();
-    MenuItem itemDelete = new MenuItem("Удалить упражнение");
+    private final ContextMenu contextMenu = new ContextMenu();
+    private final MenuItem itemDelete = new MenuItem("Удалить упражнение");
+
+    ArrayList<Integer> hoursWorkout = new ArrayList<>();
 
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
@@ -82,6 +91,8 @@ public class RequestController implements Controller, Initializable {
         dbExercises = new DBExercises();
         dbUser = new DBUser();
         dbRequests = new DBRequests();
+        dbWorkout = new DBWorkout();
+        dbGroupCells = new DBGroupCells();
 
         boxExercises.setVisible(false);
         boxExercises.setManaged(false);
@@ -113,6 +124,29 @@ public class RequestController implements Controller, Initializable {
     }
 
     @FXML
+    void setAvailableTime(ActionEvent event) throws SQLException, ClassNotFoundException {
+
+        if (comboTypeWorkout.getSelectionModel().getSelectedItem() != null &&
+                comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная"))
+        {
+            hoursWorkout.clear();
+            for (int i = 10; i < 20; i++) {
+                hoursWorkout.add(i);
+            }
+
+            if (datePicker.getValue() != null) {
+
+                hoursWorkout.removeAll(dbWorkout.getHoursWorkout(datePicker.getValue()));
+                hoursWorkout.removeAll(dbWorkout.getHoursRequest(datePicker.getValue()));
+                hoursWorkout.removeAll(dbGroupCells.getGroupHoursRequest());
+                comboTime.setItems(FXCollections.observableArrayList(hoursWorkout));
+
+            }
+        }
+
+    }
+
+    @FXML
     void showContext() {
 
         listExercises.setCellFactory(lv -> {
@@ -140,18 +174,38 @@ public class RequestController implements Controller, Initializable {
     }
 
     @FXML
-    void showExercises() {
+    void showExercises() throws SQLException, ClassNotFoundException {
 
         btnAddRequest.setVisible(true);
         btnAddRequest.setManaged(true);
 
-        if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная")) {
-            boxExercises.setVisible(true);
-            boxExercises.setManaged(true);
-        } else {
-            boxExercises.setVisible(false);
-            boxExercises.setManaged(false);
+        if (comboTypeWorkout.getSelectionModel().getSelectedItem() != null) {
+            if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная")) {
+                boxExercises.setVisible(true);
+                boxExercises.setManaged(true);
+
+                hoursWorkout.clear();
+                for (int i = 10; i < 20; i++) {
+                    hoursWorkout.add(i);
+                }
+
+                if (datePicker.getValue() != null) {
+
+                    hoursWorkout.removeAll(dbWorkout.getHoursWorkout(datePicker.getValue()));
+                    hoursWorkout.removeAll(dbWorkout.getHoursRequest(datePicker.getValue()));
+                    hoursWorkout.removeAll(dbGroupCells.getGroupHoursRequest());
+                    comboTime.setItems(FXCollections.observableArrayList(hoursWorkout));
+
+                }
+
+            } else {
+                comboTime.setItems(FXCollections.observableArrayList(dbGroupCells.getGroupHoursRequest()));
+                boxExercises.setVisible(false);
+                boxExercises.setManaged(false);
+            }
+
         }
+
 
     }
 
@@ -163,12 +217,11 @@ public class RequestController implements Controller, Initializable {
         }
 
 
-
     }
 
     @FXML
     void doAddRequest() throws SQLException, ClassNotFoundException {
-        if (datePicker.getValue() == null
+        if (datePicker.getValue() == null || comboTime.getSelectionModel().getSelectedItem() == null
                 || comboCoach.getSelectionModel().getSelectedItem() == null
                 || comboTypeWorkout.getSelectionModel().getSelectedItem() == null
                 || comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная") && listExercises.getItems().isEmpty())
@@ -193,31 +246,36 @@ public class RequestController implements Controller, Initializable {
 
         }
 
-        if (dbRequests.cntRequestFromClient(currentUser.getIdUser(), datePicker.getValue()) == 1) {
+        if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная")) {
+            if (dbRequests.cntRequestFromClient(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem()) == 1)
+            {
 
-            lblError.setTextFill(Color.RED);
-            lblError.setText("На данную дату уже есть заявка!");
-            lblError.setVisible(true);
-            lblError.setManaged(true);
+                lblError.setTextFill(Color.RED);
+                lblError.setText("На данную дату и время уже есть заявка!");
+                lblError.setVisible(true);
+                lblError.setManaged(true);
 
-            Timer timer = new Timer();
-            TimerTask task = new TimerTask() {
-                public void run() {
-                    lblError.setManaged(false);
-                    lblError.setVisible(false);
-                }
-            };
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    public void run() {
+                        lblError.setManaged(false);
+                        lblError.setVisible(false);
+                    }
+                };
 
-            timer.schedule(task, 2000);
+                timer.schedule(task, 2000);
 
-            return;
+                return;
+
+            }
 
         }
 
-        if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Групповая")){
+        if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Групповая")) {
 
             dbRequests.addNewRequest(currentUser.getIdUser(), comboCoach.getSelectionModel().getSelectedItem().getIdUser(),
-                    datePicker.getValue(), comboTypeWorkout.getSelectionModel().getSelectedItem());
+                    datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(),
+                    comboTypeWorkout.getSelectionModel().getSelectedItem());
 
         } else if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная")) {
 
@@ -229,9 +287,14 @@ public class RequestController implements Controller, Initializable {
             }
 
             dbRequests.addNewRequest(currentUser.getIdUser(), comboCoach.getSelectionModel().getSelectedItem().getIdUser(),
-                    datePicker.getValue(), comboTypeWorkout.getSelectionModel().getSelectedItem(), exercisesArr);
+                    datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(), comboTypeWorkout.getSelectionModel().getSelectedItem(), exercisesArr);
         }
 
+        datePicker.setValue(null);
+        comboTime.getSelectionModel().clearSelection();
+        comboTime.getItems().clear();
+        comboCoach.getSelectionModel().clearSelection();
+        comboTypeWorkout.getSelectionModel().clearSelection();
         listExercises.getItems().clear();
 
         lblError.setVisible(true);
@@ -248,6 +311,26 @@ public class RequestController implements Controller, Initializable {
             }
         };
         timer.schedule(task, 2000);
+
+    }
+
+    @FXML
+    void goSendRequests() throws ClassNotFoundException, SQLException, IOException {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(StartApplication.class.getResource("fxml/forClient/show-send-request.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Отправленные заявки");
+        stage.setScene(new Scene(root));
+
+        ShowSendRequestController showSendRequestController = loader.getController();
+        showSendRequestController.startPage(currentUser);
+
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(this.btnGoSendRequests.getScene().getWindow());
+
+        stage.showAndWait();
 
     }
 
@@ -275,7 +358,7 @@ public class RequestController implements Controller, Initializable {
             stage.show();
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 }

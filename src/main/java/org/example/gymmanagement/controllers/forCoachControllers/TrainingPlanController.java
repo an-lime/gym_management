@@ -154,7 +154,7 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
             tblWorkoutStructure.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
             TableColumn<ModelWorkouts, String> trainingStructure = new TableColumn<>("Состав тренировки");
             trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
-            changeColumn(trainingStructure);
+            changeColumnWorkout(trainingStructure);
             tblWorkoutStructure.getColumns().addAll(trainingStructure);
         }
 

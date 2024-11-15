@@ -100,6 +100,7 @@ public class LoginController implements Initializable {
                     stage.show();
 
                 }
+
             }
         } catch (Exception e) {
             System.out.println(e);
