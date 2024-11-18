@@ -29,7 +29,6 @@ public class DBRequests {
             LocalDateTime dateTime = date.atStartOfDay();
             dateTime = dateTime.plusHours(time);
             Timestamp timestamp = Timestamp.valueOf(dateTime);
-            Date sqlDate = Date.valueOf(date);
 
             PreparedStatement statement = dbConn.prepareStatement(sql);
             statement.setInt(1, idClient);
@@ -70,7 +69,8 @@ public class DBRequests {
 
         try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
 
-            LocalDateTime dateTime = date.atTime(time, 0, 0);
+            LocalDateTime dateTime = date.atStartOfDay();
+            dateTime = dateTime.plusHours(time);
             Timestamp timestamp = Timestamp.valueOf(dateTime);
 
             PreparedStatement statement = dbConn.prepareStatement(sql);
@@ -116,6 +116,35 @@ public class DBRequests {
 
             }
             return modelRequestList;
+        }
+    }
+
+    public List<ModelUsers> getAllRequestsOnCurrentDate(int idCoach, LocalDate date) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
+        Class.forName("org.postgresql.Driver");
+        String sql = "select DISTINCT id_user_client from requests where id_user_coach = ? and training_date_request::date = ?";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+
+            Date sqlDate = Date.valueOf(date);
+
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, idCoach);
+            statement.setDate(2, sqlDate);
+            ResultSet res = statement.executeQuery();
+
+            ArrayList<ModelUsers> modelUsersArrayList = new ArrayList<>();
+
+            DBUser dbUser = new DBUser();
+
+            while (res.next()) {
+                ModelUsers modelUsers = new ModelUsers(
+                        res.getInt("id_user_client"),
+                        dbUser.getUserFio(res.getInt("id_user_client"))
+                );
+                modelUsersArrayList.add(modelUsers);
+            }
+            return modelUsersArrayList;
         }
     }
 

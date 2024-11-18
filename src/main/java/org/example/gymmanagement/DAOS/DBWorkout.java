@@ -6,6 +6,7 @@ import org.example.gymmanagement.models.ModelWorkouts;
 import java.sql.*;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class DBWorkout {
@@ -138,8 +139,7 @@ public class DBWorkout {
 
         List<ModelWorkouts> modelWorkoutsList = new ArrayList<ModelWorkouts>();
         DBUser dbUser = new DBUser();
-        String sql = "select * from workouts where id_user_coach = ? and training_date > CURRENT_TIMESTAMP(0)\n" +
-                "and id_workout not in (select id_workout from training_plan);";
+        String sql = "select * from workouts where id_user_coach = ? and training_date > CURRENT_TIMESTAMP(0)\n" + "and id_workout not in (select id_workout from training_plan);";
 
         try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
             PreparedStatement statement = dbConn.prepareStatement(sql);
@@ -168,8 +168,7 @@ public class DBWorkout {
 
         List<ModelWorkouts> modelWorkoutsList = new ArrayList<ModelWorkouts>();
         DBUser dbUser = new DBUser();
-        String sql = "select * from workouts where id_user_coach = ? \n" +
-                "and id_workout in (select id_workout from training_plan);";
+        String sql = "select * from workouts where id_user_coach = ? \n" + "and id_workout in (select id_workout from training_plan);";
 
         try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
             PreparedStatement statement = dbConn.prepareStatement(sql);
@@ -192,16 +191,17 @@ public class DBWorkout {
         }
     }
 
-    public ArrayList<Integer> getHoursWorkout(LocalDate date) throws SQLException, ClassNotFoundException {
+    public ArrayList<Integer> getHoursWorkoutForCoach(int id, LocalDate date) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
-        String sql = "SELECT EXTRACT(HOUR FROM training_date) AS hour FROM workouts where training_date::date = ?";
+        String sql = "SELECT EXTRACT(HOUR FROM training_date) AS hour FROM workouts where id_user_coach = ? and training_date::date = ?";
 
         try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
             Date sqlDate = Date.valueOf(date);
 
             PreparedStatement statement = dbConn.prepareStatement(sql);
-            statement.setDate(1, sqlDate);
+            statement.setInt(1, id);
+            statement.setDate(2, sqlDate);
             ResultSet res = statement.executeQuery();
             ArrayList<Integer> hoursWorkout = new ArrayList<>();
 
@@ -214,16 +214,63 @@ public class DBWorkout {
 
     }
 
-    public ArrayList<Integer> getHoursRequest(LocalDate date) throws SQLException, ClassNotFoundException {
+    public ArrayList<Integer> getHoursRequestForCoach(int id, LocalDate date) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
-        String sql = "SELECT EXTRACT(HOUR FROM training_date_request) AS hour FROM requests where training_date_request::date = ?";
+        String sql = "SELECT EXTRACT(HOUR FROM training_date_request) AS hour FROM requests where id_user_coach = ? and training_date_request::date = ?";
 
         try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
             Date sqlDate = Date.valueOf(date);
 
             PreparedStatement statement = dbConn.prepareStatement(sql);
-            statement.setDate(1, sqlDate);
+            statement.setInt(1, id);
+            statement.setDate(2, sqlDate);
+            ResultSet res = statement.executeQuery();
+            ArrayList<Integer> hoursWorkout = new ArrayList<>();
+
+            while (res.next()) {
+                hoursWorkout.add(res.getInt("hour"));
+            }
+            return hoursWorkout;
+        }
+
+
+    }
+
+    public ArrayList<Integer> getHoursWorkoutForClient(int id, LocalDate date) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+        String sql = "SELECT EXTRACT(HOUR FROM training_date) AS hour FROM workouts where id_user_coach = ? and training_date::date = ?";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            Date sqlDate = Date.valueOf(date);
+
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.setDate(2, sqlDate);
+            ResultSet res = statement.executeQuery();
+            ArrayList<Integer> hoursWorkout = new ArrayList<>();
+
+            while (res.next()) {
+                hoursWorkout.add(res.getInt("hour"));
+            }
+            return hoursWorkout;
+        }
+
+
+    }
+
+    public ArrayList<Integer> getHoursRequestForClient(int id, LocalDate date) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+        String sql = "SELECT EXTRACT(HOUR FROM training_date_request) AS hour FROM requests where id_user_coach = ? and training_date_request::date = ?";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            Date sqlDate = Date.valueOf(date);
+
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.setDate(2, sqlDate);
             ResultSet res = statement.executeQuery();
             ArrayList<Integer> hoursWorkout = new ArrayList<>();
 
@@ -250,4 +297,69 @@ public class DBWorkout {
         }
         return newList;
     }
+
+    public void addNewWorkout(int idCoach, LocalDate date, Integer time, Integer[] clientsArr) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+        String sql = "insert into workouts values (default, ?, ?, ?)";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+
+            LocalDateTime dateTime = date.atStartOfDay();
+            dateTime = dateTime.plusHours(time);
+            Timestamp timestamp = Timestamp.valueOf(dateTime);
+
+            Array sqlArr = dbConn.createArrayOf("int", clientsArr);
+
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, idCoach);
+            statement.setTimestamp(2, timestamp);
+            statement.setArray(3, sqlArr);
+            statement.executeUpdate();
+        }
+    }
+
+    public void updateWorkout(int idCoach, LocalDate date, Integer time, Integer[] clientsArr) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+        String sql = "update workouts set id_clients = ? where id_user_coach = ? and training_date = ?";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+
+            LocalDateTime dateTime = date.atStartOfDay();
+            dateTime = dateTime.plusHours(time);
+            Timestamp timestamp = Timestamp.valueOf(dateTime);
+
+            Array sqlArr = dbConn.createArrayOf("int", clientsArr);
+
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setArray(1, sqlArr);
+            statement.setInt(2, idCoach);
+            statement.setTimestamp(3, timestamp);
+            statement.executeUpdate();
+        }
+    }
+
+    public Array getClientInCurrentWorkout(int id, LocalDate date, Integer time) throws SQLException, ClassNotFoundException {
+        String sql = "select id_clients from workouts where id_user_coach = ? and training_date = ?;";
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+
+        LocalDateTime dateTime = date.atStartOfDay();
+        dateTime = dateTime.plusHours(time);
+        Timestamp timestamp = Timestamp.valueOf(dateTime);
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.setTimestamp(2, timestamp);
+            ResultSet res = statement.executeQuery();
+
+            while (res.next()) {
+                return res.getArray("id_clients");
+            }
+        }
+        return null;
+    }
+
 }

@@ -82,7 +82,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <ComboBox fx:id="comboCoach" prefHeight="31.0" prefWidth="233.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
+            <ComboBox fx:id="comboCoach" onAction="#setAvailableTime" prefHeight="31.0" prefWidth="233.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
             <HBox fx:id="boxExercises" prefHeight="287.0" prefWidth="522.0" spacing="20.0">
                <children>
                   <VBox alignment="CENTER_LEFT" prefHeight="214.0" prefWidth="236.0" spacing="5.0">

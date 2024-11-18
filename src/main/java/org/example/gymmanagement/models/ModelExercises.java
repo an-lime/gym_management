@@ -1,6 +1,7 @@
 package org.example.gymmanagement.models;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ModelExercises {
 
@@ -25,5 +26,18 @@ public class ModelExercises {
     @Override
     public String toString() {
         return this.exercise;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ModelExercises that = (ModelExercises) o;
+        return id == that.id && Objects.equals(exercise, that.exercise);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, exercise);
     }
 }

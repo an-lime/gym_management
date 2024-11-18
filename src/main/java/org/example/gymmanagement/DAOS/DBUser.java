@@ -3,6 +3,8 @@ package org.example.gymmanagement.DAOS;
 import org.example.gymmanagement.models.ModelUsers;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,6 +144,65 @@ public class DBUser {
             statement.setString(3, password);
             statement.setInt(4, id);
             statement.executeUpdate();
+        }
+    }
+
+    public List<ModelUsers> getClientWhichNotDoRequestAndNotHasWorkout(LocalDate date, Integer time) throws SQLException, ClassNotFoundException {
+        String sql = "select * from users where id_user not in (select id_user_client from requests\n" +
+                "where training_date_request::date = ?) " +
+                "and ARRAY[id_user] != all (select id_clients from workouts where training_date = ?)" +
+                "and id_role = 1;";
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+
+        List<ModelUsers> modelUsersList = new ArrayList<>();
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+
+            LocalDateTime dateTime = date.atStartOfDay();
+            dateTime = dateTime.plusHours(time);
+            Timestamp timestamp = Timestamp.valueOf(dateTime);
+
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setDate(1, Date.valueOf(date));
+            statement.setTimestamp(2, timestamp);
+            ResultSet res = statement.executeQuery();
+
+            while (res.next()) {
+                ModelUsers user = new ModelUsers(
+                        res.getInt("id_user"),
+                        res.getString("fio"));
+                modelUsersList.add(user);
+            }
+            return modelUsersList;
+        }
+    }
+
+    public List<ModelUsers> getClientModelFromArray(Array idUsers) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+
+        String sql = "SELECT * FROM users WHERE id_user = any (?);";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setArray(1, idUsers);
+            ResultSet res = statement.executeQuery();
+
+            ArrayList<ModelUsers> usersList = new ArrayList<>();
+
+            while (res.next()) {
+                ModelUsers user = new ModelUsers(
+                        res.getInt("id_user"),
+                        res.getString("fio")
+                );
+                usersList.add(user);
+            }
+
+            return usersList;
+
+
         }
     }
 

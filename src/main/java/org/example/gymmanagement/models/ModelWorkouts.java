@@ -1,6 +1,7 @@
 package org.example.gymmanagement.models;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ModelWorkouts {
     private int id_workout;
@@ -70,5 +71,18 @@ public class ModelWorkouts {
 
     public void setExercises(ArrayList<Integer> exercises) {
         this.exercises = exercises;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ModelWorkouts workouts = (ModelWorkouts) o;
+        return id_workout == workouts.id_workout && Objects.equals(coach, workouts.coach) && Objects.equals(trainingDate, workouts.trainingDate) && Objects.equals(id_client, workouts.id_client) && Objects.equals(nameClient, workouts.nameClient) && Objects.equals(trainingType, workouts.trainingType) && Objects.equals(exercises, workouts.exercises);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_workout, coach, trainingDate, id_client, nameClient, trainingType, exercises);
     }
 }

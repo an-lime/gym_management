@@ -76,6 +76,10 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
     ContextMenu contextMenu = new ContextMenu();
     MenuItem itemDelete = new MenuItem("Удалить упражнение");
 
+    public ComboBox<ModelWorkouts> getComboTrainingDate() {
+        return comboTrainingDate;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

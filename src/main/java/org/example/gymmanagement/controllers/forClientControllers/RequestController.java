@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import org.example.gymmanagement.DAOS.*;
 import org.example.gymmanagement.StartApplication;
 import org.example.gymmanagement.controllers.MainPageController;
-import org.example.gymmanagement.controllers.forCoachControllers.ExercisesController;
 import org.example.gymmanagement.interfaces.Controller;
 import org.example.gymmanagement.models.ModelExercises;
 import org.example.gymmanagement.models.ModelUsers;
@@ -75,7 +74,7 @@ public class RequestController implements Controller, Initializable {
     private final ContextMenu contextMenu = new ContextMenu();
     private final MenuItem itemDelete = new MenuItem("Удалить упражнение");
 
-    ArrayList<Integer> hoursWorkout = new ArrayList<>();
+    private ArrayList<Integer> hoursWorkout = new ArrayList<>();
 
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
@@ -134,10 +133,14 @@ public class RequestController implements Controller, Initializable {
                 hoursWorkout.add(i);
             }
 
-            if (datePicker.getValue() != null) {
+            if (datePicker.getValue() != null && comboCoach.getSelectionModel().getSelectedItem() != null) {
 
-                hoursWorkout.removeAll(dbWorkout.getHoursWorkout(datePicker.getValue()));
-                hoursWorkout.removeAll(dbWorkout.getHoursRequest(datePicker.getValue()));
+                hoursWorkout.removeAll(dbWorkout.getHoursWorkoutForClient(
+                        comboCoach.getSelectionModel().getSelectedItem().getIdUser(),
+                        datePicker.getValue()));
+                hoursWorkout.removeAll(dbWorkout.getHoursRequestForClient(
+                        comboCoach.getSelectionModel().getSelectedItem().getIdUser(),
+                        datePicker.getValue()));
                 hoursWorkout.removeAll(dbGroupCells.getGroupHoursRequest());
                 comboTime.setItems(FXCollections.observableArrayList(hoursWorkout));
 
@@ -178,6 +181,7 @@ public class RequestController implements Controller, Initializable {
 
         btnAddRequest.setVisible(true);
         btnAddRequest.setManaged(true);
+        comboTime.getItems().clear();
 
         if (comboTypeWorkout.getSelectionModel().getSelectedItem() != null) {
             if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная")) {
@@ -189,10 +193,14 @@ public class RequestController implements Controller, Initializable {
                     hoursWorkout.add(i);
                 }
 
-                if (datePicker.getValue() != null) {
+                if (datePicker.getValue() != null && comboCoach.getSelectionModel().getSelectedItem() != null) {
 
-                    hoursWorkout.removeAll(dbWorkout.getHoursWorkout(datePicker.getValue()));
-                    hoursWorkout.removeAll(dbWorkout.getHoursRequest(datePicker.getValue()));
+                    hoursWorkout.removeAll(dbWorkout.getHoursWorkoutForClient(
+                            comboCoach.getSelectionModel().getSelectedItem().getIdUser(),
+                            datePicker.getValue()));
+                    hoursWorkout.removeAll(dbWorkout.getHoursRequestForClient(
+                            comboCoach.getSelectionModel().getSelectedItem().getIdUser(),
+                            datePicker.getValue()));
                     hoursWorkout.removeAll(dbGroupCells.getGroupHoursRequest());
                     comboTime.setItems(FXCollections.observableArrayList(hoursWorkout));
 
@@ -223,8 +231,7 @@ public class RequestController implements Controller, Initializable {
     void doAddRequest() throws SQLException, ClassNotFoundException {
         if (datePicker.getValue() == null || comboTime.getSelectionModel().getSelectedItem() == null
                 || comboCoach.getSelectionModel().getSelectedItem() == null
-                || comboTypeWorkout.getSelectionModel().getSelectedItem() == null
-                || comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная") && listExercises.getItems().isEmpty())
+                || comboTypeWorkout.getSelectionModel().getSelectedItem() == null)
         {
 
             lblError.setTextFill(Color.RED);
