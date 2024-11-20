@@ -147,8 +147,7 @@ public class NewWorkoutController implements Controller, Initializable {
             };
 
             cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2
-                        && listAllClient.getSelectionModel().getSelectedItem() != null) {
+                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && listAllClient.getSelectionModel().getSelectedItem() != null) {
                     listClientOnWorkout.getItems().add(listAllClient.getSelectionModel().getSelectedItem());
                     listAllClient.getItems().remove(listAllClient.getSelectionModel().getSelectedItem());
                     pointer.setText("--->");
@@ -175,8 +174,7 @@ public class NewWorkoutController implements Controller, Initializable {
             };
 
             cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2
-                        && listClientOnWorkout.getSelectionModel().getSelectedItem() != null) {
+                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && listClientOnWorkout.getSelectionModel().getSelectedItem() != null) {
                     listAllClient.getItems().add(listClientOnWorkout.getSelectionModel().getSelectedItem());
                     listClientOnWorkout.getItems().remove(listClientOnWorkout.getSelectionModel().getSelectedItem());
                     pointer.setText("<---");
@@ -254,8 +252,7 @@ public class NewWorkoutController implements Controller, Initializable {
 
         if (datePicker.getValue() != null && comboTime.getSelectionModel().getSelectedItem() != null) {
             listAllClient.getItems().clear();
-            listAllClient.setItems(FXCollections.observableArrayList(dbUser.getClientWhichNotDoRequestAndNotHasWorkout
-                    (datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem())));
+            listAllClient.setItems(FXCollections.observableArrayList(dbUser.getClientWhichNotDoRequestAndNotHasWorkout(datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem())));
             boxClient.setVisible(true);
             boxClient.setManaged(true);
         }
@@ -284,12 +281,9 @@ public class NewWorkoutController implements Controller, Initializable {
     void showBoxClient() throws ClassNotFoundException, SQLException {
         listAllClient.getItems().clear();
         if (datePicker.getValue() != null && comboTime.getSelectionModel().getSelectedItem() != null) {
-            listAllClient.setItems(FXCollections.observableArrayList(dbUser.getClientWhichNotDoRequestAndNotHasWorkout
-                    (datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem())));
+            listAllClient.setItems(FXCollections.observableArrayList(dbUser.getClientWhichNotDoRequestAndNotHasWorkout(datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem())));
 
-            listClientOnWorkout.setItems(FXCollections.observableArrayList(
-                    dbUser.getClientModelFromArray(dbWorkout.getClientInCurrentWorkout(
-                            currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem()))));
+            listClientOnWorkout.setItems(FXCollections.observableArrayList(dbUser.getClientModelFromArray(dbWorkout.getClientInCurrentWorkout(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem()))));
 
             for (ModelUsers modelUsers : listClientOnWorkout.getItems()) {
                 listAllClient.getItems().remove(modelUsers);
@@ -322,9 +316,7 @@ public class NewWorkoutController implements Controller, Initializable {
 
             return;
 
-        } else if (comboTypeWorkout.getSelectionModel().getSelectedItem() != null
-                && comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная")
-                && listClientOnWorkout.getItems().size() > 1) {
+        } else if (comboTypeWorkout.getSelectionModel().getSelectedItem() != null && comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная") && listClientOnWorkout.getItems().size() > 1) {
             lblError.setText("Выбрана индивидуальная тренировка!");
             lblError.setVisible(true);
             lblError.setManaged(true);
@@ -350,10 +342,8 @@ public class NewWorkoutController implements Controller, Initializable {
             i++;
         }
 
-        if (dbWorkout.getClientInCurrentWorkout(
-                currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem()) == null) {
-            dbWorkout.addNewWorkout(currentUser.getIdUser(), datePicker.getValue(),
-                    comboTime.getSelectionModel().getSelectedItem(), clientsArr);
+        if (dbWorkout.getClientInCurrentWorkout(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem()) == null) {
+            dbWorkout.addNewWorkout(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(), clientsArr);
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(StartApplication.class.getResource("fxml/forCoach/training-plan.fxml"));
@@ -365,7 +355,7 @@ public class NewWorkoutController implements Controller, Initializable {
             TrainingPlanController trainingPlanController = loader.getController();
             trainingPlanController.startPage(currentUser);
 
-            for (ModelWorkouts modelWorkouts: trainingPlanController.getComboTrainingDate().getItems()) {
+            for (ModelWorkouts modelWorkouts : trainingPlanController.getComboTrainingDate().getItems()) {
 
                 LocalDateTime dateTime = datePicker.getValue().atStartOfDay();
                 dateTime = dateTime.plusHours(comboTime.getSelectionModel().getSelectedItem());
@@ -383,8 +373,7 @@ public class NewWorkoutController implements Controller, Initializable {
             stage.showAndWait();
 
         } else {
-            dbWorkout.updateWorkout(currentUser.getIdUser(), datePicker.getValue(),
-                    comboTime.getSelectionModel().getSelectedItem(), clientsArr);
+            dbWorkout.updateWorkout(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(), clientsArr);
         }
 
         listClientOnWorkout.getItems().clear();

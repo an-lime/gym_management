@@ -70,4 +70,14 @@ public class DBTrainingPlan {
         }
 
     }
+
+    public void deleteAllPlan() throws ClassNotFoundException, SQLException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
+        Class.forName("org.postgresql.Driver");
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            CallableStatement callableStatement = dbConn.prepareCall("call deletePlan()");
+            callableStatement.execute();
+            callableStatement.close();
+        }
+    }
 }

@@ -5,18 +5,19 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.example.gymmanagement.DAOS.DBRequests;
 import org.example.gymmanagement.DAOS.DBWorkout;
 import org.example.gymmanagement.StartApplication;
 import org.example.gymmanagement.controllers.forClientControllers.RequestController;
-import org.example.gymmanagement.controllers.forCoachControllers.ClientListController;
-import org.example.gymmanagement.controllers.forCoachControllers.NewWorkoutController;
-import org.example.gymmanagement.controllers.forCoachControllers.TrainingPlanController;
+import org.example.gymmanagement.controllers.forCoachControllers.*;
 import org.example.gymmanagement.interfaces.Controller;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
@@ -66,6 +67,7 @@ public class MainPageController implements Initializable, Controller {
     private ModelUsers currentUser;
 
     DBWorkout dbWorkout;
+    DBRequests dbRequests;
 
     ChangeTblColumn change;
 
@@ -76,6 +78,7 @@ public class MainPageController implements Initializable, Controller {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dbWorkout = new DBWorkout();
+        dbRequests = new DBRequests();
         change = new ChangeTblColumn();
     }
 
@@ -95,9 +98,20 @@ public class MainPageController implements Initializable, Controller {
             btnRequestToCoach.setManaged(false);
             btnRequestToCoach.setVisible(false);
         }
+
+        try {
+            if (dbRequests.getRequestCurrentCoach(currentUser.getIdUser()).isEmpty()) {
+                btnRequestFromClient.setDisable(true);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void initializeTable() throws SQLException, ClassNotFoundException {
+
+        dbWorkout.deleteAllWorkout();
 
         if (currentUser.getIdRole() == 1) {
 
@@ -285,6 +299,26 @@ public class MainPageController implements Initializable, Controller {
         stage.setFullScreen(true);
 
         stage.show();
+
+    }
+
+    @FXML
+    void goRequestsForCoach() throws ClassNotFoundException, SQLException, IOException {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(StartApplication.class.getResource("fxml/forCoach/request-for-coach.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Заявки от клиентов");
+        stage.setScene(new Scene(root));
+
+        RequestsForCoachController requestsForCoachController = loader.getController();
+        requestsForCoachController.startPage(currentUser);
+
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(this.btnRequestFromClient.getScene().getWindow());
+
+        stage.showAndWait();
 
     }
 

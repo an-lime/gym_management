@@ -136,8 +136,7 @@ public class ClientListController implements Initializable, Controller {
 
             if (textPassword.getText().equals(currentUser.getPassword())) {
 
-                dbUser.updateUsers(comboClient.getSelectionModel().getSelectedItem().getIdUser(),
-                        lblFio.getText(), lblLogin.getText(), lblPassword.getText());
+                dbUser.updateUsers(comboClient.getSelectionModel().getSelectedItem().getIdUser(), lblFio.getText(), lblLogin.getText(), lblPassword.getText());
 
                 lblSaveGood.setText("Изменения прошли успешно!");
                 lblSaveGood.setVisible(true);

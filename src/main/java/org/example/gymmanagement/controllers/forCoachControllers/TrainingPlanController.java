@@ -80,6 +80,10 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
         return comboTrainingDate;
     }
 
+    public ListView<ModelExercises> getListExercises() {
+        return listExercises;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -104,7 +108,16 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
 
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
+
+        Stage stage = (Stage) btnBack.getScene().getWindow();
+        if (stage != null && !stage.isFullScreen()) {
+            btnBack.setVisible(false);
+        }
+
         this.currentUser = currentUser;
+
+        dbTrainingPlan.deleteAllPlan();
+
         if (checkAllPlan.isSelected()) {
             comboTrainingDate.setItems(FXCollections.observableArrayList(dbWorkout.getWorkoutHavePlan(currentUser)));
         } else {
@@ -152,8 +165,7 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
             tblWorkoutStructure.getColumns().clear();
             vBoxStructure.setVisible(true);
             vBoxStructure.setManaged(true);
-            ObservableList<ModelWorkouts> list = FXCollections.observableArrayList
-                    (dbWorkout.getCurrentWorkoutForCoachOnly(comboTrainingDate.getSelectionModel().getSelectedItem().getId_workout()));
+            ObservableList<ModelWorkouts> list = FXCollections.observableArrayList(dbWorkout.getCurrentWorkoutForCoachOnly(comboTrainingDate.getSelectionModel().getSelectedItem().getId_workout()));
             tblWorkoutStructure.setItems(list);
             tblWorkoutStructure.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
             TableColumn<ModelWorkouts, String> trainingStructure = new TableColumn<>("Состав тренировки");
@@ -166,8 +178,7 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
         hBoxExercises.setVisible(true);
 
         if (checkAllPlan.isSelected() && comboTrainingDate.getSelectionModel().getSelectedItem() != null) {
-            listExercises.setItems(FXCollections.observableArrayList(dbExercises.getNameExercisesInPlan
-                    (dbTrainingPlan.getIdExercisesInPlan(comboTrainingDate.getSelectionModel().getSelectedItem().getId_workout()))));
+            listExercises.setItems(FXCollections.observableArrayList(dbExercises.getNameExercisesInPlan(dbTrainingPlan.getIdExercisesInPlan(comboTrainingDate.getSelectionModel().getSelectedItem().getId_workout()))));
         }
     }
 
@@ -219,8 +230,7 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
             }
 
             if (btnAddPlan.getText().equals("Добавить план")) {
-                dbTrainingPlan.addPlan(comboTrainingDate.getSelectionModel().getSelectedItem().getId_workout(),
-                        currentUser.getIdUser(), exercisesArr);
+                dbTrainingPlan.addPlan(comboTrainingDate.getSelectionModel().getSelectedItem().getId_workout(), currentUser.getIdUser(), exercisesArr);
 
             } else if (btnAddPlan.getText().equals("Изменить план")) {
                 dbTrainingPlan.changePlan(comboTrainingDate.getSelectionModel().getSelectedItem().getId_workout(), exercisesArr);

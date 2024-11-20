@@ -119,6 +119,41 @@ public class DBRequests {
         }
     }
 
+    public List<ModelRequest> getRequestCurrentCoach(int idCoach) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+
+        List<ModelRequest> modelRequestList = new ArrayList<ModelRequest>();
+        DBExercises dbExercises = new DBExercises();
+        DBUser dbUser = new DBUser();
+        String sql = "select * from requests where id_user_coach = ?;";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, idCoach);
+            ResultSet res = statement.executeQuery();
+
+            while (res.next()) {
+                ModelRequest request = new ModelRequest();
+
+                String formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(res.getTimestamp("training_date_request"));
+
+                request.setIdRequest(res.getInt("id_request"));
+                request.setIdClient(res.getInt("id_user_client"));
+                request.setIdCoach(res.getInt("id_user_coach"));
+                request.setClient(dbUser.getUserFio(res.getInt("id_user_client")));
+                request.setDate(formattedDate);
+                request.setType(res.getString("type_workout"));
+                request.setExercise(dbExercises.getExerciseInRequest(res.getArray("exercises")));
+                request.setExerciseArray(res.getArray("exercises"));
+
+                modelRequestList.add(request);
+
+            }
+            return modelRequestList;
+        }
+    }
+
     public List<ModelUsers> getAllRequestsOnCurrentDate(int idCoach, LocalDate date) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -138,14 +173,65 @@ public class DBRequests {
             DBUser dbUser = new DBUser();
 
             while (res.next()) {
-                ModelUsers modelUsers = new ModelUsers(
-                        res.getInt("id_user_client"),
-                        dbUser.getUserFio(res.getInt("id_user_client"))
-                );
+                ModelUsers modelUsers = new ModelUsers(res.getInt("id_user_client"), dbUser.getUserFio(res.getInt("id_user_client")));
                 modelUsersArrayList.add(modelUsers);
             }
             return modelUsersArrayList;
         }
     }
 
+    public void deleteRequest(int idRequest) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
+        Class.forName("org.postgresql.Driver");
+        String sql = "delete from requests where id_request = ?";
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, idRequest);
+            statement.execute();
+        }
+    }
+
+    public Timestamp getRequestDate(int idRequest) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
+        Class.forName("org.postgresql.Driver");
+        String sql = "select training_date_request from requests where id_request = ?";
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, idRequest);
+            ResultSet res = statement.executeQuery();
+            if (res.next()) {
+                return res.getTimestamp("training_date_request");
+            }
+            return null;
+        }
+    }
+
+    public Array getExersices(int idRequest) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
+        Class.forName("org.postgresql.Driver");
+        String sql = "select exercises from requests where id_request = ?";
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, idRequest);
+            ResultSet res = statement.executeQuery();
+            ArrayList<Array> arrayArrayList = new ArrayList<>();
+            while (res.next()) {
+                return res.getArray("exercises");
+            }
+            return null;
+
+        }
+    }
+
+    public void deleteAllRequest() throws ClassNotFoundException, SQLException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
+        Class.forName("org.postgresql.Driver");
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            CallableStatement callableStatement = dbConn.prepareCall("call deleteRequest()");
+            callableStatement.execute();
+            callableStatement.close();
+        }
+    }
 }
+
+

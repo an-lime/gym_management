@@ -81,7 +81,7 @@
             </VBox>
             <VBox fx:id="boxBtnForCoach" alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="222.0" prefWidth="289.0" spacing="10.0">
                <children>
-                  <Button fx:id="btnRequestFromClient" mnemonicParsing="false" text="Запросы от клиентов">
+                  <Button fx:id="btnRequestFromClient" mnemonicParsing="false" onAction="#goRequestsForCoach" text="Запросы от клиентов">
                      <font>
                         <Font size="15.0" />
                      </font>

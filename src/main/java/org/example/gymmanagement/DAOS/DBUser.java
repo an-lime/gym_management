@@ -27,13 +27,7 @@ public class DBUser {
             ResultSet res = statement.executeQuery();
 
             while (res.next()) {
-                ModelUsers user = new ModelUsers(
-                        res.getInt("id_user"),
-                        res.getString("login"),
-                        res.getString("password"),
-                        res.getString("fio"),
-                        res.getString("telephone"),
-                        res.getInt("id_role"));
+                ModelUsers user = new ModelUsers(res.getInt("id_user"), res.getString("login"), res.getString("password"), res.getString("fio"), res.getString("telephone"), res.getInt("id_role"));
 
                 return user;
             }
@@ -97,13 +91,9 @@ public class DBUser {
             ResultSet res = statement.executeQuery();
 
             while (res.next()) {
-                ModelUsers user = new ModelUsers(
-                        res.getInt("id_user"),
-                        res.getString("login"),
-                        res.getString("password"),
-                        res.getString("fio"));
+                ModelUsers user = new ModelUsers(res.getInt("id_user"), res.getString("login"), res.getString("password"), res.getString("fio"));
                 modelUsersList.add(user);
-                }
+            }
             return modelUsersList;
         }
     }
@@ -120,11 +110,7 @@ public class DBUser {
             ResultSet res = statement.executeQuery();
 
             while (res.next()) {
-                ModelUsers user = new ModelUsers(
-                        res.getInt("id_user"),
-                        res.getString("login"),
-                        res.getString("password"),
-                        res.getString("fio"));
+                ModelUsers user = new ModelUsers(res.getInt("id_user"), res.getString("login"), res.getString("password"), res.getString("fio"));
                 modelUsersList.add(user);
             }
             return modelUsersList;
@@ -148,10 +134,7 @@ public class DBUser {
     }
 
     public List<ModelUsers> getClientWhichNotDoRequestAndNotHasWorkout(LocalDate date, Integer time) throws SQLException, ClassNotFoundException {
-        String sql = "select * from users where id_user not in (select id_user_client from requests\n" +
-                "where training_date_request::date = ?) " +
-                "and ARRAY[id_user] != all (select id_clients from workouts where training_date = ?)" +
-                "and id_role = 1;";
+        String sql = "select * from users where id_user not in (select id_user_client from requests\n" + "where training_date_request::date = ?) " + "and ARRAY[id_user] != all (select id_clients from workouts where training_date = ?)" + "and id_role = 1;";
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
 
@@ -169,9 +152,7 @@ public class DBUser {
             ResultSet res = statement.executeQuery();
 
             while (res.next()) {
-                ModelUsers user = new ModelUsers(
-                        res.getInt("id_user"),
-                        res.getString("fio"));
+                ModelUsers user = new ModelUsers(res.getInt("id_user"), res.getString("fio"));
                 modelUsersList.add(user);
             }
             return modelUsersList;
@@ -193,10 +174,7 @@ public class DBUser {
             ArrayList<ModelUsers> usersList = new ArrayList<>();
 
             while (res.next()) {
-                ModelUsers user = new ModelUsers(
-                        res.getInt("id_user"),
-                        res.getString("fio")
-                );
+                ModelUsers user = new ModelUsers(res.getInt("id_user"), res.getString("fio"));
                 usersList.add(user);
             }
 

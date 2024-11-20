@@ -1,13 +1,43 @@
 package org.example.gymmanagement.models;
 
+import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 public class ModelRequest {
-    String coach;
-    String date;
-    String type;
-    String exercise;
+    private int idRequest;
+    private int idClient;
+    private int idCoach;
+    private String client;
+    private String coach;
+    private String date;
+    private String type;
+    private String exercise;
+    private Array exerciseArray;
+
+    public int getIdRequest() {
+        return idRequest;
+    }
+
+    public void setIdRequest(int idRequest) {
+        this.idRequest = idRequest;
+    }
+
+    public int getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
+    }
+
+    public int getIdCoach() {
+        return idCoach;
+    }
+
+    public void setIdCoach(int idCoach) {
+        this.idCoach = idCoach;
+    }
 
     public String getCoach() {
         return coach;
@@ -39,6 +69,22 @@ public class ModelRequest {
 
     public void setExercise(String exercise) {
         this.exercise = exercise;
+    }
+
+    public String getClient() {
+        return client;
+    }
+
+    public void setClient(String client) {
+        this.client = client;
+    }
+
+    public Array getExerciseArray() {
+        return exerciseArray;
+    }
+
+    public void setExerciseArray(Array exerciseArray) {
+        this.exerciseArray = exerciseArray;
     }
 
     @Override

@@ -125,9 +125,7 @@ public class RequestController implements Controller, Initializable {
     @FXML
     void setAvailableTime(ActionEvent event) throws SQLException, ClassNotFoundException {
 
-        if (comboTypeWorkout.getSelectionModel().getSelectedItem() != null &&
-                comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная"))
-        {
+        if (comboTypeWorkout.getSelectionModel().getSelectedItem() != null && comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная")) {
             hoursWorkout.clear();
             for (int i = 10; i < 20; i++) {
                 hoursWorkout.add(i);
@@ -135,12 +133,8 @@ public class RequestController implements Controller, Initializable {
 
             if (datePicker.getValue() != null && comboCoach.getSelectionModel().getSelectedItem() != null) {
 
-                hoursWorkout.removeAll(dbWorkout.getHoursWorkoutForClient(
-                        comboCoach.getSelectionModel().getSelectedItem().getIdUser(),
-                        datePicker.getValue()));
-                hoursWorkout.removeAll(dbWorkout.getHoursRequestForClient(
-                        comboCoach.getSelectionModel().getSelectedItem().getIdUser(),
-                        datePicker.getValue()));
+                hoursWorkout.removeAll(dbWorkout.getHoursWorkoutForClient(comboCoach.getSelectionModel().getSelectedItem().getIdUser(), datePicker.getValue()));
+                hoursWorkout.removeAll(dbWorkout.getHoursRequestForClient(comboCoach.getSelectionModel().getSelectedItem().getIdUser(), datePicker.getValue()));
                 hoursWorkout.removeAll(dbGroupCells.getGroupHoursRequest());
                 comboTime.setItems(FXCollections.observableArrayList(hoursWorkout));
 
@@ -195,12 +189,8 @@ public class RequestController implements Controller, Initializable {
 
                 if (datePicker.getValue() != null && comboCoach.getSelectionModel().getSelectedItem() != null) {
 
-                    hoursWorkout.removeAll(dbWorkout.getHoursWorkoutForClient(
-                            comboCoach.getSelectionModel().getSelectedItem().getIdUser(),
-                            datePicker.getValue()));
-                    hoursWorkout.removeAll(dbWorkout.getHoursRequestForClient(
-                            comboCoach.getSelectionModel().getSelectedItem().getIdUser(),
-                            datePicker.getValue()));
+                    hoursWorkout.removeAll(dbWorkout.getHoursWorkoutForClient(comboCoach.getSelectionModel().getSelectedItem().getIdUser(), datePicker.getValue()));
+                    hoursWorkout.removeAll(dbWorkout.getHoursRequestForClient(comboCoach.getSelectionModel().getSelectedItem().getIdUser(), datePicker.getValue()));
                     hoursWorkout.removeAll(dbGroupCells.getGroupHoursRequest());
                     comboTime.setItems(FXCollections.observableArrayList(hoursWorkout));
 
@@ -229,10 +219,7 @@ public class RequestController implements Controller, Initializable {
 
     @FXML
     void doAddRequest() throws SQLException, ClassNotFoundException {
-        if (datePicker.getValue() == null || comboTime.getSelectionModel().getSelectedItem() == null
-                || comboCoach.getSelectionModel().getSelectedItem() == null
-                || comboTypeWorkout.getSelectionModel().getSelectedItem() == null)
-        {
+        if (datePicker.getValue() == null || comboTime.getSelectionModel().getSelectedItem() == null || comboCoach.getSelectionModel().getSelectedItem() == null || comboTypeWorkout.getSelectionModel().getSelectedItem() == null) {
 
             lblError.setTextFill(Color.RED);
             lblError.setText("Заполните все поля!");
@@ -254,8 +241,7 @@ public class RequestController implements Controller, Initializable {
         }
 
         if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная")) {
-            if (dbRequests.cntRequestFromClient(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem()) == 1)
-            {
+            if (dbRequests.cntRequestFromClient(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem()) == 1) {
 
                 lblError.setTextFill(Color.RED);
                 lblError.setText("На данную дату и время уже есть заявка!");
@@ -280,9 +266,7 @@ public class RequestController implements Controller, Initializable {
 
         if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Групповая")) {
 
-            dbRequests.addNewRequest(currentUser.getIdUser(), comboCoach.getSelectionModel().getSelectedItem().getIdUser(),
-                    datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(),
-                    comboTypeWorkout.getSelectionModel().getSelectedItem());
+            dbRequests.addNewRequest(currentUser.getIdUser(), comboCoach.getSelectionModel().getSelectedItem().getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(), comboTypeWorkout.getSelectionModel().getSelectedItem());
 
         } else if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная")) {
 
@@ -293,8 +277,7 @@ public class RequestController implements Controller, Initializable {
                 i++;
             }
 
-            dbRequests.addNewRequest(currentUser.getIdUser(), comboCoach.getSelectionModel().getSelectedItem().getIdUser(),
-                    datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(), comboTypeWorkout.getSelectionModel().getSelectedItem(), exercisesArr);
+            dbRequests.addNewRequest(currentUser.getIdUser(), comboCoach.getSelectionModel().getSelectedItem().getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(), comboTypeWorkout.getSelectionModel().getSelectedItem(), exercisesArr);
         }
 
         datePicker.setValue(null);

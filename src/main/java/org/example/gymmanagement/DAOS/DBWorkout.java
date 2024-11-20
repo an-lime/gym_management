@@ -5,6 +5,8 @@ import org.example.gymmanagement.models.ModelWorkouts;
 
 import java.sql.*;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -319,6 +321,23 @@ public class DBWorkout {
         }
     }
 
+    public void addNewWorkout(int idCoach, Timestamp date, Integer[] clientsArr) throws SQLException, ClassNotFoundException, ParseException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+        String sql = "insert into workouts values (default, ?, ?, ?)";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+
+            Array sqlArr = dbConn.createArrayOf("int", clientsArr);
+
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, idCoach);
+            statement.setTimestamp(2, date);
+            statement.setArray(3, sqlArr);
+            statement.executeUpdate();
+        }
+    }
+
     public void updateWorkout(int idCoach, LocalDate date, Integer time, Integer[] clientsArr) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -360,6 +379,47 @@ public class DBWorkout {
             }
         }
         return null;
+    }
+
+    public int getExistWorkout(int idRequest) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+        DBRequests dbRequests = new DBRequests();
+        String sql = "select * from workouts where training_date = (\n" + "select training_date_request from requests wh" + "ere id_request = ?\n" + ");";
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, idRequest);
+            ResultSet res = statement.executeQuery();
+            while (res.next()) {
+                return 1;
+            }
+            return 0;
+        }
+
+    }
+
+    public void updateArray(int idClient, int idCoach, Timestamp date) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+        String sql = "UPDATE workouts SET id_clients = id_clients || ? WHERE id_user_coach = ? and training_date = ?;";
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, idClient);
+            statement.setInt(2, idCoach);
+            statement.setTimestamp(3, date);
+            statement.executeUpdate();
+        }
+
+    }
+
+    public void deleteAllWorkout() throws ClassNotFoundException, SQLException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
+        Class.forName("org.postgresql.Driver");
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            CallableStatement callableStatement = dbConn.prepareCall("call deleteWorkout()");
+            callableStatement.execute();
+            callableStatement.close();
+        }
     }
 
 }
