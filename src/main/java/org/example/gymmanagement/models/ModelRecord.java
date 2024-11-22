@@ -6,6 +6,7 @@ public class ModelRecord {
 
     private int id_record;
     private int id_workout;
+    private String training_date;
     private String nameClient;
     private int id_client;
     private String nameExercise;
@@ -27,6 +28,14 @@ public class ModelRecord {
 
     public void setId_workout(int id_workout) {
         this.id_workout = id_workout;
+    }
+
+    public String getTraining_date() {
+        return training_date;
+    }
+
+    public void setTraining_date(String training_date) {
+        this.training_date = training_date;
     }
 
     public String getNameClient() {

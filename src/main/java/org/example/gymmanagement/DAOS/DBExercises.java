@@ -128,6 +128,22 @@ public class DBExercises {
         }
     }
 
+    public String getCurrentExercise(int idExercise) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
+        Class.forName("org.postgresql.Driver");
+        String sql = "SELECT title FROM exercises WHERE id_exercise = ?;";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, idExercise);
+            ResultSet res = statement.executeQuery();
+
+            res.next();
+
+            return res.getString("title");
+        }
+    }
+
     public String toString(ArrayList<String> arrayList) {
         StringBuilder str = new StringBuilder();
         for (String str1 : arrayList) {

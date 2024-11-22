@@ -27,7 +27,6 @@ import org.example.gymmanagement.utils.ChangeTblColumn;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ResourceBundle;
 
 public class MainPageController implements Initializable, Controller {
@@ -65,6 +64,12 @@ public class MainPageController implements Initializable, Controller {
     @FXML
     private Button btnAddNewWorkout;
 
+    @FXML
+    private Button btnDeleteWorkout;
+
+    @FXML
+    private Button btnResult;
+
     private ModelUsers currentUser;
 
     DBWorkout dbWorkout;
@@ -93,8 +98,17 @@ public class MainPageController implements Initializable, Controller {
             btnAllCouch.setVisible(false);
             btnClientList.setVisible(false);
 
-            boxBtnForCoach.setVisible(false);
-            boxBtnForCoach.setManaged(false);
+            btnDeleteWorkout.setVisible(false);
+            btnDeleteWorkout.setManaged(false);
+            btnRequestFromClient.setVisible(false);
+            btnRequestFromClient.setManaged(false);
+            btnTrainingPlan.setVisible(false);
+            btnTrainingPlan.setManaged(false);
+            btnAddNewWorkout.setVisible(false);
+            btnAddNewWorkout.setManaged(false);
+            btnStartWorkout.setVisible(false);
+            btnStartWorkout.setManaged(false);
+
         } else {
             btnRequestToCoach.setManaged(false);
             btnRequestToCoach.setVisible(false);
@@ -192,6 +206,14 @@ public class MainPageController implements Initializable, Controller {
         } else {
             btnAllCouch.setSelected(false);
             btnAllCouch.setText("Отобразить всю информацию");
+            initializeTable();
+        }
+    }
+
+    @FXML
+    void doDeleteWorkout() throws ClassNotFoundException, SQLException {
+        if (tblWorkout.getSelectionModel().getSelectedItem() != null) {
+            dbWorkout.deleteCurrentWorkout(tblWorkout.getSelectionModel().getSelectedItem().getId_workout());
             initializeTable();
         }
     }
@@ -348,6 +370,25 @@ public class MainPageController implements Initializable, Controller {
         stage.setFullScreen(true);
 
         stage.show();
+    }
+
+    @FXML
+    void goRecords() throws ClassNotFoundException, SQLException, IOException {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(StartApplication.class.getResource("fxml/records-page.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Результаты тренировок");
+        stage.setScene(new Scene(root));
+
+        RecordsController resultsController = loader.getController();
+        resultsController.startPage(currentUser);
+
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(this.btnResult.getScene().getWindow());
+
+        stage.showAndWait();
     }
 
     @FXML

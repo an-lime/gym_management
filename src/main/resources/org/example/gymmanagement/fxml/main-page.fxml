@@ -79,12 +79,31 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox fx:id="boxBtnForCoach" alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="222.0" prefWidth="289.0" spacing="10.0">
+            <VBox fx:id="boxBtnForCoach" maxHeight="-Infinity" prefHeight="370.0" prefWidth="267.0" spacing="10.0">
                <children>
+                  <Button fx:id="btnDeleteWorkout" mnemonicParsing="false" onAction="#doDeleteWorkout" text="Удалить тренировку">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="70.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="btnResult" mnemonicParsing="false" onAction="#goRecords" text="Результаты тренировок">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Button>
                   <Button fx:id="btnRequestFromClient" mnemonicParsing="false" onAction="#goRequestsForCoach" text="Запросы от клиентов">
                      <font>
                         <Font size="15.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                   </Button>
                   <Button fx:id="btnTrainingPlan" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goTrainingPlan" text="Планы тренировок" textAlignment="CENTER">
                      <font>

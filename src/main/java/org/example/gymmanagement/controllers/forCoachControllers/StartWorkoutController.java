@@ -147,8 +147,8 @@ public class StartWorkoutController extends ChangeTblColumn implements Controlle
             modelRecord.setNameClient(comboClients.getSelectionModel().getSelectedItem().getFio());
             modelRecord.setIdExercise(comboExercises.getSelectionModel().getSelectedItem().getId());
             modelRecord.setNameExercise(comboExercises.getSelectionModel().getSelectedItem().getExercise());
-            modelRecord.setWeight(textWeight.getText().toString());
-            modelRecord.setRepetitions(textRepetition.getText().toString());
+            modelRecord.setWeight(textWeight.getText());
+            modelRecord.setRepetitions(textRepetition.getText());
 
             tblClientsRecord.getItems().add(modelRecord);
 
