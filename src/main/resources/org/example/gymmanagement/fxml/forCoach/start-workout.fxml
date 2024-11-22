@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="1178.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.forCoachControllers.StartWorkoutController">
+   <top>
+      <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="878.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" text="Назад">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox maxHeight="-Infinity" prefHeight="490.0" prefWidth="1178.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="120.0" prefWidth="878.0" spacing="50.0">
+               <children>
+                  <VBox maxHeight="-Infinity" prefHeight="385.0" prefWidth="251.0">
+                     <children>
+                        <ComboBox fx:id="comboDate" onAction="#setTrainingPlan" prefHeight="31.0" prefWidth="250.0" promptText="Дата тренировки" styleClass="cell" stylesheets="@../../css/fonts.css" />
+                        <Label text="План тренировки">
+                           <VBox.margin>
+                              <Insets top="100.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="530.0" prefWidth="426.0">
+                     <children>
+                        <ComboBox fx:id="comboClients" prefHeight="31.0" prefWidth="323.0" promptText="Имя клиента" styleClass="cell" stylesheets="@../../css/fonts.css" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="237.0">
+                                 <children>
+                                    <ComboBox fx:id="comboExercises" prefHeight="26.0" prefWidth="228.0" promptText="Упражнение" styleClass="cell" stylesheets="@../../css/fonts.css" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Вес (кг)">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="textWeight" styleClass="cell" stylesheets="@../../css/fonts.css">
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" layoutX="60.0" layoutY="10.0" prefHeight="100.0" prefWidth="140.0">
+                                 <children>
+                                    <Label text="Повторения">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="textRepetition" styleClass="cell" stylesheets="@../../css/fonts.css">
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <Button fx:id="btnAddRecord" mnemonicParsing="false" onAction="#doAddRecord" text="Добавить">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="350.0" prefWidth="1178.0">
+               <children>
+                  <ListView fx:id="listExercises" maxHeight="-Infinity" prefHeight="230.0" prefWidth="274.0" styleClass="cell" stylesheets="@../../css/fonts.css">
+                     <HBox.margin>
+                        <Insets left="200.0" />
+                     </HBox.margin>
+                  </ListView>
+                  <TableView fx:id="tblClientsRecord" maxHeight="-Infinity" prefHeight="291.0" prefWidth="630.0">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </TableView>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="56.0" prefWidth="1178.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#doEndWorkout" text="Завершить тренировку">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="955.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

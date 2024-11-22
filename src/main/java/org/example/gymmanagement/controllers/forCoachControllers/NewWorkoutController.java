@@ -147,7 +147,9 @@ public class NewWorkoutController implements Controller, Initializable {
             };
 
             cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && listAllClient.getSelectionModel().getSelectedItem() != null) {
+                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && listAllClient.getSelectionModel().getSelectedItem() != null
+                        && ((comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная") && listClientOnWorkout.getItems().isEmpty()
+                        || comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Групповая"))) ) {
                     listClientOnWorkout.getItems().add(listAllClient.getSelectionModel().getSelectedItem());
                     listAllClient.getItems().remove(listAllClient.getSelectionModel().getSelectedItem());
                     pointer.setText("--->");

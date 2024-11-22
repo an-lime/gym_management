@@ -176,6 +176,7 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
 
 
         hBoxExercises.setVisible(true);
+        hBoxExercises.setVisible(true);
 
         if (checkAllPlan.isSelected() && comboTrainingDate.getSelectionModel().getSelectedItem() != null) {
             listExercises.setItems(FXCollections.observableArrayList(dbExercises.getNameExercisesInPlan(dbTrainingPlan.getIdExercisesInPlan(comboTrainingDate.getSelectionModel().getSelectedItem().getId_workout()))));

@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="682e531b-ae23-4f9a-a8a9-a135d3eb976e" name="Changes" comment="в окне создания новых тренировок заявки для тренера отображаются в ListView">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forCoachControllers/RequestsForCoachController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/forCoach/request-for-coach.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c5a9320e-9b09-41ce-9b08-edeff14eec06.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c5a9320e-9b09-41ce-9b08-edeff14eec06.xml" afterDir="false" />
+    <list default="true" id="682e531b-ae23-4f9a-a8a9-a135d3eb976e" name="Changes" comment="Сделано окно приёма заявок от клиентов">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forCoachControllers/StartWorkoutController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/models/ModelRecord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/forCoach/start-workout.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBExercises.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBExercises.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBRequests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBRequests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBTrainingPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBTrainingPlan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBWorkout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/DAOS/DBWorkout.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/MainPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forCoachControllers/NewWorkoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forCoachControllers/NewWorkoutController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forCoachControllers/TrainingPlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/controllers/forCoachControllers/TrainingPlanController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/models/ModelRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/models/ModelRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/utils/ChangeTblColumn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/gymmanagement/utils/ChangeTblColumn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/main-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/gymmanagement/fxml/main-page.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -168,7 +167,9 @@
       <workItem from="1731937212715" duration="4149000" />
       <workItem from="1732007951289" duration="1273000" />
       <workItem from="1732024494704" duration="13504000" />
-      <workItem from="1732081532635" duration="6888000" />
+      <workItem from="1732081532635" duration="7196000" />
+      <workItem from="1732099549771" duration="12040000" />
+      <workItem from="1732286050421" duration="3636000" />
     </task>
     <task id="LOCAL-00001" summary="firstCommit">
       <option name="closed" value="true" />
@@ -346,7 +347,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731941191771</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Сделано окно приёма заявок от клиентов">
+      <option name="closed" value="true" />
+      <created>1732088971927</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1732088971927</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,6 +391,7 @@
     <MESSAGE value="Клиент теперь может отправлять заявки на тренировку" />
     <MESSAGE value="полностью сделано окно оформления заявок на тренировку" />
     <MESSAGE value="в окне создания новых тренировок заявки для тренера отображаются в ListView" />
-    <option name="LAST_COMMIT_MESSAGE" value="в окне создания новых тренировок заявки для тренера отображаются в ListView" />
+    <MESSAGE value="Сделано окно приёма заявок от клиентов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Сделано окно приёма заявок от клиентов" />
   </component>
 </project>

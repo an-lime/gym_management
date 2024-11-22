@@ -1,5 +1,7 @@
 package org.example.gymmanagement.DAOS;
 
+import javafx.scene.control.TableView;
+import org.example.gymmanagement.models.ModelRecord;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
 
@@ -381,6 +383,23 @@ public class DBWorkout {
         return null;
     }
 
+    public Array getClientInCurrentWorkout(int idWorkout) throws SQLException, ClassNotFoundException {
+        String sql = "select id_clients from workouts where id_workout = ?;";
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, idWorkout);
+            ResultSet res = statement.executeQuery();
+
+            while (res.next()) {
+                return res.getArray("id_clients");
+            }
+        }
+        return null;
+    }
+
     public int getExistWorkout(int idRequest) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -420,6 +439,61 @@ public class DBWorkout {
             callableStatement.execute();
             callableStatement.close();
         }
+    }
+
+    public List<ModelWorkouts> getWorkoutsToMayStart(int idCoach) throws ClassNotFoundException, SQLException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
+        Class.forName("org.postgresql.Driver");
+        String sql = "select * from workouts where id_user_coach = ? and ARRAY_LENGTH(exercises, 1) IS NULL;";
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, idCoach);
+            ResultSet res = statement.executeQuery();
+            List<ModelWorkouts> workouts = new ArrayList<>();
+            while (res.next()) {
+                ModelWorkouts workout = new ModelWorkouts();
+                workout.setId_workout(res.getInt("id_workout"));
+                workout.setTrainingDate(res.getString("training_date"));
+                workouts.add(workout);
+            }
+            return workouts;
+        }
+    }
+
+    public void doEndWorkout(TableView<ModelRecord> table) throws ClassNotFoundException, SQLException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
+        Class.forName("org.postgresql.Driver");
+        String sqlUpdWorkout = "update workouts set exercises = ? where id_workout = ?;";
+
+        String sqlAddRecord = "insert into records values (default, ?, ?, ?, ?, ?);";
+
+        ArrayList<Integer> arrIdExercises = new ArrayList<>();
+        for (ModelRecord item: table.getItems()) {
+            arrIdExercises.add(item.getIdExercise());
+        }
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+
+            Array sqlArr = dbConn.createArrayOf("int", arrIdExercises.toArray());
+
+            PreparedStatement statement = dbConn.prepareStatement(sqlUpdWorkout);
+            statement.setArray(1, sqlArr);
+            statement.setInt(2, table.getItems().getFirst().getId_workout());
+            statement.executeUpdate();
+
+            statement = dbConn.prepareStatement(sqlAddRecord);
+            for (ModelRecord item: table.getItems()) {
+                statement.setInt(1, item.getId_workout());
+                statement.setInt(2, item.getId_client());
+                statement.setInt(3, item.getIdExercise());
+                statement.setInt(4, Integer.parseInt(item.getWeight()));
+                statement.setInt(5, Integer.parseInt(item.getRepetitions()));
+                statement.executeUpdate();
+            }
+
+        }
+
+
     }
 
 }

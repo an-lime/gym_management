@@ -48,7 +48,7 @@ public class DBTrainingPlan {
                 return res.getArray("exercises");
 
             }
-            return res.getArray("exercises");
+            return null;
         }
     }
 

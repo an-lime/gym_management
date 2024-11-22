@@ -96,7 +96,7 @@
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnStartWorkout" mnemonicParsing="false" text="Начать тренировку">
+                  <Button fx:id="btnStartWorkout" mnemonicParsing="false" onAction="#goStartWorkout" text="Начать тренировку">
                      <font>
                         <Font size="15.0" />
                      </font>

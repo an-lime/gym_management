@@ -27,6 +27,7 @@ import org.example.gymmanagement.utils.ChangeTblColumn;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 
 public class MainPageController implements Initializable, Controller {
@@ -151,6 +152,9 @@ public class MainPageController implements Initializable, Controller {
             TableColumn<ModelWorkouts, String> trainingStructure = new TableColumn<>("Состав тренировки");
             trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
             change.changeColumnWorkout(trainingStructure);
+
+            tblWorkout.getSortOrder().add(trainingDate);
+            trainingDate.setSortType(TableColumn.SortType.ASCENDING);
 
             tblWorkout.getColumns().addAll(trainingDate, trainingStructure);
 
@@ -320,6 +324,30 @@ public class MainPageController implements Initializable, Controller {
 
         stage.showAndWait();
 
+    }
+
+    @FXML
+    void goStartWorkout() throws ClassNotFoundException, SQLException, IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("fxml/forCoach/start-workout.fxml"));
+
+        Scene scene = new Scene(fxmlLoader.load());
+
+        StartWorkoutController startWorkoutController = fxmlLoader.getController();
+        startWorkoutController.startPage(currentUser);
+
+        Stage stage = (Stage) btnAddNewWorkout.getScene().getWindow();
+        stage.setTitle("Проведение тренировки");
+
+        stage.setResizable(false);
+
+        stage.setFullScreenExitHint("");
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+
+        stage.setScene(scene);
+        stage.setFullScreen(true);
+
+        stage.show();
     }
 
     @FXML
