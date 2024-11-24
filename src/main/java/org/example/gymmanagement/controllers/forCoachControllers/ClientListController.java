@@ -7,13 +7,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.example.gymmanagement.DAOS.DBUser;
 import org.example.gymmanagement.StartApplication;
 import org.example.gymmanagement.controllers.MainPageController;
-import org.example.gymmanagement.interfaces.Controller;
+import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelUsers;
 
 import java.net.URL;
@@ -22,7 +21,7 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ClientListController implements Initializable, Controller {
+public class ClientListController implements Initializable, StartController {
 
     @FXML
     private Button btnBack;
@@ -52,7 +51,7 @@ public class ClientListController implements Initializable, Controller {
     private Label lblConfirmAction;
 
     @FXML
-    private TextField textPassword;
+    private PasswordField textPassword;
 
     private ModelUsers currentUser;
 
@@ -96,7 +95,7 @@ public class ClientListController implements Initializable, Controller {
             stage.show();
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -174,7 +173,7 @@ public class ClientListController implements Initializable, Controller {
     }
 
     @FXML
-    void hideConfirmLbl(MouseEvent event) {
+    void hideConfirmLbl() {
         lblConfirmAction.setVisible(false);
         textPassword.requestFocus();
     }

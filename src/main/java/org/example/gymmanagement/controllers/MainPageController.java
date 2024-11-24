@@ -13,12 +13,13 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.example.gymmanagement.DAOS.DBClubCard;
 import org.example.gymmanagement.DAOS.DBRequests;
 import org.example.gymmanagement.DAOS.DBWorkout;
 import org.example.gymmanagement.StartApplication;
 import org.example.gymmanagement.controllers.forClientControllers.RequestController;
 import org.example.gymmanagement.controllers.forCoachControllers.*;
-import org.example.gymmanagement.interfaces.Controller;
+import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
 
@@ -29,7 +30,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class MainPageController implements Initializable, Controller {
+public class MainPageController implements Initializable, StartController {
 
     @FXML
     private Label lblWelcome;
@@ -70,22 +71,28 @@ public class MainPageController implements Initializable, Controller {
     @FXML
     private Button btnResult;
 
+    @FXML
+    private VBox boxClubCard;
+
+    @FXML
+    private Label textClubCard;
+
     private ModelUsers currentUser;
 
     DBWorkout dbWorkout;
     DBRequests dbRequests;
+    DBClubCard dbClubCard;
 
     ChangeTblColumn change;
-
-    public Button getBtnClientList() {
-        return btnClientList;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dbWorkout = new DBWorkout();
         dbRequests = new DBRequests();
+        dbClubCard = new DBClubCard();
         change = new ChangeTblColumn();
+
+        tblWorkout.setPlaceholder(new Label("Таблица тренировок пуста"));
     }
 
     @Override
@@ -95,6 +102,9 @@ public class MainPageController implements Initializable, Controller {
         initializeTable();
 
         if (currentUser.getIdRole() == 1) {
+
+            textClubCard.setText(textClubCard.getText() + dbClubCard.getBalance(currentUser.getIdUser()) + " руб.");
+
             btnAllCouch.setVisible(false);
             btnClientList.setVisible(false);
 
@@ -112,6 +122,7 @@ public class MainPageController implements Initializable, Controller {
         } else {
             btnRequestToCoach.setManaged(false);
             btnRequestToCoach.setVisible(false);
+            boxClubCard.setVisible(false);
         }
 
         try {
@@ -149,6 +160,10 @@ public class MainPageController implements Initializable, Controller {
             trainingType.setCellValueFactory(new PropertyValueFactory<>("trainingType"));
             change.changeColumnWorkout(trainingType);
 
+            coach.getStyleClass().add("fontMedium");
+            trainingDate.getStyleClass().add("fontMedium");
+            trainingType.getStyleClass().add("fontMedium");
+
 
             tblWorkout.getColumns().addAll(coach, trainingDate, trainingType);
 
@@ -166,6 +181,9 @@ public class MainPageController implements Initializable, Controller {
             TableColumn<ModelWorkouts, String> trainingStructure = new TableColumn<>("Состав тренировки");
             trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
             change.changeColumnWorkout(trainingStructure);
+
+            trainingDate.getStyleClass().add("fontMedium");
+            trainingStructure.getStyleClass().add("fontMedium");
 
             tblWorkout.getSortOrder().add(trainingDate);
             trainingDate.setSortType(TableColumn.SortType.ASCENDING);
@@ -201,6 +219,10 @@ public class MainPageController implements Initializable, Controller {
             trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
             change.changeColumnWorkout(trainingStructure);
 
+            coach.getStyleClass().add("fontMedium");
+            trainingDate.getStyleClass().add("fontMedium");
+            trainingStructure.getStyleClass().add("fontMedium");
+
             tblWorkout.getColumns().addAll(coach, trainingDate, trainingStructure);
 
         } else {
@@ -214,6 +236,7 @@ public class MainPageController implements Initializable, Controller {
     void doDeleteWorkout() throws ClassNotFoundException, SQLException {
         if (tblWorkout.getSelectionModel().getSelectedItem() != null) {
             dbWorkout.deleteCurrentWorkout(tblWorkout.getSelectionModel().getSelectedItem().getId_workout());
+            tblWorkout.getColumns().clear();
             initializeTable();
         }
     }

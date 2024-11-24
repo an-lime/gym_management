@@ -3,15 +3,12 @@ package org.example.gymmanagement.controllers.forClientControllers;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableCell;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import org.example.gymmanagement.DAOS.DBRequests;
-import org.example.gymmanagement.interfaces.Controller;
-import org.example.gymmanagement.models.ModelExercises;
+import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelRequest;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.utils.ChangeTblColumn;
@@ -20,7 +17,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ShowSendRequestController extends ChangeTblColumn implements Controller, Initializable {
+public class ShowSendRequestController extends ChangeTblColumn implements StartController, Initializable {
 
     @FXML
     private TableView<ModelRequest> tblRequests;
@@ -66,5 +63,6 @@ public class ShowSendRequestController extends ChangeTblColumn implements Contro
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dbRequests = new DBRequests();
+        tblRequests.setPlaceholder(new Label("Таблица заявок пуста"));
     }
 }

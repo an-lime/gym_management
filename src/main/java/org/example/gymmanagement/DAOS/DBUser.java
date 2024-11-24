@@ -27,9 +27,8 @@ public class DBUser {
             ResultSet res = statement.executeQuery();
 
             while (res.next()) {
-                ModelUsers user = new ModelUsers(res.getInt("id_user"), res.getString("login"), res.getString("password"), res.getString("fio"), res.getString("telephone"), res.getInt("id_role"));
 
-                return user;
+                return new ModelUsers(res.getInt("id_user"), res.getString("login"), res.getString("password"), res.getString("fio"), res.getString("telephone"), res.getInt("id_role"));
             }
             return null;
         }

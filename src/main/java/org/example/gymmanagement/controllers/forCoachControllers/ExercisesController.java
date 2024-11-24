@@ -7,7 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import org.example.gymmanagement.DAOS.DBExercises;
-import org.example.gymmanagement.interfaces.Controller;
+import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelExercises;
 import org.example.gymmanagement.models.ModelUsers;
 
@@ -15,7 +15,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ExercisesController implements Initializable, Controller {
+public class ExercisesController implements Initializable, StartController {
 
     @FXML
     private Button btnBack;
@@ -25,8 +25,6 @@ public class ExercisesController implements Initializable, Controller {
 
     @FXML
     private TextField textNewExercise;
-
-    private ModelUsers currentUser;
 
     private DBExercises dbExercises;
 
@@ -38,7 +36,6 @@ public class ExercisesController implements Initializable, Controller {
 
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
-        this.currentUser = currentUser;
         listExercises.setItems(FXCollections.observableArrayList(dbExercises.getExercises()));
     }
 
@@ -50,7 +47,7 @@ public class ExercisesController implements Initializable, Controller {
 
     @FXML
     void addNewExercise() throws ClassNotFoundException, SQLException {
-        if (!textNewExercise.getText().trim().equals("")) {
+        if (!textNewExercise.getText().trim().isEmpty()) {
             dbExercises.addNewExercise(textNewExercise.getText());
             textNewExercise.clear();
             listExercises.setItems(FXCollections.observableArrayList(dbExercises.getExercises()));

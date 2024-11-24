@@ -1,6 +1,5 @@
 package org.example.gymmanagement.models;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class ModelUsers {
@@ -12,7 +11,8 @@ public class ModelUsers {
     private String telephone;
     private int idRole;
 
-    public ModelUsers() {}
+    public ModelUsers() {
+    }
 
     public ModelUsers(int idUser, String login, String password, String fio, String telephone, int idRole) {
         this.idUser = idUser;

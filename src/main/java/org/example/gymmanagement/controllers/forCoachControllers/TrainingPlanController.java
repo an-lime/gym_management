@@ -10,8 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -21,18 +19,19 @@ import org.example.gymmanagement.DAOS.DBTrainingPlan;
 import org.example.gymmanagement.DAOS.DBWorkout;
 import org.example.gymmanagement.StartApplication;
 import org.example.gymmanagement.controllers.MainPageController;
-import org.example.gymmanagement.interfaces.Controller;
+import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelExercises;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
 import org.example.gymmanagement.utils.ChangeTblColumn;
+import org.example.gymmanagement.utils.SimpleUtils;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
 
-public class TrainingPlanController extends ChangeTblColumn implements Initializable, Controller {
+public class TrainingPlanController extends ChangeTblColumn implements Initializable, StartController {
 
     @FXML
     private Button btnBack;
@@ -152,7 +151,7 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
             stage.show();
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
     }
@@ -171,6 +170,7 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
             TableColumn<ModelWorkouts, String> trainingStructure = new TableColumn<>("Состав тренировки");
             trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
             changeColumnWorkout(trainingStructure);
+            trainingStructure.getStyleClass().add("fontMedium");
             tblWorkoutStructure.getColumns().addAll(trainingStructure);
         }
 
@@ -194,27 +194,8 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
     @FXML
     void showContext() {
 
-        listExercises.setCellFactory(lv -> {
-            ListCell<ModelExercises> cell = new ListCell<>() {
-                @Override
-                protected void updateItem(ModelExercises item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setText(null);
-                    } else {
-                        setText(item.toString());
-                    }
-                }
-            };
-
-            cell.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-                if (event.getButton() == MouseButton.SECONDARY && (!cell.isEmpty())) {
-                    contextMenu.show(listExercises, event.getScreenX(), event.getScreenY());
-                    itemDelete.setOnAction(_ -> listExercises.getItems().remove(listExercises.getSelectionModel().getSelectedItem()));
-                }
-            });
-            return cell;
-        });
+        SimpleUtils simpleUtils = new SimpleUtils();
+        simpleUtils.showContextDelete(listExercises, contextMenu, itemDelete);
 
     }
 

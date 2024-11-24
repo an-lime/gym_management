@@ -1,8 +1,5 @@
 package org.example.gymmanagement.DAOS;
 
-import javafx.collections.ObservableList;
-import org.example.gymmanagement.models.ModelExercises;
-
 import java.sql.*;
 
 public class DBTrainingPlan {

@@ -20,24 +20,22 @@ import org.example.gymmanagement.DAOS.DBUser;
 import org.example.gymmanagement.DAOS.DBWorkout;
 import org.example.gymmanagement.StartApplication;
 import org.example.gymmanagement.controllers.MainPageController;
-import org.example.gymmanagement.controllers.forClientControllers.ShowSendRequestController;
-import org.example.gymmanagement.interfaces.Controller;
+import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
+import org.example.gymmanagement.utils.SimpleUtils;
 
-import java.io.IO;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class NewWorkoutController implements Controller, Initializable {
+public class NewWorkoutController extends SimpleUtils implements StartController, Initializable {
 
     @FXML
     private Button btnBack;
@@ -88,7 +86,7 @@ public class NewWorkoutController implements Controller, Initializable {
     private DBGroupCells dbGroupCells;
     private DBRequests dbRequests;
 
-    private ArrayList<Integer> hoursWorkout = new ArrayList<>();
+    private final ArrayList<Integer> hoursWorkout = new ArrayList<>();
 
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
@@ -117,23 +115,14 @@ public class NewWorkoutController implements Controller, Initializable {
         listRequests.setVisible(false);
         listRequests.setManaged(false);
 
-        datePicker.setDayCellFactory(_ -> new DateCell() {
-            public void updateItem(LocalDate date, boolean empty) {
-                super.updateItem(date, empty);
-                LocalDate today = LocalDate.now();
-
-                setDisable(empty || today.isAfter(date));
-            }
-        });
-
-        comboTypeWorkout.setItems(FXCollections.observableArrayList("Индивидуальная", "Групповая"));
+        createComboTypeWorkouts(datePicker, comboTypeWorkout);
 
     }
 
     @FXML
     void addClientToWorkout() {
 
-        listAllClient.setCellFactory(lv -> {
+        listAllClient.setCellFactory(_ -> {
             ListCell<ModelUsers> cell = new ListCell<>() {
                 @Override
                 protected void updateItem(ModelUsers item, boolean empty) {
@@ -147,9 +136,7 @@ public class NewWorkoutController implements Controller, Initializable {
             };
 
             cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && listAllClient.getSelectionModel().getSelectedItem() != null
-                        && ((comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная") && listClientOnWorkout.getItems().isEmpty()
-                        || comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Групповая"))) ) {
+                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && listAllClient.getSelectionModel().getSelectedItem() != null && ((comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная") && listClientOnWorkout.getItems().isEmpty() || comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Групповая")))) {
                     listClientOnWorkout.getItems().add(listAllClient.getSelectionModel().getSelectedItem());
                     listAllClient.getItems().remove(listAllClient.getSelectionModel().getSelectedItem());
                     pointer.setText("--->");
@@ -162,7 +149,7 @@ public class NewWorkoutController implements Controller, Initializable {
     @FXML
     void deleteClientFromWorkout() {
 
-        listClientOnWorkout.setCellFactory(lv -> {
+        listClientOnWorkout.setCellFactory(_ -> {
             ListCell<ModelUsers> cell = new ListCell<>() {
                 @Override
                 protected void updateItem(ModelUsers item, boolean empty) {
@@ -194,7 +181,6 @@ public class NewWorkoutController implements Controller, Initializable {
         }
         listClientOnWorkout.getItems().clear();
         listAllClient.getItems().clear();
-//        listAllClient.setItems(FXCollections.observableArrayList(dbUser.getAllClient()));
         boxClient.setVisible(false);
         boxClient.setManaged(false);
 
@@ -225,6 +211,7 @@ public class NewWorkoutController implements Controller, Initializable {
 
     @FXML
     void setTime() throws ClassNotFoundException, SQLException {
+        listClientOnWorkout.getItems().clear();
         lblRequests.setVisible(false);
         lblRequests.setManaged(false);
         listRequests.setVisible(false);
@@ -427,7 +414,7 @@ public class NewWorkoutController implements Controller, Initializable {
             stage.show();
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 }

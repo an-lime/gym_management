@@ -1,7 +1,6 @@
 package org.example.gymmanagement.controllers.forClientControllers;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,8 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -18,17 +15,17 @@ import javafx.stage.Stage;
 import org.example.gymmanagement.DAOS.*;
 import org.example.gymmanagement.StartApplication;
 import org.example.gymmanagement.controllers.MainPageController;
-import org.example.gymmanagement.interfaces.Controller;
+import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelExercises;
 import org.example.gymmanagement.models.ModelUsers;
+import org.example.gymmanagement.utils.SimpleUtils;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.*;
 
-public class RequestController implements Controller, Initializable {
+public class RequestController implements StartController, Initializable {
 
     @FXML
     private Button btnBack;
@@ -65,8 +62,6 @@ public class RequestController implements Controller, Initializable {
 
     private ModelUsers currentUser;
 
-    private DBExercises dbExercises;
-    private DBUser dbUser;
     private DBRequests dbRequests;
     private DBWorkout dbWorkout;
     private DBGroupCells dbGroupCells;
@@ -74,7 +69,9 @@ public class RequestController implements Controller, Initializable {
     private final ContextMenu contextMenu = new ContextMenu();
     private final MenuItem itemDelete = new MenuItem("Удалить упражнение");
 
-    private ArrayList<Integer> hoursWorkout = new ArrayList<>();
+    private final ArrayList<Integer> hoursWorkout = new ArrayList<>();
+
+    private SimpleUtils simpleUtils;
 
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
@@ -84,11 +81,13 @@ public class RequestController implements Controller, Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        simpleUtils = new SimpleUtils();
+
         lblError.setVisible(false);
         lblError.setManaged(false);
 
-        dbExercises = new DBExercises();
-        dbUser = new DBUser();
+        DBExercises dbExercises = new DBExercises();
+        DBUser dbUser = new DBUser();
         dbRequests = new DBRequests();
         dbWorkout = new DBWorkout();
         dbGroupCells = new DBGroupCells();
@@ -109,21 +108,12 @@ public class RequestController implements Controller, Initializable {
         }
 
 
-        datePicker.setDayCellFactory(picker -> new DateCell() {
-            public void updateItem(LocalDate date, boolean empty) {
-                super.updateItem(date, empty);
-                LocalDate today = LocalDate.now();
-
-                setDisable(empty || today.isAfter(date));
-            }
-        });
-
-        comboTypeWorkout.setItems(FXCollections.observableArrayList("Индивидуальная", "Групповая"));
+        simpleUtils.createComboTypeWorkouts(datePicker, comboTypeWorkout);
 
     }
 
     @FXML
-    void setAvailableTime(ActionEvent event) throws SQLException, ClassNotFoundException {
+    void setAvailableTime() throws SQLException, ClassNotFoundException {
 
         if (comboTypeWorkout.getSelectionModel().getSelectedItem() != null && comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная")) {
             hoursWorkout.clear();
@@ -146,27 +136,7 @@ public class RequestController implements Controller, Initializable {
     @FXML
     void showContext() {
 
-        listExercises.setCellFactory(lv -> {
-            ListCell<ModelExercises> cell = new ListCell<>() {
-                @Override
-                protected void updateItem(ModelExercises item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setText(null);
-                    } else {
-                        setText(item.toString());
-                    }
-                }
-            };
-
-            cell.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-                if (event.getButton() == MouseButton.SECONDARY && (!cell.isEmpty())) {
-                    contextMenu.show(listExercises, event.getScreenX(), event.getScreenY());
-                    itemDelete.setOnAction(_ -> listExercises.getItems().remove(listExercises.getSelectionModel().getSelectedItem()));
-                }
-            });
-            return cell;
-        });
+        simpleUtils.showContextDelete(listExercises, contextMenu, itemDelete);
 
     }
 

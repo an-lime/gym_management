@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -11,16 +12,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="771.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.forClientControllers.RequestController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="771.0" prefWidth="840.0" styleClass="background" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.forClientControllers.RequestController">
    <top>
       <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" text="Назад">
+            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" styleClass="fontSmall" stylesheets="@../../css/styles.css" text="Назад">
                <font>
                   <Font size="15.0" />
                </font>
                <HBox.margin>
-                  <Insets right="5.0" />
+                  <Insets right="10.0" top="10.0" />
                </HBox.margin>
             </Button>
          </children>
@@ -31,40 +32,48 @@
          <children>
             <HBox alignment="CENTER" prefHeight="20.0" prefWidth="522.0">
                <children>
-                  <Label text="Заявка на проведение тренировки">
+                  <Label styleClass="fontBig" stylesheets="@../../css/styles.css" text="Заявка на проведение тренировки">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <Button fx:id="btnGoSendRequests" mnemonicParsing="false" onAction="#goSendRequests" text="Отправленные заявки">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="100.0" />
-               </VBox.margin>
-            </Button>
-            <Label text="Индивидуальная/групповая">
+            <Button fx:id="btnGoSendRequests" mnemonicParsing="false" onAction="#goSendRequests" styleClass="fontSmall" stylesheets="@../../css/styles.css" text="Отправленные заявки">
                <font>
                   <Font size="15.0" />
                </font>
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>
+            </Button>
+            <Label styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Индивидуальная/групповая">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
             </Label>
-            <ComboBox fx:id="comboTypeWorkout" onAction="#showExercises" prefHeight="31.0" prefWidth="233.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
+            <ComboBox fx:id="comboTypeWorkout" onAction="#showExercises" prefHeight="31.0" prefWidth="233.0" stylesheets="@../../css/styles.css">
+               <styleClass>
+                  <String fx:value="fontSmall" />
+                  <String fx:value="button" />
+               </styleClass></ComboBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <DatePicker fx:id="datePicker" onAction="#setAvailableTime" promptText="Дата тренировки" styleClass="cell" stylesheets="@../../css/fonts.css" />
-                  <Label text="в">
+                  <DatePicker fx:id="datePicker" onAction="#setAvailableTime" promptText="Дата тренировки" styleClass="fontSmall" stylesheets="@../../css/styles.css" />
+                  <Label styleClass="fontMedium" stylesheets="@../../css/styles.css" text="в">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboTime" prefHeight="31.0" prefWidth="100.0" promptText="Время" stylesheets="@../../css/fonts.css" />
-                  <Label text="часов">
+                  <ComboBox fx:id="comboTime" prefHeight="34.0" prefWidth="116.0" promptText="Время" stylesheets="@../../css/styles.css">
+                     <styleClass>
+                        <String fx:value="fontSmall" />
+                        <String fx:value="button" />
+                     </styleClass></ComboBox>
+                  <Label styleClass="fontMedium" stylesheets="@../../css/styles.css" text="часов">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -74,26 +83,34 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <Label text="Тренер">
+            <Label styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Тренер">
                <font>
                   <Font size="15.0" />
                </font>
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets />
                </VBox.margin>
             </Label>
-            <ComboBox fx:id="comboCoach" onAction="#setAvailableTime" prefHeight="31.0" prefWidth="233.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
+            <ComboBox fx:id="comboCoach" onAction="#setAvailableTime" prefHeight="31.0" prefWidth="233.0" stylesheets="@../../css/styles.css">
+               <styleClass>
+                  <String fx:value="fontSmall" />
+                  <String fx:value="button" />
+               </styleClass></ComboBox>
             <HBox fx:id="boxExercises" prefHeight="287.0" prefWidth="522.0" spacing="20.0">
                <children>
                   <VBox alignment="CENTER_LEFT" prefHeight="214.0" prefWidth="236.0" spacing="5.0">
                      <children>
-                        <Label text="Упражненния">
+                        <Label styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Упражненния">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="comboExercises" maxHeight="-Infinity" prefHeight="31.0" prefWidth="230.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
-                        <Button mnemonicParsing="false" onAction="#addExercises" text="Добавить">
+                        <ComboBox fx:id="comboExercises" maxHeight="-Infinity" prefHeight="31.0" prefWidth="230.0" stylesheets="@../../css/styles.css">
+                           <styleClass>
+                              <String fx:value="fontSmall" />
+                              <String fx:value="button" />
+                           </styleClass></ComboBox>
+                        <Button mnemonicParsing="false" onAction="#addExercises" styleClass="fontSmall" stylesheets="@../../css/styles.css" text="Добавить">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -105,12 +122,12 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="242.0" prefWidth="223.0">
                      <children>
-                        <Label text="Упражнения">
+                        <Label styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Упражнения">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <ListView fx:id="listExercises" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#showContext" prefHeight="220.0" prefWidth="222.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
+                        <ListView fx:id="listExercises" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#showContext" prefHeight="220.0" prefWidth="222.0" styleClass="fontMedium" stylesheets="@../../css/styles.css" />
                      </children>
                   </VBox>
                </children>
@@ -119,12 +136,12 @@
                <children>
                   <VBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="264.0">
                      <children>
-                        <Label fx:id="lblError" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="250.0" text="Заполните все поля!" textFill="RED">
+                        <Label fx:id="lblError" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="250.0" styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Заполните все поля!" textFill="RED">
                            <font>
-                              <Font size="15.0" />
+                              <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnAddRequest" mnemonicParsing="false" onAction="#doAddRequest" text="Отправить заявку">
+                        <Button fx:id="btnAddRequest" mnemonicParsing="false" onAction="#doAddRequest" styleClass="fontSmall" text="Отправить заявку">
                            <font>
                               <Font size="15.0" />
                            </font>

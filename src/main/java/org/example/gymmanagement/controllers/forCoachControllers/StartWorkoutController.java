@@ -1,7 +1,6 @@
 package org.example.gymmanagement.controllers.forCoachControllers;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,7 +16,7 @@ import org.example.gymmanagement.DAOS.DBUser;
 import org.example.gymmanagement.DAOS.DBWorkout;
 import org.example.gymmanagement.StartApplication;
 import org.example.gymmanagement.controllers.MainPageController;
-import org.example.gymmanagement.interfaces.Controller;
+import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelExercises;
 import org.example.gymmanagement.models.ModelRecord;
 import org.example.gymmanagement.models.ModelUsers;
@@ -26,13 +25,11 @@ import org.example.gymmanagement.utils.ChangeTblColumn;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
-public class StartWorkoutController extends ChangeTblColumn implements Controller, Initializable {
+public class StartWorkoutController extends ChangeTblColumn implements StartController, Initializable {
 
     @FXML
     private Button btnBack;
@@ -107,6 +104,11 @@ public class StartWorkoutController extends ChangeTblColumn implements Controlle
         repetitions.setCellValueFactory(new PropertyValueFactory<>("repetitions"));
         changeColumnRecord(repetitions);
 
+        client.getStyleClass().add("fontMedium");
+        exercise.getStyleClass().add("fontMedium");
+        weight.getStyleClass().add("fontMedium");
+        repetitions.getStyleClass().add("fontMedium");
+
         tblClientsRecord.getColumns().addAll(client, exercise, weight, repetitions);
 
         Pattern pattern = Pattern.compile("\\d*");
@@ -127,8 +129,10 @@ public class StartWorkoutController extends ChangeTblColumn implements Controlle
     }
 
     @FXML
-    void setTrainingPlan(ActionEvent event) throws SQLException, ClassNotFoundException {
+    void setTrainingPlan() throws SQLException, ClassNotFoundException {
         if (comboDate.getSelectionModel().getSelectedItem() != null) {
+
+            tblClientsRecord.getItems().clear();
 
             listExercises.setItems(FXCollections.observableArrayList(dbExercises.getNameExercisesInPlan(dbTrainingPlan.getIdExercisesInPlan(comboDate.getSelectionModel().getSelectedItem().getId_workout()))));
 
@@ -138,7 +142,7 @@ public class StartWorkoutController extends ChangeTblColumn implements Controlle
     }
 
     @FXML
-    void doAddRecord(ActionEvent event) {
+    void doAddRecord() {
         if (comboDate.getSelectionModel().getSelectedItem() != null && comboExercises.getSelectionModel().getSelectedItem() != null && comboClients.getSelectionModel().getSelectedItem() != null && !textWeight.getText().isBlank() && !textRepetition.getText().isBlank() && (Integer.parseInt(textWeight.getText())) > 0 && (Integer.parseInt(textRepetition.getText()) > 0)) {
 
             ModelRecord modelRecord = new ModelRecord();
@@ -160,7 +164,7 @@ public class StartWorkoutController extends ChangeTblColumn implements Controlle
     }
 
     @FXML
-    void doEndWorkout(ActionEvent event) throws SQLException, ClassNotFoundException {
+    void doEndWorkout() throws SQLException, ClassNotFoundException {
         dbWorkout.doEndWorkout(tblClientsRecord);
 
         textWeight.setText("0");
@@ -173,7 +177,7 @@ public class StartWorkoutController extends ChangeTblColumn implements Controlle
     }
 
     @FXML
-    void goBack(ActionEvent event) {
+    void goBack() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("fxml/main-page.fxml"));
 
@@ -196,7 +200,7 @@ public class StartWorkoutController extends ChangeTblColumn implements Controlle
             stage.show();
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 

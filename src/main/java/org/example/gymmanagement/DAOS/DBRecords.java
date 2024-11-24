@@ -24,7 +24,7 @@ public class DBRecords {
         try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
 
             PreparedStatement statement = dbConn.prepareStatement(sql);
-            for (ModelRecord item: table.getItems()) {
+            for (ModelRecord item : table.getItems()) {
                 statement.setInt(1, item.getId_workout());
                 statement.setInt(2, item.getId_client());
                 statement.setInt(3, item.getIdExercise());

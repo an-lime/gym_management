@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -14,19 +16,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="695.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.forCoachControllers.ClientListController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="792.0" styleClass="background" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.forCoachControllers.ClientListController">
    <center>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="376.0" prefWidth="533.0" BorderPane.alignment="CENTER">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="490.0" prefWidth="622.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Клиент">
+            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="534.0">
+               <children>
+                  <Label styleClass="fontBig" stylesheets="@../../css/styles.css" text="Список клиентов" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="50.0" />
+               </VBox.margin>
+            </HBox>
+            <Label styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Клиент">
                <font>
                   <Font size="15.0" />
                </font></Label>
-            <ComboBox fx:id="comboClient" onAction="#showClientInfo" prefHeight="26.0" prefWidth="222.0" />
+            <ComboBox fx:id="comboClient" onAction="#showClientInfo" prefHeight="26.0" prefWidth="222.0" stylesheets="@../../css/styles.css">
+               <styleClass>
+                  <String fx:value="fontSmall" />
+                  <String fx:value="button" />
+               </styleClass></ComboBox>
             <GridPane prefHeight="168.0" prefWidth="490.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.20001220703125" minWidth="10.0" prefWidth="211.79996337890626" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="316.20001220703125" minWidth="10.0" prefWidth="278.2000366210938" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="244.39996337890625" minWidth="10.0" prefWidth="236.39996337890625" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="316.20001220703125" minWidth="10.0" prefWidth="298.0000366210937" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="94.8" minHeight="10.0" prefHeight="74.40001220703125" vgrow="SOMETIMES" />
@@ -35,12 +49,12 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label text="Фамилия Имя">
+                        <Label styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Фамилия Имя">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="lblFio" maxWidth="-Infinity">
+                        <TextField fx:id="lblFio" maxWidth="-Infinity" styleClass="fontMedium" stylesheets="@../../css/styles.css">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -49,7 +63,7 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label text="Пароль">
+                        <Label styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Пароль">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -57,16 +71,19 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="lblPassword" maxWidth="-Infinity">
+                        <TextField fx:id="lblPassword" maxWidth="-Infinity" styleClass="fontMedium" stylesheets="@../../css/styles.css">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </TextField>
                      </children>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                      <children>
-                        <Label text="Логин">
+                        <Label styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Логин">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -74,7 +91,7 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="lblLogin" maxWidth="-Infinity">
+                        <TextField fx:id="lblLogin" maxWidth="-Infinity" styleClass="fontMedium" stylesheets="@../../css/styles.css">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -89,15 +106,16 @@
                   <Insets top="50.0" />
                </VBox.margin>
             </GridPane>
-            <VBox prefHeight="99.0" prefWidth="198.0">
+            <VBox prefHeight="90.0" prefWidth="534.0">
                <children>
                   <Pane fx:id="paneConfirm" prefHeight="36.0" prefWidth="198.0">
                      <children>
-                        <TextField fx:id="textPassword" onAction="#hideConfirmLbl" onMouseClicked="#hideConfirmLbl" prefHeight="26.0" prefWidth="198.0">
+                        <PasswordField fx:id="textPassword" onAction="#hideConfirmLbl" prefHeight="30.0" prefWidth="188.0" styleClass="fontMedium" stylesheets="@../../css/styles.css">
                            <font>
                               <Font size="15.0" />
-                           </font></TextField>
-                        <Label fx:id="lblConfirmAction" layoutX="3.0" layoutY="2.0" onMouseClicked="#hideConfirmLbl" prefHeight="18.0" prefWidth="187.0" text="Введите свой пароль" textFill="#a9a7a7">
+                           </font>
+                        </PasswordField>
+                        <Label fx:id="lblConfirmAction" onMouseClicked="#hideConfirmLbl" prefHeight="33.0" prefWidth="187.0" styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Введите свой пароль" textFill="#a9a7a7">
                            <font>
                               <Font size="15.0" />
                            </font></Label>
@@ -109,11 +127,14 @@
                         <Insets top="-10.0" />
                      </VBox.margin>
                   </Pane>
-                  <Button fx:id="btnSave" mnemonicParsing="false" onAction="#doSave" text="Сохранить изменения">
+                  <Button fx:id="btnSave" mnemonicParsing="false" onAction="#doSave" styleClass="fontSmall" stylesheets="@../../css/styles.css" text="Сохранить изменения">
                      <font>
                         <Font size="15.0" />
-                     </font></Button>
-                  <Label fx:id="lblSaveGood" text="Изменения прошли успешно!" visible="false">
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin></Button>
+                  <Label fx:id="lblSaveGood" styleClass="fontSmall" stylesheets="@../../css/styles.css" text="Изменения прошли успешно!" visible="false">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
@@ -126,11 +147,11 @@
       </VBox>
    </center>
    <top>
-      <HBox alignment="CENTER_RIGHT" prefHeight="51.0" prefWidth="695.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="792.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" text="Назад">
+            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" styleClass="fontSmall" stylesheets="@../../css/styles.css" text="Назад">
                <HBox.margin>
-                  <Insets right="5.0" />
+                  <Insets right="10.0" top="10.0" />
                </HBox.margin>
                <font>
                   <Font size="15.0" />

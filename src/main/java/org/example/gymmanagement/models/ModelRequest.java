@@ -1,7 +1,6 @@
 package org.example.gymmanagement.models;
 
 import java.sql.Array;
-import java.sql.Timestamp;
 import java.util.Objects;
 
 public class ModelRequest {

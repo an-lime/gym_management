@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -11,17 +12,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.forCoachControllers.NewWorkoutController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="791.0" styleClass="background" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.forCoachControllers.NewWorkoutController">
    <top>
-      <HBox alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="791.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" text="Назад">
+            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" stylesheets="@../../css/styles.css" text="Назад">
                <font>
                   <Font size="15.0" />
                </font>
                <HBox.margin>
-                  <Insets right="5.0" />
+                  <Insets right="10.0" top="10.0" />
                </HBox.margin>
+               <styleClass>
+                  <String fx:value="button" />
+                  <String fx:value="fontSmall" />
+               </styleClass>
             </Button>
          </children>
       </HBox>
@@ -31,7 +36,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="20.0" prefWidth="522.0">
                <children>
-                  <Label text="Создание новой тренировки">
+                  <Label styleClass="fontBig" stylesheets="@../../css/styles.css" text="Создание новой тренировки">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -41,7 +46,7 @@
                   </Label>
                </children>
             </HBox>
-            <Label fx:id="lblRequests" alignment="CENTER" text="Нерассмотренные заявки на тренировку от: " textAlignment="CENTER" wrapText="true">
+            <Label fx:id="lblRequests" alignment="CENTER" styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Нерассмотренные заявки на тренировку от: " textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="15.0" />
                </font>
@@ -49,23 +54,27 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <ListView fx:id="listRequests" maxWidth="-Infinity" prefHeight="154.0" prefWidth="200.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
+            <ListView fx:id="listRequests" maxWidth="-Infinity" prefHeight="154.0" prefWidth="200.0" styleClass="fontMedium" stylesheets="@../../css/styles.css" />
             <HBox alignment="CENTER" prefHeight="42.0" prefWidth="791.0">
                <children>
                   <VBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="245.0">
                      <children>
-                        <Label text="Индивидуальная/групповая">
+                        <Label styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Индивидуальная/групповая">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="comboTypeWorkout" onAction="#showDate" prefHeight="31.0" prefWidth="233.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
+                        <ComboBox fx:id="comboTypeWorkout" onAction="#showDate" prefHeight="31.0" prefWidth="233.0" stylesheets="@../../css/styles.css">
+                           <styleClass>
+                              <String fx:value="button" />
+                              <String fx:value="fontSmall" />
+                           </styleClass></ComboBox>
                      </children>
                      <HBox.margin>
                         <Insets bottom="10.0" />
                      </HBox.margin>
                   </VBox>
-                  <Label fx:id="lblWorkoutAdd" text="Тренировка создана!">
+                  <Label fx:id="lblWorkoutAdd" styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Тренировка создана!">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -77,9 +86,13 @@
             </HBox>
             <HBox fx:id="boxDateTime" alignment="CENTER" maxWidth="-Infinity" prefHeight="39.0" prefWidth="547.0" spacing="10.0">
                <children>
-                  <DatePicker fx:id="datePicker" onAction="#setTime" promptText="Дата тренировки" styleClass="cell" stylesheets="@../../css/fonts.css" />
-                  <ComboBox fx:id="comboTime" onAction="#showBoxClient" prefHeight="31.0" prefWidth="114.0" promptText="время" styleClass="cell" stylesheets="@../../css/fonts.css" />
-                  <Label text="часов">
+                  <DatePicker fx:id="datePicker" onAction="#setTime" promptText="Дата тренировки" styleClass="fontSmall" stylesheets="@../../css/styles.css" />
+                  <ComboBox fx:id="comboTime" onAction="#showBoxClient" prefHeight="31.0" prefWidth="114.0" promptText="время" stylesheets="@../../css/styles.css">
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="fontSmall" />
+                     </styleClass></ComboBox>
+                  <Label styleClass="fontMedium" stylesheets="@../../css/styles.css" text="часов">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -93,12 +106,12 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="278.0" prefWidth="238.0">
                      <children>
-                        <Label text="Все клиенты">
+                        <Label styleClass="fontBig" stylesheets="@../../css/styles.css" text="Все клиенты">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <ListView fx:id="listAllClient" onMouseClicked="#addClientToWorkout" prefHeight="200.0" prefWidth="200.0" styleClass="cell" stylesheets="@../../css/fonts.css">
+                        <ListView fx:id="listAllClient" onMouseClicked="#addClientToWorkout" prefHeight="200.0" prefWidth="200.0" styleClass="fontMedium" stylesheets="@../../css/styles.css">
                            <VBox.margin>
                               <Insets bottom="30.0" />
                            </VBox.margin></ListView>
@@ -106,7 +119,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="278.0" prefWidth="48.0">
                      <children>
-                        <Label fx:id="pointer" text="---&gt;">
+                        <Label fx:id="pointer" styleClass="fontBig" stylesheets="@../../css/styles.css" text="---&gt;">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -115,24 +128,28 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="278.0" prefWidth="247.0">
                      <children>
-                        <Label text="На тренировке">
+                        <Label styleClass="fontBig" stylesheets="@../../css/styles.css" text="На тренировке">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <ListView fx:id="listClientOnWorkout" onMouseClicked="#deleteClientFromWorkout" prefHeight="200.0" prefWidth="200.0" styleClass="cell" stylesheets="@../../css/fonts.css" />
-                        <Label fx:id="lblError" alignment="CENTER" prefHeight="22.0" prefWidth="262.0" text="Label">
+                        <ListView fx:id="listClientOnWorkout" onMouseClicked="#deleteClientFromWorkout" prefHeight="200.0" prefWidth="200.0" styleClass="fontMedium" stylesheets="@../../css/styles.css" />
+                        <Label fx:id="lblError" alignment="CENTER" prefHeight="22.0" prefWidth="262.0" styleClass="fontSmall" stylesheets="@../../css/styles.css" text="Label">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnAddWorkout" mnemonicParsing="false" onAction="#doAddWorkout" text="Создать тренировку">
+                        <Button fx:id="btnAddWorkout" mnemonicParsing="false" onAction="#doAddWorkout" stylesheets="@../../css/styles.css" text="Создать тренировку">
                            <font>
                               <Font size="15.0" />
                            </font>
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
+                           <styleClass>
+                              <String fx:value="button" />
+                              <String fx:value="fontSmall" />
+                           </styleClass>
                         </Button>
                      </children>
                   </VBox>

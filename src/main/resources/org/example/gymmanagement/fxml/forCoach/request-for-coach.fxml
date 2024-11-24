@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -9,11 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="877.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.forCoachControllers.RequestsForCoachController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="877.0" styleClass="background" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.forCoachControllers.RequestsForCoachController">
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Список заявок">
+            <Label styleClass="fontBig" stylesheets="@../../css/styles.css" text="Список заявок">
                <font>
                   <Font size="15.0" />
                </font>
@@ -23,22 +24,35 @@
             </Label>
             <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="39.0" prefWidth="829.0" spacing="10.0">
                <children>
-                  <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#doAdd" text="Одобрить">
+                  <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#doAdd" stylesheets="@../../css/styles.css" text="Одобрить">
                      <font>
                         <Font size="15.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="fontSmall" />
+                     </styleClass>
                   </Button>
-                  <Button fx:id="btnRej" mnemonicParsing="false" onAction="#doRej" text="Отклонить">
+                  <Button fx:id="btnRej" mnemonicParsing="false" onAction="#doRej" stylesheets="@../../css/styles.css" text="Отклонить">
                      <font>
                         <Font size="15.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="fontSmall" />
+                     </styleClass>
                   </Button>
                </children>
             </HBox>
-            <TableView fx:id="tblListRequests" maxWidth="-Infinity" onMouseClicked="#showBtn" prefHeight="370.0" prefWidth="827.0">
+            <TableView fx:id="tblListRequests" maxWidth="-Infinity" onMouseClicked="#showBtn" prefHeight="370.0" prefWidth="827.0" stylesheets="@../../css/styles.css">
                <VBox.margin>
                   <Insets top="10.0" />
-               </VBox.margin></TableView>
+               </VBox.margin>
+               <styleClass>
+                  <String fx:value="fontMedium" />
+                  <String fx:value="table-column" />
+                  <String fx:value="table-row-cell" />
+               </styleClass></TableView>
          </children>
       </VBox>
    </center>

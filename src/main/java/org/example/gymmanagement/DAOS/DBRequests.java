@@ -2,7 +2,6 @@ package org.example.gymmanagement.DAOS;
 
 import org.example.gymmanagement.models.ModelRequest;
 import org.example.gymmanagement.models.ModelUsers;
-import org.example.gymmanagement.models.ModelWorkouts;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;

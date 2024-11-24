@@ -4,6 +4,6 @@ import org.example.gymmanagement.models.ModelUsers;
 
 import java.sql.SQLException;
 
-public interface Controller {
+public interface StartController {
     void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException;
 }

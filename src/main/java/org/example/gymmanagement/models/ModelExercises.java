@@ -1,6 +1,5 @@
 package org.example.gymmanagement.models;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class ModelExercises {
@@ -13,7 +12,8 @@ public class ModelExercises {
         this.exercise = exercise;
     }
 
-    public ModelExercises() {}
+    public ModelExercises() {
+    }
 
     public int getId() {
         return id;

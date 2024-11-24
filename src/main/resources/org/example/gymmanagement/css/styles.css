@@ -1,0 +1,47 @@
+.fontBig {
+    -fx-font: 20pt "Sylfaen";
+}
+
+.fontMedium {
+    -fx-font: 14pt "Sylfaen";
+}
+
+.fontSmall {
+    -fx-font: 12pt "Sylfaen";
+}
+
+.cell:hover {
+    -fx-background-color: #95acff;
+}
+
+.background {
+    -fx-background-image: url("../images/img-fotor-20241123174734.png");
+    -fx-background-size: cover;
+}
+.button {
+    -fx-border-color: #a3bbed;
+    -fx-background-color: #d3dcff;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+.button:hover {
+    -fx-border-color: #a3bbed;
+    -fx-background-color: #bfccfd;
+}
+.button:focused {
+    -fx-border-color: #4d84ff;
+}
+
+.button:pressed {
+    -fx-background-color: #9baef8;
+}
+
+.table-column {
+    -fx-background-color: #f4ebff;
+    -fx-border-color: #d4d4ff;
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: #6e6e6e;
+
+}

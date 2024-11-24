@@ -1,9 +1,8 @@
 package org.example.gymmanagement.DAOS;
 
 import java.sql.*;
-import java.util.ArrayList;
 
-public class DBGroupCells {
+public class DBClubCard {
 
     private final String HOST = "localhost";
     private final String PORT = "5432";
@@ -11,24 +10,20 @@ public class DBGroupCells {
     private final String LOGIN = "postgres";
     private final String PASS = "root";
 
-    public ArrayList<Integer> getGroupHoursRequest() throws SQLException, ClassNotFoundException {
+    public String getBalance(int idClient) throws ClassNotFoundException, SQLException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
-        String sql = "SELECT EXTRACT(HOUR FROM cell) AS hour FROM group_training_cells";
+        String sql = "select balance from club_cards where id_user = ?;";
 
         try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
-
             PreparedStatement statement = dbConn.prepareStatement(sql);
-            ResultSet res = statement.executeQuery();
-            ArrayList<Integer> hoursWorkout = new ArrayList<>();
-
-            while (res.next()) {
-                hoursWorkout.add(res.getInt("hour"));
+            statement.setInt(1, idClient);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("balance");
             }
-            return hoursWorkout;
+            return null;
         }
-
-
     }
 
 }

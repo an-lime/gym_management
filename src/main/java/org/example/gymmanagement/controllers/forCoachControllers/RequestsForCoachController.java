@@ -1,9 +1,6 @@
 package org.example.gymmanagement.controllers.forCoachControllers;
 
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,32 +8,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import org.example.gymmanagement.DAOS.DBExercises;
 import org.example.gymmanagement.DAOS.DBRequests;
 import org.example.gymmanagement.DAOS.DBWorkout;
 import org.example.gymmanagement.StartApplication;
-import org.example.gymmanagement.interfaces.Controller;
-import org.example.gymmanagement.models.ModelExercises;
+import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelRequest;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
 import org.example.gymmanagement.utils.ChangeTblColumn;
 
-import java.io.IO;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.text.ParseException;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-public class RequestsForCoachController extends ChangeTblColumn implements Controller, Initializable {
+public class RequestsForCoachController extends ChangeTblColumn implements StartController, Initializable {
 
     @FXML
     private TableView<ModelRequest> tblListRequests;
@@ -66,6 +56,8 @@ public class RequestsForCoachController extends ChangeTblColumn implements Contr
         dbExercises = new DBExercises();
         btnAdd.setDisable(true);
         btnRej.setDisable(true);
+
+        tblListRequests.setPlaceholder(new Label("Таблица заявок пуста"));
     }
 
     public void initializeTable() throws SQLException, ClassNotFoundException {

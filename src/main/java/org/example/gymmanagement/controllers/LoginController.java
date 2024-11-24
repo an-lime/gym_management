@@ -1,20 +1,17 @@
 package org.example.gymmanagement.controllers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.example.gymmanagement.DAOS.DBUser;
 import org.example.gymmanagement.StartApplication;
 import org.example.gymmanagement.models.ModelUsers;
-import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,6 +19,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class LoginController implements Initializable {
+
+    @FXML
+    private Button btnClose;
 
     @FXML
     private CheckBox checkShowPassword;
@@ -103,7 +103,7 @@ public class LoginController implements Initializable {
 
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -118,6 +118,11 @@ public class LoginController implements Initializable {
         passwordField.setVisible(false);
         password.setVisible(true);
 
+    }
+
+    @FXML
+    void closeApp() {
+        Platform.exit();
     }
 
 }
