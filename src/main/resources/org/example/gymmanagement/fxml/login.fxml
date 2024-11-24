@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -89,9 +90,18 @@
       </VBox>
    </center>
    <top>
-      <HBox alignment="CENTER_RIGHT" prefHeight="5.0" prefWidth="704.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="5.0" prefWidth="704.0" spacing="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnClose" mnemonicParsing="false" onAction="#closeApp" styleClass="fontSmall" stylesheets="@../css/styles.css" text="Закрыть">
+            <Label prefHeight="47.0" prefWidth="351.0" styleClass="logoStyle" text="Аметистовый Зал">
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <Region prefHeight="58.0" prefWidth="53.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnClose" mnemonicParsing="false" onAction="#closeApp" prefHeight="34.0" prefWidth="106.0" styleClass="fontSmall" stylesheets="@../css/styles.css" text="Закрыть">
                <HBox.margin>
                   <Insets right="10.0" top="10.0" />
                </HBox.margin>

@@ -10,6 +10,11 @@
     -fx-font: 12pt "Sylfaen";
 }
 
+.logoStyle {
+    -fx-font: 25pt "Comic Sans MS";
+    -fx-text-fill: #5934ff;
+}
+
 .cell:hover {
     -fx-background-color: #95acff;
 }

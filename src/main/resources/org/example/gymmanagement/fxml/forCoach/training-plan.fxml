@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -17,6 +18,15 @@
    <top>
       <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="978.0" BorderPane.alignment="CENTER">
          <children>
+            <Label prefHeight="47.0" prefWidth="351.0" styleClass="logoStyle" text="Аметистовый Зал">
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <Region prefHeight="58.0" prefWidth="53.0" HBox.hgrow="ALWAYS" />
             <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" stylesheets="@../../css/styles.css" text="Назад">
                <HBox.margin>
                   <Insets right="10.0" top="10.0" />

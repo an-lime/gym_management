@@ -9,13 +9,23 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="1113.0" styleClass="background" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gymmanagement.controllers.MainPageController">
    <top>
-      <HBox alignment="TOP_RIGHT" prefHeight="26.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="26.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
+            <Label prefHeight="47.0" prefWidth="351.0" styleClass="logoStyle" text="Аметистовый Зал">
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <Region prefHeight="58.0" prefWidth="53.0" HBox.hgrow="ALWAYS" />
             <Button fx:id="btnExit" mnemonicParsing="false" onMouseClicked="#doExit" styleClass="fontSmall" stylesheets="@../css/styles.css" text="Выход">
                <font>
                   <Font size="15.0" />
