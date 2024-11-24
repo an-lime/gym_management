@@ -15,6 +15,7 @@ public class DBUser {
     private final String LOGIN = "postgres";
     private final String PASS = "root";
 
+    // получение пользователя по логину и паролю
     public ModelUsers getCurrentUser(String log, String pass) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM users where login=? and password=?;";
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
@@ -34,6 +35,26 @@ public class DBUser {
         }
     }
 
+    // существует ли пользователь с таким логином?
+    public int getCurrentUserFromLogin(String log) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM users where login=?;";
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setString(1, log);
+            ResultSet res = statement.executeQuery();
+
+            while (res.next()) {
+
+                return 1;
+            }
+            return 0;
+        }
+    }
+
+    // получение фио пользователя
     public String getUserFio(int idUser) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM users where id_user=?;";
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
@@ -52,6 +73,7 @@ public class DBUser {
         }
     }
 
+    // получение списка имён пользователей на тренировке
     public String getUserFioOnWorkout(Array idUsers) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -78,6 +100,7 @@ public class DBUser {
         }
     }
 
+    // получение списка всех пользователей
     public List<ModelUsers> getAllClient() throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM users where id_role = 1;";
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
@@ -97,6 +120,7 @@ public class DBUser {
         }
     }
 
+    // получение всех тренеров
     public List<ModelUsers> getAllCoach() throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM users where id_role = 2;";
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
@@ -116,6 +140,7 @@ public class DBUser {
         }
     }
 
+    // обновление данных пользователя
     public void updateUsers(int id, String fio, String login, String password) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -132,6 +157,8 @@ public class DBUser {
         }
     }
 
+    // получение пользователей, у которых нет записи на текущую тренировку
+    // и так же на неё нет заявок
     public List<ModelUsers> getClientWhichNotDoRequestAndNotHasWorkout(LocalDate date, Integer time) throws SQLException, ClassNotFoundException {
         String sql = "select * from users where id_user not in (select id_user_client from requests\n" + "where training_date_request::date = ?) " + "and ARRAY[id_user] != all (select id_clients from workouts where training_date = ?)" + "and id_role = 1;";
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
@@ -158,6 +185,7 @@ public class DBUser {
         }
     }
 
+    // получение пользователей из массива id
     public List<ModelUsers> getClientModelFromArray(Array idUsers) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -180,6 +208,22 @@ public class DBUser {
             return usersList;
 
 
+        }
+    }
+
+    // добавление нового пользователя
+    public void addNewUser(String login, String password, String fio, String phone) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+
+        String sql = "insert into users values (DEFAULT, ?, ?, ?, ?, 1);";
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setString(1, login);
+            statement.setString(2, password);
+            statement.setString(3, fio);
+            statement.setString(4, phone);
+            statement.execute();
         }
     }
 

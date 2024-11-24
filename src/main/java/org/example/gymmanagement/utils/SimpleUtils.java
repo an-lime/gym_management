@@ -10,6 +10,7 @@ import java.time.LocalDate;
 
 public class SimpleUtils {
 
+    // метод для инициализации ComboBox с типами тренировок
     public void createComboTypeWorkouts(DatePicker datePicker, ComboBox<String> comboTypeWorkout) {
         datePicker.setDayCellFactory(_ -> new DateCell() {
             public void updateItem(LocalDate date, boolean empty) {
@@ -23,6 +24,7 @@ public class SimpleUtils {
         comboTypeWorkout.setItems(FXCollections.observableArrayList("Индивидуальная", "Групповая"));
     }
 
+    // метод для отображения контекстного меню с кнопкой "удалить"
     public void showContextDelete(ListView<ModelExercises> listExercises, ContextMenu contextMenu, MenuItem itemDelete) {
 
         listExercises.setCellFactory(_ -> {

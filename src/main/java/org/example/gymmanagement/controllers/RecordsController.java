@@ -12,13 +12,12 @@ import org.example.gymmanagement.DAOS.DBRecords;
 import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelRecord;
 import org.example.gymmanagement.models.ModelUsers;
-import org.example.gymmanagement.utils.ChangeTblColumn;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class RecordsController extends ChangeTblColumn implements StartController, Initializable {
+public class RecordsController implements StartController, Initializable {
 
     @FXML
     private TableView<ModelRecord> tblRecords;
@@ -54,23 +53,18 @@ public class RecordsController extends ChangeTblColumn implements StartControlle
 
             TableColumn<ModelRecord, String> dateCol = new TableColumn<>("Дата тренировки");
             dateCol.setCellValueFactory(new PropertyValueFactory<>("training_date"));
-            changeColumnRecord(dateCol);
 
             TableColumn<ModelRecord, String> clientCol = new TableColumn<>("Клиент");
             clientCol.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
-            changeColumnRecord(clientCol);
 
             TableColumn<ModelRecord, String> exerciseCol = new TableColumn<>("Упражнение");
             exerciseCol.setCellValueFactory(new PropertyValueFactory<>("nameExercise"));
-            changeColumnRecord(exerciseCol);
 
             TableColumn<ModelRecord, String> weightCol = new TableColumn<>("Вес");
             weightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
-            changeColumnRecord(weightCol);
 
             TableColumn<ModelRecord, String> repetitionCol = new TableColumn<>("Повторения");
             repetitionCol.setCellValueFactory(new PropertyValueFactory<>("repetitions"));
-            changeColumnRecord(repetitionCol);
 
             dateCol.getStyleClass().add("fontMedium");
             clientCol.getStyleClass().add("fontMedium");
@@ -88,19 +82,15 @@ public class RecordsController extends ChangeTblColumn implements StartControlle
 
             TableColumn<ModelRecord, String> dateCol = new TableColumn<>("Дата тренировки");
             dateCol.setCellValueFactory(new PropertyValueFactory<>("training_date"));
-            changeColumnRecord(dateCol);
 
             TableColumn<ModelRecord, String> exerciseCol = new TableColumn<>("Упражнение");
             exerciseCol.setCellValueFactory(new PropertyValueFactory<>("nameExercise"));
-            changeColumnRecord(exerciseCol);
 
             TableColumn<ModelRecord, String> weightCol = new TableColumn<>("Вес");
             weightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
-            changeColumnRecord(weightCol);
 
             TableColumn<ModelRecord, String> repetitionCol = new TableColumn<>("Повторения");
             repetitionCol.setCellValueFactory(new PropertyValueFactory<>("repetitions"));
-            changeColumnRecord(repetitionCol);
 
             dateCol.getStyleClass().add("fontMedium");
             exerciseCol.getStyleClass().add("fontMedium");

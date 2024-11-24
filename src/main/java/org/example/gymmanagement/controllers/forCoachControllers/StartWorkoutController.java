@@ -21,7 +21,6 @@ import org.example.gymmanagement.models.ModelExercises;
 import org.example.gymmanagement.models.ModelRecord;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
-import org.example.gymmanagement.utils.ChangeTblColumn;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -29,7 +28,7 @@ import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
-public class StartWorkoutController extends ChangeTblColumn implements StartController, Initializable {
+public class StartWorkoutController implements StartController, Initializable {
 
     @FXML
     private Button btnBack;
@@ -74,6 +73,7 @@ public class StartWorkoutController extends ChangeTblColumn implements StartCont
         comboDate.setItems(FXCollections.observableArrayList(dbWorkout.getWorkoutsToMayStart(currentUser.getIdUser())));
     }
 
+    // инициализиция и сокрытие некоторых объектов
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dbWorkout = new DBWorkout();
@@ -93,19 +93,15 @@ public class StartWorkoutController extends ChangeTblColumn implements StartCont
 
         TableColumn<ModelRecord, String> client = new TableColumn<>("Клиент");
         client.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
-        changeColumnRecord(client);
 
         TableColumn<ModelRecord, String> exercise = new TableColumn<>("Упражнение");
         exercise.setCellValueFactory(new PropertyValueFactory<>("nameExercise"));
-        changeColumnRecord(exercise);
 
         TableColumn<ModelRecord, String> weight = new TableColumn<>("Вес (кг)");
         weight.setCellValueFactory(new PropertyValueFactory<>("weight"));
-        changeColumnRecord(weight);
 
         TableColumn<ModelRecord, String> repetitions = new TableColumn<>("Повторения");
         repetitions.setCellValueFactory(new PropertyValueFactory<>("repetitions"));
-        changeColumnRecord(repetitions);
 
         client.getStyleClass().add("fontMedium");
         exercise.getStyleClass().add("fontMedium");

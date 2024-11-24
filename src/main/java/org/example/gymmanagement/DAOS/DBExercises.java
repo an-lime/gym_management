@@ -84,6 +84,7 @@ public class DBExercises {
         }
     }
 
+    // получение названий упражнений из массива id
     public String getExerciseInRequest(Array idExercises) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -110,6 +111,7 @@ public class DBExercises {
         }
     }
 
+    // получение конкретного упражнения
     public String getCurrentExercise(int idExercise) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");

@@ -19,6 +19,7 @@ public class DBWorkout {
     private final String LOGIN = "postgres";
     private final String PASS = "root";
 
+    // получение списка тренировок для текущего пользователя
     public List<ModelWorkouts> getWorkoutForClient(ModelUsers user) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -49,6 +50,7 @@ public class DBWorkout {
         }
     }
 
+    // получение списка тренировок для текущего тренера
     public List<ModelWorkouts> getWorkoutForCoachOnly(ModelUsers user) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -78,6 +80,7 @@ public class DBWorkout {
         }
     }
 
+    // получение текущей тренировки
     public List<ModelWorkouts> getCurrentWorkoutForCoachOnly(int id_workout) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -107,6 +110,7 @@ public class DBWorkout {
         }
     }
 
+    // получение списка всех тренировок
     public List<ModelWorkouts> getWorkoutForCoachAll() throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -136,6 +140,7 @@ public class DBWorkout {
         }
     }
 
+    // получение тренировок у который нет плана
     public List<ModelWorkouts> getWorkoutNeedPlan(ModelUsers user) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -165,6 +170,7 @@ public class DBWorkout {
         }
     }
 
+    // получчение тренировок у которых есть план
     public List<ModelWorkouts> getWorkoutHavePlan(ModelUsers user) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -194,6 +200,7 @@ public class DBWorkout {
         }
     }
 
+    // получение списка занятых часов тренировок текущего тренера в конкретный день
     public ArrayList<Integer> getHoursWorkoutForCoach(int id, LocalDate date) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -217,6 +224,7 @@ public class DBWorkout {
 
     }
 
+    // получение списка занятых часов тренировок текущего тренера в заявках на конкретный день
     public ArrayList<Integer> getHoursRequestForCoach(int id, LocalDate date) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -240,6 +248,7 @@ public class DBWorkout {
 
     }
 
+    // получение списка занятых часов тренировок текущего клиента в конкретный день
     public ArrayList<Integer> getHoursWorkoutForClient(int id, LocalDate date) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -263,6 +272,31 @@ public class DBWorkout {
 
     }
 
+    // получение времени групповых тренировок,
+    // на которое уже записан клиент
+    public int getNotAvailableTimeGroupWorkout(int idClient, LocalDate date, Integer time) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
+        Class.forName("org.postgresql.Driver");
+        String sql = "SELECT EXTRACT(HOUR FROM training_date) AS hour FROM workouts where ? = any(id_clients) and training_date::date = ?";
+
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+
+            LocalDateTime dateTime = date.atStartOfDay();
+            dateTime = dateTime.plusHours(time);
+            Timestamp timestamp = Timestamp.valueOf(dateTime);
+
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+            statement.setInt(1, idClient);
+            statement.setTimestamp(2, timestamp);
+            ResultSet res = statement.executeQuery();
+            if (res.next()) {
+                return res.getInt("hour");
+            }
+            return 0;
+        }
+    }
+
+    // получение списка занятых часов тренировок текущего клиента в заявках на конкретный день
     public ArrayList<Integer> getHoursRequestForClient(int id, LocalDate date) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -286,6 +320,7 @@ public class DBWorkout {
 
     }
 
+    // преобразование sqlArray в ArrayList
     public ArrayList<Integer> getList(ResultSet rs, String column) throws SQLException {
         ArrayList<Integer> newList = new ArrayList<>();
         java.sql.Array sqlList = rs.getArray(column);
@@ -301,6 +336,7 @@ public class DBWorkout {
         return newList;
     }
 
+    // добавление новой групповой тренировки
     public void addNewWorkout(int idCoach, LocalDate date, Integer time, Integer[] clientsArr) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -322,6 +358,7 @@ public class DBWorkout {
         }
     }
 
+    // добавление новой тренировки
     public void addNewWorkout(int idCoach, Timestamp date, Integer[] clientsArr) throws SQLException, ClassNotFoundException, ParseException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -339,6 +376,7 @@ public class DBWorkout {
         }
     }
 
+    // измененние состава групповой тренировки
     public void updateWorkout(int idCoach, LocalDate date, Integer time, Integer[] clientsArr) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -360,6 +398,7 @@ public class DBWorkout {
         }
     }
 
+    // получение клиентов в текущей тренировке по дате
     public Array getClientInCurrentWorkout(int id, LocalDate date, Integer time) throws SQLException, ClassNotFoundException {
         String sql = "select id_clients from workouts where id_user_coach = ? and training_date = ?;";
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
@@ -382,6 +421,7 @@ public class DBWorkout {
         return null;
     }
 
+    // получение клиентов в текущей тренировке по id тренировки
     public Array getClientInCurrentWorkout(int idWorkout) throws SQLException, ClassNotFoundException {
         String sql = "select id_clients from workouts where id_workout = ?;";
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
@@ -399,6 +439,7 @@ public class DBWorkout {
         return null;
     }
 
+    // проверка, есть ли уже заявка на текущую дату
     public int getExistWorkout(int idRequest) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -416,6 +457,7 @@ public class DBWorkout {
 
     }
 
+    // изменение состава тренировки
     public void updateArray(int idClient, int idCoach, Timestamp date) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -430,6 +472,7 @@ public class DBWorkout {
 
     }
 
+    // удаление старых тренировок
     public void deleteAllWorkout() throws ClassNotFoundException, SQLException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -440,6 +483,7 @@ public class DBWorkout {
         }
     }
 
+    // удаление конкретной тренировки
     public void deleteCurrentWorkout(int idWorkout) throws ClassNotFoundException, SQLException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -451,6 +495,7 @@ public class DBWorkout {
         }
     }
 
+    // получение ещё не проведённых тренировок
     public List<ModelWorkouts> getWorkoutsToMayStart(int idCoach) throws ClassNotFoundException, SQLException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -470,6 +515,7 @@ public class DBWorkout {
         }
     }
 
+    // метод завершения тренировки
     public void doEndWorkout(TableView<ModelRecord> table) throws ClassNotFoundException, SQLException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -496,6 +542,7 @@ public class DBWorkout {
 
     }
 
+    // получение даты конкретной тренировки
     public String getDateCurrentWorkout(int idWorkout) throws ClassNotFoundException, SQLException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");

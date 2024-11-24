@@ -18,6 +18,7 @@ public class DBRequests {
     private final String LOGIN = "postgres";
     private final String PASS = "root";
 
+    // добавление новой заявки на групповую тренировку
     public void addNewRequest(int idClient, int idCoach, LocalDate date, Integer time, String type) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -38,6 +39,7 @@ public class DBRequests {
         }
     }
 
+    // добавление новой заявки на индивидуальную тренировку
     public void addNewRequest(int idClient, int idCoach, LocalDate date, Integer time, String type, Integer[] exercisesArr) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -61,6 +63,7 @@ public class DBRequests {
         }
     }
 
+    // получение числа заявок от клиента на текущее время
     public int cntRequestFromClient(int idClient, LocalDate date, Integer time) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -87,6 +90,7 @@ public class DBRequests {
         }
     }
 
+    // получение всех запросов от текущего клиента
     public List<ModelRequest> getRequestCurrentClient(int idClient) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -118,6 +122,7 @@ public class DBRequests {
         }
     }
 
+    // получение всех заявок к текущему тренеру
     public List<ModelRequest> getRequestCurrentCoach(int idCoach) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -153,6 +158,7 @@ public class DBRequests {
         }
     }
 
+    // получение всех заявок на текущкю дату к текущему тренеру
     public List<ModelUsers> getAllRequestsOnCurrentDate(int idCoach, LocalDate date) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -179,6 +185,7 @@ public class DBRequests {
         }
     }
 
+    // удаление заявки
     public void deleteRequest(int idRequest) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -190,6 +197,7 @@ public class DBRequests {
         }
     }
 
+    // получение даты заявки
     public Timestamp getRequestDate(int idRequest) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -205,7 +213,8 @@ public class DBRequests {
         }
     }
 
-    public Array getExersices(int idRequest) throws SQLException, ClassNotFoundException {
+    // получение списка упражнений в текущей заявке
+    public Array getExercises(int idRequest) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
         String sql = "select exercises from requests where id_request = ?";
@@ -222,6 +231,7 @@ public class DBRequests {
         }
     }
 
+    // процедура удаления старых заявок
     public void deleteAllRequest() throws ClassNotFoundException, SQLException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");

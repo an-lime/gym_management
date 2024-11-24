@@ -251,6 +251,29 @@ public class RequestController implements StartController, Initializable {
 
             }
 
+            // проверка, что пользователь не пытается отправить заявку на тренировку
+            // на которую уже записан
+            if (dbWorkout.getNotAvailableTimeGroupWorkout(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem()) != 0) {
+
+                lblError.setTextFill(Color.RED);
+                lblError.setText("Вы уже записаны!");
+                lblError.setVisible(true);
+                lblError.setManaged(true);
+
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    public void run() {
+                        lblError.setManaged(false);
+                        lblError.setVisible(false);
+                    }
+                };
+
+                timer.schedule(task, 2000);
+
+                return;
+
+            }
+
         }
 
         // завка добавляется в базу

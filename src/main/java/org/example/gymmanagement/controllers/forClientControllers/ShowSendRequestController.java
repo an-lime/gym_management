@@ -11,13 +11,12 @@ import org.example.gymmanagement.DAOS.DBRequests;
 import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelRequest;
 import org.example.gymmanagement.models.ModelUsers;
-import org.example.gymmanagement.utils.ChangeTblColumn;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ShowSendRequestController extends ChangeTblColumn implements StartController, Initializable {
+public class ShowSendRequestController implements StartController, Initializable {
 
     @FXML
     private TableView<ModelRequest> tblRequests;
@@ -42,22 +41,18 @@ public class ShowSendRequestController extends ChangeTblColumn implements StartC
         TableColumn<ModelRequest, String> coach = new TableColumn<>("Тренер");
         coach.setCellValueFactory(new PropertyValueFactory<>("coach"));
         coach.getStyleClass().add("cell");
-        changeColumnRequest(coach);
 
         TableColumn<ModelRequest, String> date = new TableColumn<>("Дата тренировки");
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
         date.getStyleClass().add("cell");
-        changeColumnRequest(date);
 
         TableColumn<ModelRequest, String> type = new TableColumn<>("Тип тренировки");
         type.setCellValueFactory(new PropertyValueFactory<>("type"));
         type.getStyleClass().add("cell");
-        changeColumnRequest(type);
 
         TableColumn<ModelRequest, String> exercise = new TableColumn<>("Упражнения");
         exercise.setCellValueFactory(new PropertyValueFactory<>("exercise"));
         exercise.getStyleClass().add("cell");
-        changeColumnRequest(exercise);
 
         tblRequests.getColumns().addAll(coach, date, type, exercise);
     }

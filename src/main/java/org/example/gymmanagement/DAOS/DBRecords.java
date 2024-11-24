@@ -15,6 +15,7 @@ public class DBRecords {
     private final String LOGIN = "postgres";
     private final String PASS = "root";
 
+    // добавление результатов клиентов на тренировке
     public void addRecords(TableView<ModelRecord> table) throws ClassNotFoundException, SQLException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -38,6 +39,7 @@ public class DBRecords {
 
     }
 
+    // получение результатов клиентов на тренировке для тренера
     public List<ModelRecord> getRecordsForCoachOnly(int idCoach) throws ClassNotFoundException, SQLException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -66,6 +68,7 @@ public class DBRecords {
         }
     }
 
+    // получение результатов клиентов на тренировке для клиента
     public List<ModelRecord> getRecordsForClient(int idClient) throws ClassNotFoundException, SQLException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");

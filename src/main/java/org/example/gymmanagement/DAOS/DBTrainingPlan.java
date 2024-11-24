@@ -10,6 +10,7 @@ public class DBTrainingPlan {
     private final String LOGIN = "postgres";
     private final String PASS = "root";
 
+    // добавление плана в бд
     public void addPlan(int id_workout, int idCoach, Integer[] exercisesArr) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -29,6 +30,7 @@ public class DBTrainingPlan {
 
     }
 
+    // получение массива id из конкретной тренировки
     public Array getIdExercisesInPlan(int id_workout) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -49,6 +51,7 @@ public class DBTrainingPlan {
         }
     }
 
+    // изменение упражнений в плане тренировки
     public void changePlan(int id_workout, Integer[] exercisesArr) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -68,6 +71,7 @@ public class DBTrainingPlan {
 
     }
 
+    // вызов процедуры удаления старых планов тренировок
     public void deleteAllPlan() throws ClassNotFoundException, SQLException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");

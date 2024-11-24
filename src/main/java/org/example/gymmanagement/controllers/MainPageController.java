@@ -23,8 +23,6 @@ import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
 
-import org.example.gymmanagement.utils.ChangeTblColumn;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -83,15 +81,12 @@ public class MainPageController implements Initializable, StartController {
     DBRequests dbRequests;
     DBClubCard dbClubCard;
 
-    ChangeTblColumn change;
-
     // инициализиция некоторых объектов
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dbWorkout = new DBWorkout();
         dbRequests = new DBRequests();
         dbClubCard = new DBClubCard();
-        change = new ChangeTblColumn();
 
         tblWorkout.setPlaceholder(new Label("Таблица тренировок пуста"));
     }
@@ -158,16 +153,13 @@ public class MainPageController implements Initializable, StartController {
             TableColumn<ModelWorkouts, String> coach = new TableColumn<>("Тренер");
             coach.setCellValueFactory(new PropertyValueFactory<>("coach"));
             coach.getStyleClass().add("cell");
-            change.changeColumnWorkout(coach);
 
             TableColumn<ModelWorkouts, String> trainingDate = new TableColumn<>("Дата тренировки");
             trainingDate.setCellValueFactory(new PropertyValueFactory<>("trainingDate"));
-            change.changeColumnWorkout(trainingDate);
 
 
             TableColumn<ModelWorkouts, String> trainingType = new TableColumn<>("Вид тренировки");
             trainingType.setCellValueFactory(new PropertyValueFactory<>("trainingType"));
-            change.changeColumnWorkout(trainingType);
 
             coach.getStyleClass().add("fontMedium");
             trainingDate.getStyleClass().add("fontMedium");
@@ -187,11 +179,9 @@ public class MainPageController implements Initializable, StartController {
 
             TableColumn<ModelWorkouts, String> trainingDate = new TableColumn<>("Дата тренировки");
             trainingDate.setCellValueFactory(new PropertyValueFactory<>("trainingDate"));
-            change.changeColumnWorkout(trainingDate);
 
             TableColumn<ModelWorkouts, String> trainingStructure = new TableColumn<>("Состав тренировки");
             trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
-            change.changeColumnWorkout(trainingStructure);
 
             trainingDate.getStyleClass().add("fontMedium");
             trainingStructure.getStyleClass().add("fontMedium");
@@ -221,15 +211,12 @@ public class MainPageController implements Initializable, StartController {
 
             TableColumn<ModelWorkouts, String> coach = new TableColumn<>("Тренер");
             coach.setCellValueFactory(new PropertyValueFactory<>("coach"));
-            change.changeColumnWorkout(coach);
 
             TableColumn<ModelWorkouts, String> trainingDate = new TableColumn<>("Дата тренировки");
             trainingDate.setCellValueFactory(new PropertyValueFactory<>("trainingDate"));
-            change.changeColumnWorkout(trainingDate);
 
             TableColumn<ModelWorkouts, String> trainingStructure = new TableColumn<>("Состав тренировки");
             trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
-            change.changeColumnWorkout(trainingStructure);
 
             coach.getStyleClass().add("fontMedium");
             trainingDate.getStyleClass().add("fontMedium");

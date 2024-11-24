@@ -4,10 +4,12 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.gymmanagement.DAOS.DBUser;
 import org.example.gymmanagement.StartApplication;
@@ -15,6 +17,7 @@ import org.example.gymmanagement.controllers.MainPageController;
 import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelUsers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -22,6 +25,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ClientListController implements Initializable, StartController {
+
+    @FXML
+    private Button btnAddUser;
 
     @FXML
     private Button btnBack;
@@ -116,14 +122,17 @@ public class ClientListController implements Initializable, StartController {
     // отображение информации о выбранном клиенте
     @FXML
     void showClientInfo() {
-        paneConfirm.setManaged(false);
-        textPassword.setText("");
-        step = 0;
-        lblConfirmAction.setVisible(true);
-        paneConfirm.setVisible(false);
-        lblFio.setText(comboClient.getSelectionModel().getSelectedItem().getFio());
-        lblLogin.setText(comboClient.getSelectionModel().getSelectedItem().getLogin());
-        lblPassword.setText(comboClient.getSelectionModel().getSelectedItem().getPassword());
+        if (comboClient.getSelectionModel().getSelectedItem() != null) {
+
+            paneConfirm.setManaged(false);
+            textPassword.setText("");
+            step = 0;
+            lblConfirmAction.setVisible(true);
+            paneConfirm.setVisible(false);
+            lblFio.setText(comboClient.getSelectionModel().getSelectedItem().getFio());
+            lblLogin.setText(comboClient.getSelectionModel().getSelectedItem().getLogin());
+            lblPassword.setText(comboClient.getSelectionModel().getSelectedItem().getPassword());
+        }
     }
 
     // сохранение изменений данных клиента
@@ -176,6 +185,26 @@ public class ClientListController implements Initializable, StartController {
             }
         }
 
+
+    }
+
+    // открытие окна добавления нового пользователя
+    @FXML
+    void goAddUser() throws ClassNotFoundException, SQLException, IOException {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(StartApplication.class.getResource("fxml/forCoach/add-new-user.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Добавление пользователя");
+        stage.setScene(new Scene(root));
+
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(this.btnAddUser.getScene().getWindow());
+
+        stage.showAndWait();
+
+        initializeComboBox();
 
     }
 

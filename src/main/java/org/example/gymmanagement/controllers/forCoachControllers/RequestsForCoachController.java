@@ -18,7 +18,6 @@ import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelRequest;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
-import org.example.gymmanagement.utils.ChangeTblColumn;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +25,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ResourceBundle;
 
-public class RequestsForCoachController extends ChangeTblColumn implements StartController, Initializable {
+public class RequestsForCoachController implements StartController, Initializable {
 
     @FXML
     private TableView<ModelRequest> tblListRequests;
@@ -75,22 +74,18 @@ public class RequestsForCoachController extends ChangeTblColumn implements Start
         TableColumn<ModelRequest, String> client = new TableColumn<>("Клиент");
         client.setCellValueFactory(new PropertyValueFactory<>("client"));
         client.getStyleClass().add("cell");
-        changeColumnRequest(client);
 
         TableColumn<ModelRequest, String> date = new TableColumn<>("Дата тренировки");
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
         date.getStyleClass().add("cell");
-        changeColumnRequest(date);
 
         TableColumn<ModelRequest, String> type = new TableColumn<>("Тип тренировки");
         type.setCellValueFactory(new PropertyValueFactory<>("type"));
         type.getStyleClass().add("cell");
-        changeColumnRequest(type);
 
         TableColumn<ModelRequest, String> exercise = new TableColumn<>("Упражнения");
         exercise.setCellValueFactory(new PropertyValueFactory<>("exercise"));
         exercise.getStyleClass().add("cell");
-        changeColumnRequest(exercise);
 
         tblListRequests.getColumns().addAll(client, date, type, exercise);
     }
@@ -139,7 +134,7 @@ public class RequestsForCoachController extends ChangeTblColumn implements Start
                 if (modelWorkouts.getTrainingDate().equals(tblListRequests.getSelectionModel().getSelectedItem().getDate())) {
                     trainingPlanController.getComboTrainingDate().getSelectionModel().select(modelWorkouts);
                     trainingPlanController.showExercises();
-                    trainingPlanController.getListExercises().setItems(FXCollections.observableArrayList(dbExercises.getNameExercisesFromArray(dbRequests.getExersices(tblListRequests.getSelectionModel().getSelectedItem().getIdRequest()))));
+                    trainingPlanController.getListExercises().setItems(FXCollections.observableArrayList(dbExercises.getNameExercisesFromArray(dbRequests.getExercises(tblListRequests.getSelectionModel().getSelectedItem().getIdRequest()))));
                 }
             }
 

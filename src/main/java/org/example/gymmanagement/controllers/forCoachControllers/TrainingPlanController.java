@@ -23,7 +23,6 @@ import org.example.gymmanagement.interfaces.StartController;
 import org.example.gymmanagement.models.ModelExercises;
 import org.example.gymmanagement.models.ModelUsers;
 import org.example.gymmanagement.models.ModelWorkouts;
-import org.example.gymmanagement.utils.ChangeTblColumn;
 import org.example.gymmanagement.utils.SimpleUtils;
 
 import java.io.IOException;
@@ -31,7 +30,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
 
-public class TrainingPlanController extends ChangeTblColumn implements Initializable, StartController {
+public class TrainingPlanController implements Initializable, StartController {
 
     @FXML
     private Button btnBack;
@@ -175,7 +174,6 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
             tblWorkoutStructure.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
             TableColumn<ModelWorkouts, String> trainingStructure = new TableColumn<>("Состав тренировки");
             trainingStructure.setCellValueFactory(new PropertyValueFactory<>("nameClient"));
-            changeColumnWorkout(trainingStructure);
             trainingStructure.getStyleClass().add("fontMedium");
             tblWorkoutStructure.getColumns().addAll(trainingStructure);
         }

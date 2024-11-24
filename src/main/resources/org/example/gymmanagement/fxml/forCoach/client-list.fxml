@@ -106,43 +106,59 @@
                   <Insets top="50.0" />
                </VBox.margin>
             </GridPane>
-            <VBox prefHeight="90.0" prefWidth="534.0">
+            <HBox prefHeight="118.0" prefWidth="622.0">
                <children>
-                  <Pane fx:id="paneConfirm" prefHeight="36.0" prefWidth="198.0">
+                  <VBox prefHeight="79.0" prefWidth="228.0">
                      <children>
-                        <PasswordField fx:id="textPassword" onAction="#hideConfirmLbl" prefHeight="30.0" prefWidth="188.0" styleClass="fontMedium" stylesheets="@../../css/styles.css">
+                        <Pane fx:id="paneConfirm" prefHeight="36.0" prefWidth="198.0">
+                           <children>
+                              <PasswordField fx:id="textPassword" onAction="#hideConfirmLbl" prefHeight="30.0" prefWidth="188.0" styleClass="fontMedium" stylesheets="@../../css/styles.css">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </PasswordField>
+                              <Label fx:id="lblConfirmAction" onMouseClicked="#hideConfirmLbl" prefHeight="33.0" prefWidth="187.0" styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Введите свой пароль" textFill="#a9a7a7">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Pane>
+                        <Button fx:id="btnSave" mnemonicParsing="false" onAction="#doSave" styleClass="fontSmall" stylesheets="@../../css/styles.css" text="Сохранить изменения">
                            <font>
                               <Font size="15.0" />
                            </font>
-                        </PasswordField>
-                        <Label fx:id="lblConfirmAction" onMouseClicked="#hideConfirmLbl" prefHeight="33.0" prefWidth="187.0" styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Введите свой пароль" textFill="#a9a7a7">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Label fx:id="lblSaveGood" prefHeight="22.0" prefWidth="330.0" styleClass="fontSmall" stylesheets="@../../css/styles.css" text="Изменения прошли успешно!" visible="false">
                            <font>
                               <Font size="15.0" />
-                           </font></Label>
+                           </font>
+                        </Label>
                      </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <VBox.margin>
-                        <Insets top="-10.0" />
-                     </VBox.margin>
-                  </Pane>
-                  <Button fx:id="btnSave" mnemonicParsing="false" onAction="#doSave" styleClass="fontSmall" stylesheets="@../../css/styles.css" text="Сохранить изменения">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <VBox.margin>
+                  </VBox>
+                  <Button fx:id="btnAddUser" mnemonicParsing="false" onAction="#goAddUser" stylesheets="@../../css/styles.css" text="Добавить пользователя">
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="fontSmall" />
+                     </styleClass>
+                     <HBox.margin>
                         <Insets top="10.0" />
-                     </VBox.margin></Button>
-                  <Label fx:id="lblSaveGood" styleClass="fontSmall" stylesheets="@../../css/styles.css" text="Изменения прошли успешно!" visible="false">
-                     <font>
-                        <Font size="15.0" />
-                     </font></Label>
+                     </HBox.margin>
+                  </Button>
                </children>
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="10.0" />
                </VBox.margin>
-            </VBox>
+            </HBox>
          </children>
       </VBox>
    </center>

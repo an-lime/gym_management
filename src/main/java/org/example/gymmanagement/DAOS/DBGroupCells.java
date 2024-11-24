@@ -11,6 +11,7 @@ public class DBGroupCells {
     private final String LOGIN = "postgres";
     private final String PASS = "root";
 
+    // получение времени групповых тренировок
     public ArrayList<Integer> getGroupHoursRequest() throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
