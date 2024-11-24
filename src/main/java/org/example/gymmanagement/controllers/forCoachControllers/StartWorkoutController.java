@@ -65,6 +65,8 @@ public class StartWorkoutController extends ChangeTblColumn implements StartCont
     private DBTrainingPlan dbTrainingPlan;
     private DBUser dbUser;
 
+    // метод для передачи данны о текущем пользователе
+    // и инициализация всех объектов, зависящих от текущего пользователя
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
         this.currentUser = currentUser;
@@ -86,6 +88,7 @@ public class StartWorkoutController extends ChangeTblColumn implements StartCont
             System.out.println(e.getMessage());
         }
 
+        //инициализация таблицы с упражнениями на текущей тренировке
         tblClientsRecord.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 
         TableColumn<ModelRecord, String> client = new TableColumn<>("Клиент");
@@ -111,6 +114,8 @@ public class StartWorkoutController extends ChangeTblColumn implements StartCont
 
         tblClientsRecord.getColumns().addAll(client, exercise, weight, repetitions);
 
+        // установка паттерна ввода только чисел в поля
+        // веса и количества повторений
         Pattern pattern = Pattern.compile("\\d*");
 
         UnaryOperator<TextFormatter.Change> filter = c -> {
@@ -128,23 +133,27 @@ public class StartWorkoutController extends ChangeTblColumn implements StartCont
         textRepetition.setTextFormatter(formatterRepetitions);
     }
 
+    // загрузка плана тренировки, если он был составлен
     @FXML
     void setTrainingPlan() throws SQLException, ClassNotFoundException {
         if (comboDate.getSelectionModel().getSelectedItem() != null) {
 
             tblClientsRecord.getItems().clear();
 
-            listExercises.setItems(FXCollections.observableArrayList(dbExercises.getNameExercisesInPlan(dbTrainingPlan.getIdExercisesInPlan(comboDate.getSelectionModel().getSelectedItem().getId_workout()))));
+            listExercises.setItems(FXCollections.observableArrayList(dbExercises.getNameExercisesFromArray(dbTrainingPlan.getIdExercisesInPlan(comboDate.getSelectionModel().getSelectedItem().getId_workout()))));
 
             comboClients.setItems(FXCollections.observableArrayList(dbUser.getClientModelFromArray(dbWorkout.getClientInCurrentWorkout(comboDate.getSelectionModel().getSelectedItem().getId_workout()))));
 
         }
     }
 
+    // добавление результата подхода в таблицу
     @FXML
     void doAddRecord() {
         if (comboDate.getSelectionModel().getSelectedItem() != null && comboExercises.getSelectionModel().getSelectedItem() != null && comboClients.getSelectionModel().getSelectedItem() != null && !textWeight.getText().isBlank() && !textRepetition.getText().isBlank() && (Integer.parseInt(textWeight.getText())) > 0 && (Integer.parseInt(textRepetition.getText()) > 0)) {
 
+            // создание модели результата
+            // и добавление её в таблицу
             ModelRecord modelRecord = new ModelRecord();
             modelRecord.setId_workout(comboDate.getSelectionModel().getSelectedItem().getId_workout());
             modelRecord.setId_client(comboClients.getSelectionModel().getSelectedItem().getIdUser());
@@ -163,6 +172,8 @@ public class StartWorkoutController extends ChangeTblColumn implements StartCont
         }
     }
 
+    // при завершении тренировки
+    // все упражнения добавляются в поле текущей тренировки в базе
     @FXML
     void doEndWorkout() throws SQLException, ClassNotFoundException {
         dbWorkout.doEndWorkout(tblClientsRecord);
@@ -176,6 +187,7 @@ public class StartWorkoutController extends ChangeTblColumn implements StartCont
         comboClients.getItems().clear();
     }
 
+    // переход на главный экран
     @FXML
     void goBack() {
         try {

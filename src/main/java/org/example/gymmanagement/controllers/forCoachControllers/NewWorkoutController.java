@@ -88,11 +88,13 @@ public class NewWorkoutController extends SimpleUtils implements StartController
 
     private final ArrayList<Integer> hoursWorkout = new ArrayList<>();
 
+    // метод для передачи данны о текущем пользователе
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
         this.currentUser = currentUser;
     }
 
+    // инициализиция и сокрытие некоторых объектов
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -119,9 +121,13 @@ public class NewWorkoutController extends SimpleUtils implements StartController
 
     }
 
+    // добавление клиента в новую тренировку
     @FXML
     void addClientToWorkout() {
 
+        // если 2 раза кликнуть по клиенту таблицы, то он перенесётся в противоположную
+        // весь список -> на тренировке
+        // на тренировке -> весь список
         listAllClient.setCellFactory(_ -> {
             ListCell<ModelUsers> cell = new ListCell<>() {
                 @Override
@@ -174,6 +180,8 @@ public class NewWorkoutController extends SimpleUtils implements StartController
 
     }
 
+    // установка значений доступных даты и времени для тренировке
+    // в зависимости от типа и даты
     @FXML
     void showDate() throws ClassNotFoundException, SQLException {
         if (comboTypeWorkout.getSelectionModel().getSelectedItem() == null) {
@@ -209,6 +217,7 @@ public class NewWorkoutController extends SimpleUtils implements StartController
 
     }
 
+    // установка времени тренировки
     @FXML
     void setTime() throws ClassNotFoundException, SQLException {
         listClientOnWorkout.getItems().clear();
@@ -266,6 +275,8 @@ public class NewWorkoutController extends SimpleUtils implements StartController
         }
     }
 
+    // отображение полного списка клиентов
+    // а так же списка клиентов, уже добавленных в групповую тренировку
     @FXML
     void showBoxClient() throws ClassNotFoundException, SQLException {
         listAllClient.getItems().clear();
@@ -283,9 +294,11 @@ public class NewWorkoutController extends SimpleUtils implements StartController
         }
     }
 
+    // добавление тренировки в базу
     @FXML
     void doAddWorkout() throws ClassNotFoundException, SQLException, IOException {
 
+        // проверка, что список клиентов заполнен
         if (listClientOnWorkout.getItems().isEmpty()) {
 
             lblError.setText("Заполните список клиентов!");
@@ -305,6 +318,7 @@ public class NewWorkoutController extends SimpleUtils implements StartController
 
             return;
 
+        // проверка, что на индивидуальную тренировку добавлен только 1 человек
         } else if (comboTypeWorkout.getSelectionModel().getSelectedItem() != null && comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная") && listClientOnWorkout.getItems().size() > 1) {
             lblError.setText("Выбрана индивидуальная тренировка!");
             lblError.setVisible(true);
@@ -331,7 +345,10 @@ public class NewWorkoutController extends SimpleUtils implements StartController
             i++;
         }
 
+        // открытие окна составление плана тренировки,
+        // если она была СОЗДАНА, а не ИЗМЕНЕНА
         if (dbWorkout.getClientInCurrentWorkout(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem()) == null) {
+            // непосредственное добавление тренировки в базу
             dbWorkout.addNewWorkout(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(), clientsArr);
 
             FXMLLoader loader = new FXMLLoader();
@@ -344,6 +361,7 @@ public class NewWorkoutController extends SimpleUtils implements StartController
             TrainingPlanController trainingPlanController = loader.getController();
             trainingPlanController.startPage(currentUser);
 
+            // выбор в ComboBox только что добавленной тренировки
             for (ModelWorkouts modelWorkouts : trainingPlanController.getComboTrainingDate().getItems()) {
 
                 LocalDateTime dateTime = datePicker.getValue().atStartOfDay();
@@ -362,9 +380,11 @@ public class NewWorkoutController extends SimpleUtils implements StartController
             stage.showAndWait();
 
         } else {
+            // обновление данных тренировки, если она уже была создана
             dbWorkout.updateWorkout(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(), clientsArr);
         }
 
+        // сокрытие объектов
         listClientOnWorkout.getItems().clear();
         pointer.setText("--->");
         boxClient.setVisible(false);
@@ -390,6 +410,7 @@ public class NewWorkoutController extends SimpleUtils implements StartController
 
     }
 
+    // переход на главный экран
     @FXML
     void goBack() {
         try {

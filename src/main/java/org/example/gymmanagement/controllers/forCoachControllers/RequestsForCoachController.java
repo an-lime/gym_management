@@ -43,12 +43,15 @@ public class RequestsForCoachController extends ChangeTblColumn implements Start
     DBWorkout dbWorkout;
     DBExercises dbExercises;
 
+    // метод для передачи данны о текущем пользователе
+    // и инициализация всех объектов, зависящих от текущего пользователя
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
         this.currentUser = currentUser;
         initializeTable();
     }
 
+    // инициализиция и сокрытие некоторых объектов
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dbRequests = new DBRequests();
@@ -60,6 +63,7 @@ public class RequestsForCoachController extends ChangeTblColumn implements Start
         tblListRequests.setPlaceholder(new Label("Таблица заявок пуста"));
     }
 
+    // инициализация таблицы всех заявок для тренера
     public void initializeTable() throws SQLException, ClassNotFoundException {
         dbRequests.deleteAllRequest();
         tblListRequests.getItems().clear();
@@ -91,6 +95,8 @@ public class RequestsForCoachController extends ChangeTblColumn implements Start
         tblListRequests.getColumns().addAll(client, date, type, exercise);
     }
 
+    // кнопки добавить / отклонить завку становятся доступными
+    // при выборе заявки в таблице
     @FXML
     void showBtn() {
 
@@ -101,18 +107,23 @@ public class RequestsForCoachController extends ChangeTblColumn implements Start
 
     }
 
+    // добавление заявки в список тренировок, если заявку приянли
     @FXML
     void doAdd() throws ClassNotFoundException, SQLException, ParseException, IOException {
+        // тренировка обновляется, если клиент отправил заявку на групповую тренировку
         if (dbWorkout.getExistWorkout(tblListRequests.getSelectionModel().getSelectedItem().getIdRequest()) == 1) {
             ModelRequest modelRequest = tblListRequests.getSelectionModel().getSelectedItem();
             dbWorkout.updateArray(modelRequest.getIdClient(), modelRequest.getIdCoach(), dbRequests.getRequestDate(modelRequest.getIdRequest()));
             doRej();
             initializeTable();
         } else {
+            // добавление новой индивидуальной тренировки
             Integer[] clientsArr = new Integer[1];
             clientsArr[0] = tblListRequests.getSelectionModel().getSelectedItem().getIdClient();
             dbWorkout.addNewWorkout(currentUser.getIdUser(), dbRequests.getRequestDate(tblListRequests.getSelectionModel().getSelectedItem().getIdRequest()), clientsArr);
 
+            // открытие окна с планами тренировок и выбор
+            // только что добавленной тренировки
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(StartApplication.class.getResource("fxml/forCoach/training-plan.fxml"));
             Parent root = loader.load();
@@ -128,7 +139,7 @@ public class RequestsForCoachController extends ChangeTblColumn implements Start
                 if (modelWorkouts.getTrainingDate().equals(tblListRequests.getSelectionModel().getSelectedItem().getDate())) {
                     trainingPlanController.getComboTrainingDate().getSelectionModel().select(modelWorkouts);
                     trainingPlanController.showExercises();
-                    trainingPlanController.getListExercises().setItems(FXCollections.observableArrayList(dbExercises.getNameExercisesModelWorkout(dbRequests.getExersices(tblListRequests.getSelectionModel().getSelectedItem().getIdRequest()))));
+                    trainingPlanController.getListExercises().setItems(FXCollections.observableArrayList(dbExercises.getNameExercisesFromArray(dbRequests.getExersices(tblListRequests.getSelectionModel().getSelectedItem().getIdRequest()))));
                 }
             }
 
@@ -143,6 +154,7 @@ public class RequestsForCoachController extends ChangeTblColumn implements Start
         }
     }
 
+    // отклонение заявки на тренировку и удаление её из базы
     @FXML
     void doRej() throws ClassNotFoundException, SQLException {
         dbRequests.deleteRequest(tblListRequests.getSelectionModel().getSelectedItem().getIdRequest());

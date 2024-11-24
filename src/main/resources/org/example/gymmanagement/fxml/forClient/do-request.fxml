@@ -136,7 +136,7 @@
                <children>
                   <VBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="264.0">
                      <children>
-                        <Label fx:id="lblError" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="250.0" styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Заполните все поля!" textFill="RED">
+                        <Label fx:id="lblError" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="250.0" styleClass="fontMedium" stylesheets="@../../css/styles.css" text="Заявка уже отправлена!" textFill="RED">
                            <font>
                               <Font size="18.0" />
                            </font>

@@ -85,6 +85,7 @@ public class MainPageController implements Initializable, StartController {
 
     ChangeTblColumn change;
 
+    // инициализиция некоторых объектов
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dbWorkout = new DBWorkout();
@@ -95,12 +96,16 @@ public class MainPageController implements Initializable, StartController {
         tblWorkout.setPlaceholder(new Label("Таблица тренировок пуста"));
     }
 
+    // метод для передачи данны о текущем пользователе
+    // и инициализация всех объектов, зависящих от текущего пользователя
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
         this.currentUser = currentUser;
         lblWelcome.setText(lblWelcome.getText() + currentUser.getFio() + '!');
         initializeTable();
 
+        // сокрытие большей части функционала,
+        // если авторизованный пользователь -- клиент
         if (currentUser.getIdRole() == 1) {
 
             textClubCard.setText(textClubCard.getText() + dbClubCard.getBalance(currentUser.getIdUser()) + " руб.");
@@ -120,6 +125,8 @@ public class MainPageController implements Initializable, StartController {
             btnStartWorkout.setManaged(false);
 
         } else {
+            // сокрытие лишь части функционала,
+            // если авторизованный пользователь -- тренер
             btnRequestToCoach.setManaged(false);
             btnRequestToCoach.setVisible(false);
             boxClubCard.setVisible(false);
@@ -139,6 +146,8 @@ public class MainPageController implements Initializable, StartController {
 
         dbWorkout.deleteAllWorkout();
 
+        // если авторизованный пользователь -- клиент,
+        // то он видит такую таблицу:
         if (currentUser.getIdRole() == 1) {
 
             ObservableList<ModelWorkouts> list = FXCollections.observableArrayList(dbWorkout.getWorkoutForClient(currentUser));
@@ -168,6 +177,8 @@ public class MainPageController implements Initializable, StartController {
             tblWorkout.getColumns().addAll(coach, trainingDate, trainingType);
 
         } else {
+            // если авторизованный пользователь -- тренер,
+            // то он видит такую таблицу:
 
             ObservableList<ModelWorkouts> list = FXCollections.observableArrayList(dbWorkout.getWorkoutForCoachOnly(currentUser));
             tblWorkout.setItems(list);
@@ -196,6 +207,7 @@ public class MainPageController implements Initializable, StartController {
 
     }
 
+    // отображение информации тренировок все тренеров
     @FXML
     void showAllCouch() throws SQLException, ClassNotFoundException {
         tblWorkout.getColumns().clear();
@@ -232,6 +244,7 @@ public class MainPageController implements Initializable, StartController {
         }
     }
 
+    // удаление выбранной тренировки в таблице
     @FXML
     void doDeleteWorkout() throws ClassNotFoundException, SQLException {
         if (tblWorkout.getSelectionModel().getSelectedItem() != null) {
@@ -241,6 +254,7 @@ public class MainPageController implements Initializable, StartController {
         }
     }
 
+    // переход на окно всего списка клиентов
     @FXML
     void goClientList() {
 
@@ -271,6 +285,7 @@ public class MainPageController implements Initializable, StartController {
 
     }
 
+    // переход на окно планов тренировок
     @FXML
     void goTrainingPlan() {
 
@@ -301,6 +316,7 @@ public class MainPageController implements Initializable, StartController {
 
     }
 
+    // переход на окно клиента, где составляются запросы
     @FXML
     void goRequest() throws ClassNotFoundException, SQLException, IOException {
 
@@ -312,7 +328,7 @@ public class MainPageController implements Initializable, StartController {
         requestController.startPage(currentUser);
 
         Stage stage = (Stage) btnTrainingPlan.getScene().getWindow();
-        stage.setTitle("Планы тренировок");
+        stage.setTitle("Новый запрос");
 
         stage.setResizable(false);
 
@@ -326,6 +342,7 @@ public class MainPageController implements Initializable, StartController {
 
     }
 
+    // переход на окно добавления новой тренировки
     @FXML
     void goAddNewWorkout() throws ClassNotFoundException, SQLException, IOException {
 
@@ -351,6 +368,7 @@ public class MainPageController implements Initializable, StartController {
 
     }
 
+    // переход на окно тренера, где он видит отправленные ему заявки
     @FXML
     void goRequestsForCoach() throws ClassNotFoundException, SQLException, IOException {
 
@@ -371,6 +389,7 @@ public class MainPageController implements Initializable, StartController {
 
     }
 
+    // переход на окно начала тренировки
     @FXML
     void goStartWorkout() throws ClassNotFoundException, SQLException, IOException {
 
@@ -395,6 +414,7 @@ public class MainPageController implements Initializable, StartController {
         stage.show();
     }
 
+    // переход на окно результатов тренировок
     @FXML
     void goRecords() throws ClassNotFoundException, SQLException, IOException {
 
@@ -414,6 +434,7 @@ public class MainPageController implements Initializable, StartController {
         stage.showAndWait();
     }
 
+    // переход на окно авторизации
     @FXML
     void doExit() {
         try {

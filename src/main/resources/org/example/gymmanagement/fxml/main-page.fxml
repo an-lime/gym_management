@@ -134,7 +134,7 @@
                         <String fx:value="button" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="btnRequestFromClient" mnemonicParsing="false" onAction="#goRequestsForCoach" stylesheets="@../css/styles.css" text="Запросы от клиентов">
+                  <Button fx:id="btnRequestFromClient" mnemonicParsing="false" onAction="#goRequestsForCoach" stylesheets="@../css/styles.css" text="Заявки от клиентов">
                      <font>
                         <Font size="15.0" />
                      </font>

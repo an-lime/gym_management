@@ -73,11 +73,14 @@ public class RequestController implements StartController, Initializable {
 
     private SimpleUtils simpleUtils;
 
+    // метод для передачи данны о текущем пользователе
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
         this.currentUser = currentUser;
     }
 
+    // инициализация переменных
+    // и сокрытие некоторых объектов
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -100,6 +103,7 @@ public class RequestController implements StartController, Initializable {
         btnAddRequest.setVisible(false);
         btnAddRequest.setManaged(false);
 
+        // заполнение comboBox значениями упражнений и тренеров
         try {
             comboExercises.setItems(FXCollections.observableArrayList(dbExercises.getExercises()));
             comboCoach.setItems(FXCollections.observableArrayList(dbUser.getAllCoach()));
@@ -108,19 +112,25 @@ public class RequestController implements StartController, Initializable {
         }
 
 
+        // заполнеие ComboBox постоянными типами тренеровок
+        // "Индивидуальная" и "групповая"
         simpleUtils.createComboTypeWorkouts(datePicker, comboTypeWorkout);
 
     }
 
+    // установка значений доступного времени
+    // в связи с типом тренировки и датой
     @FXML
     void setAvailableTime() throws SQLException, ClassNotFoundException {
 
+        // заполнение массива всеми возможными часами
         if (comboTypeWorkout.getSelectionModel().getSelectedItem() != null && comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная")) {
             hoursWorkout.clear();
             for (int i = 10; i < 20; i++) {
                 hoursWorkout.add(i);
             }
 
+            // удаление из массива недоступных часов
             if (datePicker.getValue() != null && comboCoach.getSelectionModel().getSelectedItem() != null) {
 
                 hoursWorkout.removeAll(dbWorkout.getHoursWorkoutForClient(comboCoach.getSelectionModel().getSelectedItem().getIdUser(), datePicker.getValue()));
@@ -133,6 +143,8 @@ public class RequestController implements StartController, Initializable {
 
     }
 
+    // отображение контекстного меню для удаления
+    // упражнения из заявки
     @FXML
     void showContext() {
 
@@ -140,6 +152,8 @@ public class RequestController implements StartController, Initializable {
 
     }
 
+    // появление возможности добавлять упражнения в заявку
+    // если тип тренировки "Индивидуальная"
     @FXML
     void showExercises() throws SQLException, ClassNotFoundException {
 
@@ -177,6 +191,7 @@ public class RequestController implements StartController, Initializable {
 
     }
 
+    // добавление упражнения в заявку
     @FXML
     void addExercises() {
         if (comboExercises.getSelectionModel().getSelectedItem() != null) {
@@ -187,8 +202,10 @@ public class RequestController implements StartController, Initializable {
 
     }
 
+    // добавление заявки в базу данных
     @FXML
     void doAddRequest() throws SQLException, ClassNotFoundException {
+        // проверка, что все поля заполнены
         if (datePicker.getValue() == null || comboTime.getSelectionModel().getSelectedItem() == null || comboCoach.getSelectionModel().getSelectedItem() == null || comboTypeWorkout.getSelectionModel().getSelectedItem() == null) {
 
             lblError.setTextFill(Color.RED);
@@ -210,11 +227,13 @@ public class RequestController implements StartController, Initializable {
 
         }
 
-        if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная")) {
+        // проверка, отправлял ли пользователь уже заявку
+        // на групповую тренировку
+        if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Групповая")) {
             if (dbRequests.cntRequestFromClient(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem()) == 1) {
 
                 lblError.setTextFill(Color.RED);
-                lblError.setText("На данную дату и время уже есть заявка!");
+                lblError.setText("Заявка уже отправлена!");
                 lblError.setVisible(true);
                 lblError.setManaged(true);
 
@@ -234,6 +253,8 @@ public class RequestController implements StartController, Initializable {
 
         }
 
+        // завка добавляется в базу
+        // в соответствии с типом тренировки
         if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Групповая")) {
 
             dbRequests.addNewRequest(currentUser.getIdUser(), comboCoach.getSelectionModel().getSelectedItem().getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(), comboTypeWorkout.getSelectionModel().getSelectedItem());
@@ -250,6 +271,7 @@ public class RequestController implements StartController, Initializable {
             dbRequests.addNewRequest(currentUser.getIdUser(), comboCoach.getSelectionModel().getSelectedItem().getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(), comboTypeWorkout.getSelectionModel().getSelectedItem(), exercisesArr);
         }
 
+        // поля всех объектов очищаются
         datePicker.setValue(null);
         comboTime.getSelectionModel().clearSelection();
         comboTime.getItems().clear();
@@ -274,6 +296,7 @@ public class RequestController implements StartController, Initializable {
 
     }
 
+    // переход к отправленным заявкам
     @FXML
     void goSendRequests() throws ClassNotFoundException, SQLException, IOException {
 
@@ -294,6 +317,7 @@ public class RequestController implements StartController, Initializable {
 
     }
 
+    // переход на главный экран
     @FXML
     void goBack() {
         try {

@@ -2,6 +2,7 @@ package org.example.gymmanagement.DAOS;
 
 import java.sql.*;
 
+// класс обращений к таблице club_cards
 public class DBClubCard {
 
     private final String HOST = "localhost";
@@ -10,6 +11,7 @@ public class DBClubCard {
     private final String LOGIN = "postgres";
     private final String PASS = "root";
 
+    // получение баланса клубной карты клиента
     public String getBalance(int idClient) throws ClassNotFoundException, SQLException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");

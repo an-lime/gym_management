@@ -51,6 +51,8 @@ public class LoginController implements Initializable {
 
     @FXML
     void enter() {
+        // получение введённого пароляв независимости,
+        // был он скрыт или нет
         String enterPassword = "";
         if (password.isVisible()) {
             enterPassword = password.getText();
@@ -60,6 +62,8 @@ public class LoginController implements Initializable {
 
         try {
 
+            // если логие и пароль введены правильно, то осуществляется авторизация в системе
+            // иначе сообщается об ошибке
             if (!loginTxt.getText().isEmpty() & !enterPassword.isEmpty()) {
 
                 ModelUsers user = dbUser.getCurrentUser(loginTxt.getText(), enterPassword);
@@ -79,6 +83,7 @@ public class LoginController implements Initializable {
                 }
                 if (user != null) {
 
+                    // переход на главный экран
                     FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("fxml/main-page.fxml"));
 
                     Scene scene = new Scene(fxmlLoader.load());
@@ -107,6 +112,7 @@ public class LoginController implements Initializable {
         }
     }
 
+    // переключение видимости пароля
     public void toggleVisiblePassword() {
         if (!checkShowPassword.isSelected()) {
             passwordField.setText(password.getText());

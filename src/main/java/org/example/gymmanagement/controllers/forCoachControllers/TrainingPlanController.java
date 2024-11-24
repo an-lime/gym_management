@@ -83,6 +83,7 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
         return listExercises;
     }
 
+    // инициализиция и сокрытие некоторых объектов
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -105,6 +106,8 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
         }
     }
 
+    // метод для передачи данны о текущем пользователе
+    // и инициализация всех объектов, зависящих от текущего пользователя
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
 
@@ -126,6 +129,7 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
         comboExercises.setItems(FXCollections.observableArrayList(dbExercises.getExercises()));
     }
 
+    // переход на главный экран
     @FXML
     void goBack() {
 
@@ -156,10 +160,12 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
 
     }
 
+    // отображение добавленных упражнений и клиентов в уже составленный план тренировки
     @FXML
     void showExercises() throws SQLException, ClassNotFoundException {
 
 
+        // отображение клиентов
         if (comboTrainingDate.getSelectionModel().getSelectedItem() != null) {
             tblWorkoutStructure.getColumns().clear();
             vBoxStructure.setVisible(true);
@@ -178,11 +184,13 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
         hBoxExercises.setVisible(true);
         hBoxExercises.setVisible(true);
 
+        // отображение упражнений
         if (checkAllPlan.isSelected() && comboTrainingDate.getSelectionModel().getSelectedItem() != null) {
-            listExercises.setItems(FXCollections.observableArrayList(dbExercises.getNameExercisesInPlan(dbTrainingPlan.getIdExercisesInPlan(comboTrainingDate.getSelectionModel().getSelectedItem().getId_workout()))));
+            listExercises.setItems(FXCollections.observableArrayList(dbExercises.getNameExercisesFromArray(dbTrainingPlan.getIdExercisesInPlan(comboTrainingDate.getSelectionModel().getSelectedItem().getId_workout()))));
         }
     }
 
+    // добвление упражнения в таблицу
     @FXML
     void addExercises() {
         if (comboExercises.getSelectionModel().getSelectedItem() != null) {
@@ -191,6 +199,7 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
         }
     }
 
+    // отображение кнопки "удалить" при клике пкм по упражнению в таблице
     @FXML
     void showContext() {
 
@@ -199,6 +208,7 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
 
     }
 
+    // непосредственное добавление / изменение плана в базе данных
     @FXML
     void doAddPlan() throws SQLException, ClassNotFoundException {
 
@@ -247,6 +257,8 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
 
     }
 
+    // переход на окно добавления новых упражнений
+    // в общий список упражнений
     @FXML
     void doAddNewExercise() throws ClassNotFoundException, SQLException, IOException {
 
@@ -269,11 +281,14 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
 
     }
 
+    // отображение уже составленных планов
     @FXML
     void showAllPlan() throws ClassNotFoundException, SQLException {
         vBoxStructure.setVisible(false);
         vBoxStructure.setManaged(false);
         tblWorkoutStructure.getColumns().clear();
+        // кнопка "добавить план" меняется на "изменить план",
+        // а содержимое ComboBox меняется
         if (checkAllPlan.isSelected()) {
 
             btnAddPlan.setText("Изменить план");
@@ -285,6 +300,8 @@ public class TrainingPlanController extends ChangeTblColumn implements Initializ
 
             hBoxExercises.setVisible(false);
         } else {
+
+            // кнопки и содержимое меняются обратно
 
             vBoxStructure.setVisible(false);
             vBoxStructure.setManaged(false);

@@ -27,20 +27,26 @@ public class RecordsController extends ChangeTblColumn implements StartControlle
 
     DBRecords dbRecords;
 
+    // метод для передачи данны о текущем пользователе
+    // и инициализация всех объектов, зависящих от текущего пользователя
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
         this.currentUser = currentUser;
         initializeTable();
     }
 
+    // инициализиция некоторых объектов
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dbRecords = new DBRecords();
         tblRecords.setPlaceholder(new Label("Таблица рекордов пуста"));
     }
 
+    // инициализация таблицы с результатами трениорвок
+    // в соответствии с ролью пользователя
     public void initializeTable() throws SQLException, ClassNotFoundException {
 
+        // инициализация для тренера
         if (currentUser.getIdRole() == 2) {
 
             ObservableList<ModelRecord> records = FXCollections.observableArrayList(dbRecords.getRecordsForCoachOnly(currentUser.getIdUser()));
@@ -74,6 +80,7 @@ public class RecordsController extends ChangeTblColumn implements StartControlle
 
             tblRecords.getColumns().addAll(dateCol, clientCol, exerciseCol, weightCol, repetitionCol);
 
+        // инициализация для клиента
         } else {
 
             ObservableList<ModelRecord> records = FXCollections.observableArrayList(dbRecords.getRecordsForClient(currentUser.getIdUser()));

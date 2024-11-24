@@ -65,12 +65,15 @@ public class ClientListController implements Initializable, StartController {
         paneConfirm.setVisible(false);
     }
 
+    // метод для передачи данны о текущем пользователе
+    // и инициализация всех объектов, зависящих от текущего пользователя
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
         this.currentUser = currentUser;
         initializeComboBox();
     }
 
+    // переход на главный экран
     @FXML
     void goBack() {
         try {
@@ -99,6 +102,7 @@ public class ClientListController implements Initializable, StartController {
         }
     }
 
+    // инициализация ComboBox со всеми клиентами
     public void initializeComboBox() throws ClassNotFoundException, SQLException {
         comboClient.setItems(FXCollections.observableArrayList(dbUser.getAllClient()));
         comboClient.getSelectionModel().selectFirst();
@@ -107,10 +111,9 @@ public class ClientListController implements Initializable, StartController {
         lblLogin.setText(comboClient.getSelectionModel().getSelectedItem().getLogin());
         lblPassword.setText(comboClient.getSelectionModel().getSelectedItem().getPassword());
 
-        comboClient.setStyle("-fx-font: 15px \"Verdana\";");
-
     }
 
+    // отображение информации о выбранном клиенте
     @FXML
     void showClientInfo() {
         paneConfirm.setManaged(false);
@@ -123,15 +126,19 @@ public class ClientListController implements Initializable, StartController {
         lblPassword.setText(comboClient.getSelectionModel().getSelectedItem().getPassword());
     }
 
+    // сохранение изменений данных клиента
     @FXML
     void doSave() throws SQLException, ClassNotFoundException {
 
+        // появление окна подтверждения паролем
         if (step == 0) {
             paneConfirm.setManaged(true);
             paneConfirm.setVisible(true);
 
             step = 1;
         } else if (step == 1) {
+
+            // если введённый пароль правильный, то изменения сохраняются
 
             if (textPassword.getText().equals(currentUser.getPassword())) {
 

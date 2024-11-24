@@ -5,6 +5,7 @@ import org.example.gymmanagement.models.ModelExercises;
 import java.sql.*;
 import java.util.*;
 
+// класс обращений к таблице exercises
 public class DBExercises {
 
     private final String HOST = "localhost";
@@ -13,6 +14,7 @@ public class DBExercises {
     private final String LOGIN = "postgres";
     private final String PASS = "root";
 
+    // получиьт список всех упражнений
     public List<ModelExercises> getExercises() throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
@@ -32,6 +34,7 @@ public class DBExercises {
 
     }
 
+    // добавление нового упражнения
     public void addNewExercise(String exercise) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -44,6 +47,7 @@ public class DBExercises {
         }
     }
 
+    // удаление конкретного упражнения
     public void deleteExercise(int id) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
@@ -56,30 +60,8 @@ public class DBExercises {
         }
     }
 
-    public ArrayList<ModelExercises> getNameExercisesInPlan(Array idExercise) throws SQLException, ClassNotFoundException {
-        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
-        Class.forName("org.postgresql.Driver");
-
-        String sql = "SELECT id_exercise, title FROM exercises WHERE id_exercise = any (?);";
-
-        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
-            PreparedStatement statement = dbConn.prepareStatement(sql);
-            statement.setArray(1, idExercise);
-            ResultSet res = statement.executeQuery();
-
-            ArrayList<ModelExercises> exerciseArr = new ArrayList<>();
-
-            while (res.next()) {
-                ModelExercises modelExercises = new ModelExercises(res.getInt("id_exercise"), res.getString("title"));
-                exerciseArr.add(modelExercises);
-            }
-
-            return exerciseArr;
-
-        }
-    }
-
-    public ArrayList<ModelExercises> getNameExercisesModelWorkout(Array idExercise) throws SQLException, ClassNotFoundException {
+    // получение упражнений в в такущем плане тренировки
+    public ArrayList<ModelExercises> getNameExercisesFromArray(Array idExercise) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
         Class.forName("org.postgresql.Driver");
 

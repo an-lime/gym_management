@@ -26,12 +26,15 @@ public class ShowSendRequestController extends ChangeTblColumn implements StartC
 
     private DBRequests dbRequests;
 
+    // метод для передачи данны о текущем пользователе
+    // и инициализация всех объектов, зависящих от текущего пользователя
     @Override
     public void startPage(ModelUsers currentUser) throws SQLException, ClassNotFoundException {
         this.currentUser = currentUser;
         initializeTable();
     }
 
+    // инициализация таблицы отправленных заявок
     public void initializeTable() throws SQLException, ClassNotFoundException {
         tblRequests.setItems(FXCollections.observableArrayList(dbRequests.getRequestCurrentClient(currentUser.getIdUser())));
         tblRequests.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
