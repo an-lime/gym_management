@@ -277,7 +277,7 @@ public class DBWorkout {
     public int getNotAvailableTimeGroupWorkout(int idClient, LocalDate date, Integer time) throws SQLException, ClassNotFoundException {
         String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME;
         Class.forName("org.postgresql.Driver");
-        String sql = "SELECT EXTRACT(HOUR FROM training_date) AS hour FROM workouts where ? = any(id_clients) and training_date::date = ?";
+        String sql = "SELECT EXTRACT(HOUR FROM training_date) AS hour FROM workouts where ? = any(id_clients) and training_date = ?";
 
         try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
 

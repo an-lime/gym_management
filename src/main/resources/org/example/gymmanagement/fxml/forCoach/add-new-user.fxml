@@ -125,7 +125,7 @@
                      </font></Label>
                </children>
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets />
                </VBox.margin>
             </VBox>
          </children>

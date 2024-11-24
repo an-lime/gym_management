@@ -27,7 +27,7 @@
             </Label>
             <Label prefHeight="18.0" prefWidth="100.0" styleClass="fontBig" stylesheets="@../css/styles.css" text="логин">
                <VBox.margin>
-                  <Insets right="90.0" top="30.0" />
+                  <Insets right="90.0" />
                </VBox.margin>
                <font>
                   <Font size="24.0" />
@@ -90,7 +90,7 @@
       </VBox>
    </center>
    <top>
-      <HBox alignment="CENTER" prefHeight="5.0" prefWidth="704.0" spacing="100.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="29.0" prefWidth="704.0" spacing="100.0" BorderPane.alignment="CENTER">
          <children>
             <Label prefHeight="47.0" prefWidth="351.0" styleClass="logoStyle" text="Аметистовый Зал">
                <font>

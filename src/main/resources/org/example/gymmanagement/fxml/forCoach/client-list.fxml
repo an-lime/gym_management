@@ -109,7 +109,7 @@
             </GridPane>
             <HBox prefHeight="118.0" prefWidth="622.0">
                <children>
-                  <VBox prefHeight="79.0" prefWidth="228.0">
+                  <VBox prefHeight="117.0" prefWidth="275.0">
                      <children>
                         <Pane fx:id="paneConfirm" prefHeight="36.0" prefWidth="198.0">
                            <children>
@@ -139,7 +139,7 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Label fx:id="lblSaveGood" prefHeight="22.0" prefWidth="330.0" styleClass="fontSmall" stylesheets="@../../css/styles.css" text="Изменения прошли успешно!" visible="false">
+                        <Label fx:id="lblSaveGood" prefHeight="22.0" prefWidth="280.0" styleClass="fontSmall" stylesheets="@../../css/styles.css" text="Изменения прошли успешно!" visible="false">
                            <font>
                               <Font size="15.0" />
                            </font>
