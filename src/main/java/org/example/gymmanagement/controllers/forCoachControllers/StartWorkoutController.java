@@ -172,15 +172,17 @@ public class StartWorkoutController implements StartController, Initializable {
     // все упражнения добавляются в поле текущей тренировки в базе
     @FXML
     void doEndWorkout() throws SQLException, ClassNotFoundException {
-        dbWorkout.doEndWorkout(tblClientsRecord);
+        if (tblClientsRecord.getItems().size() > 0) {
+            dbWorkout.doEndWorkout(tblClientsRecord);
+            textWeight.setText("0");
+            textRepetition.setText("0");
+            comboExercises.getSelectionModel().clearSelection();
+            tblClientsRecord.getItems().clear();
+            comboDate.setItems(FXCollections.observableArrayList(dbWorkout.getWorkoutsToMayStart(currentUser.getIdUser())));
+            listExercises.getItems().clear();
+            comboClients.getItems().clear();
+        }
 
-        textWeight.setText("0");
-        textRepetition.setText("0");
-        comboExercises.getSelectionModel().clearSelection();
-        tblClientsRecord.getItems().clear();
-        comboDate.setItems(FXCollections.observableArrayList(dbWorkout.getWorkoutsToMayStart(currentUser.getIdUser())));
-        listExercises.getItems().clear();
-        comboClients.getItems().clear();
     }
 
     // переход на главный экран

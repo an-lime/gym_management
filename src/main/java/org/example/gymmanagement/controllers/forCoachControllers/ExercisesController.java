@@ -45,6 +45,7 @@ public class ExercisesController implements Initializable, StartController {
         dbExercises = new DBExercises();
     }
 
+    // добавление нового упражнения в базу
     @FXML
     void addNewExercise() throws ClassNotFoundException, SQLException {
         if (!textNewExercise.getText().trim().isEmpty()) {
@@ -54,6 +55,7 @@ public class ExercisesController implements Initializable, StartController {
         }
     }
 
+    // удаление упражнения из базы
     @FXML
     void deleteExercise() {
 
@@ -91,8 +93,5 @@ public class ExercisesController implements Initializable, StartController {
             });
             return cell;
         });
-
     }
-
-
 }

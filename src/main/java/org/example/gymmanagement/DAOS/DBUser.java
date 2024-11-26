@@ -29,7 +29,9 @@ public class DBUser {
 
             while (res.next()) {
 
-                return new ModelUsers(res.getInt("id_user"), res.getString("login"), res.getString("password"), res.getString("fio"), res.getString("telephone"), res.getInt("id_role"));
+                return new ModelUsers(res.getInt("id_user"), res.getString("login"),
+                        res.getString("password"), res.getString("fio"),
+                        res.getString("telephone"), res.getInt("id_role"));
             }
             return null;
         }
@@ -68,8 +70,6 @@ public class DBUser {
             res.next();
 
             return res.getString("fio");
-
-
         }
     }
 
@@ -95,8 +95,6 @@ public class DBUser {
             fioStr = (toString(fioArr));
 
             return fioStr;
-
-
         }
     }
 
@@ -206,8 +204,6 @@ public class DBUser {
             }
 
             return usersList;
-
-
         }
     }
 

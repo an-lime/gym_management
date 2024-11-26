@@ -68,7 +68,6 @@ public class DBTrainingPlan {
             statement.setInt(2, id_workout);
             statement.execute();
         }
-
     }
 
     // вызов процедуры удаления старых планов тренировок

@@ -59,9 +59,7 @@ public class LoginController implements Initializable {
         } else if (passwordField.isVisible()) {
             enterPassword = passwordField.getText();
         }
-
         try {
-
             // если логие и пароль введены правильно, то осуществляется авторизация в системе
             // иначе сообщается об ошибке
             if (!loginTxt.getText().isEmpty() & !enterPassword.isEmpty()) {
@@ -103,9 +101,7 @@ public class LoginController implements Initializable {
                     stage.setFullScreen(true);
 
                     stage.show();
-
                 }
-
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

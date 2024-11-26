@@ -206,7 +206,9 @@ public class RequestController implements StartController, Initializable {
     @FXML
     void doAddRequest() throws SQLException, ClassNotFoundException {
         // проверка, что все поля заполнены
-        if (datePicker.getValue() == null || comboTime.getSelectionModel().getSelectedItem() == null || comboCoach.getSelectionModel().getSelectedItem() == null || comboTypeWorkout.getSelectionModel().getSelectedItem() == null) {
+        if (datePicker.getValue() == null || comboTime.getSelectionModel().getSelectedItem() == null
+                || comboCoach.getSelectionModel().getSelectedItem() == null
+                || comboTypeWorkout.getSelectionModel().getSelectedItem() == null) {
 
             lblError.setTextFill(Color.RED);
             lblError.setText("Заполните все поля!");
@@ -230,7 +232,9 @@ public class RequestController implements StartController, Initializable {
         // проверка, отправлял ли пользователь уже заявку
         // на групповую тренировку
         if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Групповая")) {
-            if (dbRequests.cntRequestFromClient(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem()) == 1) {
+            if (dbRequests.cntRequestFromClient(currentUser.getIdUser(),
+                    datePicker.getValue(),
+                    comboTime.getSelectionModel().getSelectedItem()) == 1) {
 
                 lblError.setTextFill(Color.RED);
                 lblError.setText("Заявка уже отправлена!");
@@ -253,7 +257,9 @@ public class RequestController implements StartController, Initializable {
 
             // проверка, что пользователь не пытается отправить заявку на тренировку
             // на которую уже записан
-            if (dbWorkout.getNotAvailableTimeGroupWorkout(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem()) != 0) {
+            if (dbWorkout.getNotAvailableTimeGroupWorkout(currentUser.getIdUser(),
+                    datePicker.getValue(),
+                    comboTime.getSelectionModel().getSelectedItem()) != 0) {
 
                 lblError.setTextFill(Color.RED);
                 lblError.setText("Вы уже записаны!");
@@ -280,7 +286,10 @@ public class RequestController implements StartController, Initializable {
         // в соответствии с типом тренировки
         if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Групповая")) {
 
-            dbRequests.addNewRequest(currentUser.getIdUser(), comboCoach.getSelectionModel().getSelectedItem().getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(), comboTypeWorkout.getSelectionModel().getSelectedItem());
+            dbRequests.addNewRequest(currentUser.getIdUser(),
+                    comboCoach.getSelectionModel().getSelectedItem().getIdUser(),
+                    datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(),
+                    comboTypeWorkout.getSelectionModel().getSelectedItem());
 
         } else if (comboTypeWorkout.getSelectionModel().getSelectedItem().equals("Индивидуальная")) {
 
@@ -290,8 +299,10 @@ public class RequestController implements StartController, Initializable {
                 exercisesArr[i] = modelExercises.getId();
                 i++;
             }
-
-            dbRequests.addNewRequest(currentUser.getIdUser(), comboCoach.getSelectionModel().getSelectedItem().getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(), comboTypeWorkout.getSelectionModel().getSelectedItem(), exercisesArr);
+            dbRequests.addNewRequest(currentUser.getIdUser(),
+                    comboCoach.getSelectionModel().getSelectedItem().getIdUser(),
+                    datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(),
+                    comboTypeWorkout.getSelectionModel().getSelectedItem(), exercisesArr);
         }
 
         // поля всех объектов очищаются

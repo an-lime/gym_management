@@ -15,7 +15,6 @@ public class StartApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Авторизуйтесь в системе");
         stage.setResizable(false);
-
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);

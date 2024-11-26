@@ -380,8 +380,26 @@ public class NewWorkoutController extends SimpleUtils implements StartController
             stage.showAndWait();
 
         } else {
-            // обновление данных тренировки, если она уже была создана
-            dbWorkout.updateWorkout(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(), clientsArr);
+            if (dbWorkout.getWorkoutMayChange(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem()) == 1) {
+                // обновление данных тренировки, если она уже была создана
+                dbWorkout.updateWorkout(currentUser.getIdUser(), datePicker.getValue(), comboTime.getSelectionModel().getSelectedItem(), clientsArr);
+            } else {
+                lblError.setText("Тренировка уже прошла!");
+                lblError.setVisible(true);
+                lblError.setManaged(true);
+                lblError.setTextFill(Color.RED);
+
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    public void run() {
+                        lblError.setManaged(false);
+                        lblError.setVisible(false);
+                    }
+                };
+
+                timer.schedule(task, 2000);
+                return;
+            }
         }
 
         // сокрытие объектов

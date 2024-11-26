@@ -33,10 +33,7 @@ public class DBRecords {
                 statement.setInt(5, Integer.parseInt(item.getRepetitions()));
                 statement.executeUpdate();
             }
-
         }
-
-
     }
 
     // получение результатов клиентов на тренировке для тренера

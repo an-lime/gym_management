@@ -140,7 +140,6 @@ public class MainPageController implements Initializable, StartController {
     public void initializeTable() throws SQLException, ClassNotFoundException {
 
         dbWorkout.deleteAllWorkout();
-
         // если авторизованный пользователь -- клиент,
         // то он видит такую таблицу:
         if (currentUser.getIdRole() == 1) {
@@ -157,7 +156,6 @@ public class MainPageController implements Initializable, StartController {
             TableColumn<ModelWorkouts, String> trainingDate = new TableColumn<>("Дата тренировки");
             trainingDate.setCellValueFactory(new PropertyValueFactory<>("trainingDate"));
 
-
             TableColumn<ModelWorkouts, String> trainingType = new TableColumn<>("Вид тренировки");
             trainingType.setCellValueFactory(new PropertyValueFactory<>("trainingType"));
 
@@ -171,7 +169,6 @@ public class MainPageController implements Initializable, StartController {
         } else {
             // если авторизованный пользователь -- тренер,
             // то он видит такую таблицу:
-
             ObservableList<ModelWorkouts> list = FXCollections.observableArrayList(dbWorkout.getWorkoutForCoachOnly(currentUser));
             tblWorkout.setItems(list);
 
@@ -190,11 +187,7 @@ public class MainPageController implements Initializable, StartController {
             trainingDate.setSortType(TableColumn.SortType.ASCENDING);
 
             tblWorkout.getColumns().addAll(trainingDate, trainingStructure);
-
-
         }
-
-
     }
 
     // отображение информации тренировок все тренеров

@@ -167,7 +167,6 @@ public class DBRequests {
         try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
 
             Date sqlDate = Date.valueOf(date);
-
             PreparedStatement statement = dbConn.prepareStatement(sql);
             statement.setInt(1, idCoach);
             statement.setDate(2, sqlDate);
@@ -222,7 +221,6 @@ public class DBRequests {
             PreparedStatement statement = dbConn.prepareStatement(sql);
             statement.setInt(1, idRequest);
             ResultSet res = statement.executeQuery();
-            ArrayList<Array> arrayArrayList = new ArrayList<>();
             while (res.next()) {
                 return res.getArray("exercises");
             }

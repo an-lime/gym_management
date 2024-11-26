@@ -220,8 +220,6 @@ public class DBWorkout {
             }
             return hoursWorkout;
         }
-
-
     }
 
     // получение списка занятых часов тренировок текущего тренера в заявках на конкретный день
@@ -437,6 +435,27 @@ public class DBWorkout {
             }
         }
         return null;
+    }
+
+    // проверка, можно ли изменить текущую тренировку
+    public int getWorkoutMayChange(int idCoach, LocalDate date, Integer time) throws SQLException, ClassNotFoundException {
+        String connStr = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?characterEncoding=UTF8";
+        Class.forName("org.postgresql.Driver");
+        String sql = "select * from workouts where id_user_coach = ? and training_date = ? and ARRAY_LENGTH(exercises, 1) IS NULL;";
+        try (Connection dbConn = DriverManager.getConnection(connStr, LOGIN, PASS)) {
+            PreparedStatement statement = dbConn.prepareStatement(sql);
+
+            LocalDateTime dateTime = date.atStartOfDay();
+            dateTime = dateTime.plusHours(time);
+            Timestamp timestamp = Timestamp.valueOf(dateTime);
+            statement.setInt(1, idCoach);
+            statement.setTimestamp(2, timestamp);
+            ResultSet res = statement.executeQuery();
+            while (res.next()) {
+                return 1;
+            }
+            return 0;
+        }
     }
 
     // проверка, есть ли уже заявка на текущую дату

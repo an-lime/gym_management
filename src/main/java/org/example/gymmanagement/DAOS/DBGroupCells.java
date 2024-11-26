@@ -28,8 +28,5 @@ public class DBGroupCells {
             }
             return hoursWorkout;
         }
-
-
     }
-
 }
